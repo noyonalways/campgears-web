@@ -12,10 +12,10 @@ const AdventureGroupCard: React.FC<IProps> = ({
   description,
 }) => {
   return (
-    <div className="border rounded-lg flex flex-col space-y-3">
+    <div className="border rounded-lg flex flex-col">
       <img src={image} alt="featured-group-image" />
-      <div className="px-4 pb-4 space-y-3 flex flex-col h-full items-start justify-between">
-        <div className="space-y-2">
+      <div className="p-4 flex flex-col flex-1 items-start justify-between">
+        <div className="space-y-2 mb-3">
           <h2 className="text lg font-bold">{title}</h2>
           <p>{description}</p>
         </div>
