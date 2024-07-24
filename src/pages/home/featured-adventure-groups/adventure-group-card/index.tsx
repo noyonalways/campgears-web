@@ -1,3 +1,5 @@
+import Button from "../../../../components/ui/button";
+
 interface IProps {
   image: string;
   title: string;
@@ -17,7 +19,7 @@ const AdventureGroupCard: React.FC<IProps> = ({
           <h2 className="text lg font-bold">{title}</h2>
           <p>{description}</p>
         </div>
-        <button className="btn">Read More</button>
+        <Button>Read More</Button>
       </div>
     </div>
   );
