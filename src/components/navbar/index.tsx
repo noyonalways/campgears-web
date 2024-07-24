@@ -2,7 +2,7 @@ import logo from "../../assets/images/campgears-logo.png";
 
 const Navbar = () => {
   return (
-    <header className="py-3">
+    <header className="py-3 mb-10">
       <nav className="container space-y-5">
         <div className="flex items-center justify-between">
           <a className="w-48 inline-block" href="#">
@@ -39,7 +39,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="bg-secondary rounded">
-          <ul className="flex items-center lg:justify-center space-x-6">
+          <ul className="flex items-center justify-center space-x-6">
             <li>
               <a className="font-medium p-3 inline-block" href="#">
                 Home

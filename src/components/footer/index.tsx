@@ -6,7 +6,7 @@ import QuickLinks from "./QuickLinks";
 
 const Footer = () => {
   return (
-    <footer className="my-10">
+    <footer className="mb-4">
       <div className="container">
         <div className="bg-secondary p-7 rounded-lg space-y-10">
           <div className="grid gap-y-4 md:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-x-6 lg:gap-y-0">

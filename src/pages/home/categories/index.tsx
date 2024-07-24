@@ -13,7 +13,7 @@ interface IProps {}
 
 const Categories: React.FC<IProps> = () => {
   return (
-    <section>
+    <section className="pb-20">
       <div className="container">
         <SectionTitle
           title="Shop Top Categories"
