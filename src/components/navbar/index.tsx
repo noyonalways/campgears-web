@@ -1,4 +1,4 @@
-import logo from "../../assets/images/campgears-logo.png";
+import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
   return (
@@ -6,7 +6,7 @@ const Navbar = () => {
       <nav className="container space-y-5">
         <div className="flex items-center justify-between">
           <a className="w-48 inline-block" href="#">
-            <img className="invert" src={logo} alt="campgears-logo" />
+            <img src={logo} alt="campgears-logo" />
           </a>
           <form className="bg-secondary rounded-full px-6 max-w-sm w-full flex justify-between lg:space-x-3">
             <input

@@ -1,4 +1,4 @@
-import logo from "../../assets/images/campgears-logo.png";
+import logo from "../../assets/images/logo.png";
 const Logo = () => {
   return (
     <div className="space-y-3">
