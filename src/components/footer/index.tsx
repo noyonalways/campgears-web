@@ -8,7 +8,7 @@ const Footer = () => {
   return (
     <footer className="my-10">
       <div className="container">
-        <div className="bg-slate-200 p-7 rounded-lg space-y-10">
+        <div className="bg-secondary p-7 rounded-lg space-y-10">
           <div className="grid gap-y-4 md:grid-cols-2 lg:grid-cols-4 md:gap-6 lg:gap-x-6 lg:gap-y-0">
             <Logo />
             <QuickLinks />
@@ -31,7 +31,7 @@ const Footer = () => {
           <div className="flex flex-col space-y-3 lg:space-y-0 lg:flex-row items-center lg:justify-between">
             <p>
               <span>&copy;</span> {new Date().getFullYear()}{" "}
-              <a href="#" className="font-medium">
+              <a href="#" className="font-bold">
                 CAMPGEARS
               </a>{" "}
               All rights reserved

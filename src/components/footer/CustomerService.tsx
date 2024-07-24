@@ -1,7 +1,7 @@
 const CustomerService = () => {
   return (
     <div className="space-y-3">
-      <h2 className="text-lg font-bold text-[#2d2d2d]">Customer Service</h2>
+      <h2 className="text-lg font-bold text-black">Customer Service</h2>
       <ul className="space-y-2">
         <li className="space-x-1">
           <span className="font-medium">Contact Us:</span>
