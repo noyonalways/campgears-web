@@ -1,4 +1,5 @@
 import "./App.css";
+import Cart from "./pages/cart";
 /* import ProductDetails from "./pages/product-details";
 import Footer from "./components/footer";
 import Navbar from "./components/navbar";
@@ -18,6 +19,7 @@ function App() {
       <FrequentlyAskedQuestions />
       <Footer /> */}
       {/* <ProductDetails /> */}
+      <Cart />
     </>
   );
 }
