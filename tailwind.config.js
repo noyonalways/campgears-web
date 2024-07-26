@@ -8,6 +8,10 @@ export default {
         secondary: "#e7ecef",
         black: "#2d2d2d",
       },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+      },
     },
     container: {
       center: true,
