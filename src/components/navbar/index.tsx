@@ -2,7 +2,7 @@ import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
   return (
-    <header className="py-3 mb-10">
+    <header className="py-3 mb-10 font-roboto">
       <nav className="container space-y-5">
         <div className="flex items-center justify-between">
           <a className="w-48 inline-block" href="#">
