@@ -1,6 +1,6 @@
 import "./App.css";
-import ProductDetails from "./pages/product-details";
-/* import Footer from "./components/footer";
+/* import ProductDetails from "./pages/product-details";
+import Footer from "./components/footer";
 import Navbar from "./components/navbar";
 import BestSellingProducts from "./pages/home/best-selling-products";
 import Categories from "./pages/home/categories";
@@ -17,7 +17,7 @@ function App() {
       <FeatureAdventureGroups />
       <FrequentlyAskedQuestions />
       <Footer /> */}
-      <ProductDetails />
+      {/* <ProductDetails /> */}
     </>
   );
 }
