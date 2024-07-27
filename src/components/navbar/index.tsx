@@ -1,3 +1,10 @@
+import {
+  HiMiniMagnifyingGlass,
+  HiOutlineHeart,
+  HiOutlineMagnifyingGlass,
+  HiOutlineShoppingCart,
+  HiOutlineUser,
+} from "react-icons/hi2";
 import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
@@ -8,7 +15,7 @@ const Navbar = () => {
           <a className="w-48 inline-block" href="#">
             <img src={logo} alt="campgears-logo" />
           </a>
-          <form className="bg-secondary rounded-full px-6 max-w-sm w-full flex justify-between lg:space-x-3">
+          <form className="bg-secondary rounded-full pl-4 max-w-md w-full flex justify-between">
             <input
               className="py-2 bg-secondary w-full outline-none"
               placeholder="Search Here..."
@@ -16,24 +23,30 @@ const Navbar = () => {
               name="search"
               id="search"
             />
-            <button className="font-semibold" type="submit">
-              Search
+            <button
+              className="font-semibold px-4 rounded-r-full text-[#717171] hover:bg-primary hover:text-white"
+              type="submit"
+            >
+              <HiMiniMagnifyingGlass />
             </button>
           </form>
-          <ul className="flex items-center lg:space-x-6">
+          <ul className="flex items-center lg:space-x-8">
+            <button className="text-xl outline-none">
+              <HiOutlineMagnifyingGlass />
+            </button>
             <li>
-              <a className="font-medium" href="#">
-                Wishlist
+              <a className="text-xl" href="/cart">
+                <HiOutlineHeart />
               </a>
             </li>
             <li>
-              <a className="font-medium" href="#">
-                Login
+              <a className="text-xl" href="#">
+                <HiOutlineUser />
               </a>
             </li>
             <li>
-              <a className="font-medium" href="#">
-                Cart
+              <a className="text-xl" href="#">
+                <HiOutlineShoppingCart />
               </a>
             </li>
           </ul>
