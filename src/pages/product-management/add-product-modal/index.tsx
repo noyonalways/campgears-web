@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { HiX } from "react-icons/hi";
-import StatusDropdown from "./status-dropdown";
+import StatusDropdown from "../update-product-modal/status-dropdown";
 
-const UpdateProductModal = () => {
+interface IProps {}
+
+const AddProductModal: React.FC<IProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleModal = () => {
@@ -11,12 +13,11 @@ const UpdateProductModal = () => {
 
   return (
     <div>
-      {/* Button to open the modal */}
       <button
+        className="btn focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         onClick={toggleModal}
-        className="px-4 py-1 rounded active:scale-95 duration-100 text-white bg-blue-500 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-medium"
       >
-        Update
+        Add Product
       </button>
 
       {/* Modal */}
@@ -26,7 +27,7 @@ const UpdateProductModal = () => {
             {/* Modal content */}
             <div className="bg-white">
               <div className="flex justify-between items-center p-4 lg:px-0 border-b">
-                <h2 className="text-lg font-medium">Update a Product</h2>
+                <h2 className="text-lg font-medium">Add a new Product</h2>
                 <button
                   onClick={toggleModal}
                   className="text-gray-500 hover:text-gray-700"
@@ -111,8 +112,8 @@ const UpdateProductModal = () => {
                       multiple
                     />
                     <div className="flex justify-end mt-4">
-                      <button className="bg-blue-500 hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 text-white font-medium py-2 px-4 rounded">
-                        Update Product
+                      <button className="btn focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                        Add Product
                       </button>
                     </div>
                   </div>
@@ -126,4 +127,4 @@ const UpdateProductModal = () => {
   );
 };
 
-export default UpdateProductModal;
+export default AddProductModal;

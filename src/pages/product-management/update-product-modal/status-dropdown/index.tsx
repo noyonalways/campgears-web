@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { HiChevronDown } from "react-icons/hi2";
 
-type TStatus = "in-stock" | "out-of-stock";
+type TStatus = "In Stock" | "Out of Stock";
 
 const StatusDropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +22,8 @@ const StatusDropdown = () => {
         className="py-2.5 px-3 w-full md:text-sm text-site bg-transparent border border-dimmed focus:border-brand focus:outline-none focus:ring-0 peer flex items-center justify-between rounded"
         onClick={handleButtonClick}
       >
-        {selectedStatus === "in-stock" ? "In Stock" : "Out of Stock"}
+        <span>{selectedStatus}</span>
+        <HiChevronDown />
       </button>
       <div
         className={`bg-white absolute z-[99] top-[100%] left-0 rounded-md overflow-hidden shadow-lg min-w-[200px] w-full ${
@@ -30,13 +32,13 @@ const StatusDropdown = () => {
       >
         <div
           className="hover:bg-secondary w-full block cursor-pointer hover:text-link px-3 py-2 rounded-md"
-          onClick={() => handleStatusSelect("in-stock")}
+          onClick={() => handleStatusSelect("In Stock")}
         >
           In Stack
         </div>
         <div
           className="hover:bg-secondary w-full block cursor-pointer hover:text-link px-3 py-2 rounded-md"
-          onClick={() => handleStatusSelect("out-of-stock")}
+          onClick={() => handleStatusSelect("Out of Stock")}
         >
           Out of Stock
         </div>

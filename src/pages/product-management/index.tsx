@@ -1,4 +1,4 @@
-import Button from "../../components/ui/button";
+import AddProductModal from "./add-product-modal";
 import Card from "./card";
 
 interface IProps {}
@@ -8,7 +8,7 @@ const ProductManagement: React.FC<IProps> = () => {
     <section className="font-montserrat py-10">
       <div className="container">
         <div className="mb-6">
-          <Button>Add Product</Button>
+          <AddProductModal />
         </div>
         <div className="font-semibold lg:flex items-center bg-secondary p-4 rounded hidden mb-4">
           <div className="flex items-center basis-[55%]">
