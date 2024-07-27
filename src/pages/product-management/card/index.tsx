@@ -1,4 +1,5 @@
 import tent from "../../../assets/images/products/tent.png";
+import DeleteConfirmationModal from "../delete-product-modal";
 
 interface IProps {}
 
@@ -26,10 +27,8 @@ const Card: React.FC<IProps> = () => {
       </td>
       <td className="p-4">
         <div className="flex justify-center space-x-4">
-          <button className="px-4 py-1 rounded active:scale-95 duration-100 text-white bg-red-500">
-            Delete
-          </button>
-          <button className="px-4 py-1 rounded active:scale-95 duration-100 text-white bg-primary">
+          <DeleteConfirmationModal />
+          <button className="px-4 py-1 rounded active:scale-95 duration-100 text-white bg-primary focus:ring-2 focus:ring-offset-2 focus:ring-primary">
             Update
           </button>
         </div>
