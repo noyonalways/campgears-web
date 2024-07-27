@@ -34,7 +34,7 @@ const DeleteConfirmationModal = () => {
       {/* Modal */}
       {isOpen && (
         <div
-          className={`fixed top-0 -left-4 w-full h-screen bg-black/90 transition-all duration-300 ${
+          className={`fixed top-0 -left-4 w-full h-screen bg-black/95 transition-all duration-300 ${
             isOpen ? "opacity-100" : "opacity-0"
           }`}
         >
