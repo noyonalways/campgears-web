@@ -1,5 +1,6 @@
 import "./App.css";
-import Navbar from "./components/navbar";
+import ProductManagement from "./pages/product-management";
+// import Navbar from "./components/navbar";
 /* import Footer from "./components/footer";
 import Cart from "./pages/cart";
 import BestSellingProducts from "./pages/home/best-selling-products";
@@ -12,7 +13,8 @@ import ProductDetails from "./pages/product-details"; */
 function App() {
   return (
     <>
-      <Navbar />
+      <ProductManagement />
+      {/* <Navbar /> */}
       {/* <Navbar />
       <BestSellingProducts />
       <Categories />
