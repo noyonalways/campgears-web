@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { HiX } from "react-icons/hi";
+import StatusDropdown from "./status-dropdown";
 
 const UpdateProductModal = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -82,14 +83,8 @@ const UpdateProductModal = () => {
                   </div>
                   <div className="grid grid-cols-1 gap-4 flex-1">
                     <label htmlFor="status">Status</label>
-                    <select
-                      className="border border-gray-300 p-2 rounded"
-                      name="status"
-                      id="status"
-                    >
-                      <option value="in-stock">In Stock</option>
-                      <option value="out-of-stock">Out of Stock</option>
-                    </select>
+                    <StatusDropdown />
+
                     <label htmlFor="image">Image</label>
                     <input
                       type="file"
