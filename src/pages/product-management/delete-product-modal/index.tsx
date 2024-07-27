@@ -26,7 +26,7 @@ const DeleteConfirmationModal = () => {
       {/* Button to open the modal */}
       <button
         onClick={handleOpen}
-        className="px-4 py-1 rounded active:scale-95 duration-100 text-white bg-red-500 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+        className="px-4 py-1 rounded active:scale-95 duration-100 text-white bg-red-500 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-medium"
       >
         Delete
       </button>

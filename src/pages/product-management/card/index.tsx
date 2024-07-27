@@ -1,5 +1,6 @@
 import tent from "../../../assets/images/products/tent.png";
 import DeleteConfirmationModal from "../delete-product-modal";
+import UpdateProductModal from "../update-product-modal";
 
 interface IProps {}
 
@@ -33,7 +34,7 @@ const Card: React.FC<IProps> = () => {
           <span className="lg:hidden font-semibold mb-2">Actions</span>
           <div className="flex space-x-4">
             <DeleteConfirmationModal />
-            <DeleteConfirmationModal />
+            <UpdateProductModal />
           </div>
         </div>
       </div>
