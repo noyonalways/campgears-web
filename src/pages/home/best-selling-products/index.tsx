@@ -1,3 +1,4 @@
+import { HiChevronRight } from "react-icons/hi2";
 import airBag from "../../../assets/images/products/air-bed.png";
 import boat from "../../../assets/images/products/boat.png";
 import sleepingBag from "../../../assets/images/products/sleeping-bag.png";
@@ -49,7 +50,7 @@ const BestSellingProducts: React.FC<IProps> = () => {
           title="Best Selling Products"
           description="Explore our top rated and recommended camping gear. Upgrade your adventure with the best products on the market."
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
           {products.map((product) => (
             <ProductCard
               key={product.id}
@@ -58,6 +59,15 @@ const BestSellingProducts: React.FC<IProps> = () => {
               price={product.price}
             />
           ))}
+        </div>
+        <div className="text-end">
+          <a
+            className="font-montserrat text-primary font-medium inline-flex items-center space-x-2"
+            href="#"
+          >
+            <span>View More</span>
+            <HiChevronRight />
+          </a>
         </div>
       </div>
     </section>

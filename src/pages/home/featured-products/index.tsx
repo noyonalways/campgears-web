@@ -1,3 +1,4 @@
+import { HiChevronRight } from "react-icons/hi2";
 import backpack from "../../../assets/images/products/backpack-2.png";
 import powerBank from "../../../assets/images/products/power-bank.png";
 import socks from "../../../assets/images/products/socks.png";
@@ -50,7 +51,7 @@ const FeaturedProducts: React.FC<IProps> = () => {
           title="Featured Products"
           description="Check out our featured products, handpicked for their quality and performance. Click on any item to view detailed information and make your purchase."
         />
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
           {products.map((product) => (
             <ProductCard
               key={product.id}
@@ -59,6 +60,15 @@ const FeaturedProducts: React.FC<IProps> = () => {
               price={product.price}
             />
           ))}
+        </div>
+        <div className="text-end">
+          <a
+            className="font-montserrat text-primary font-medium inline-flex items-center space-x-2"
+            href="#"
+          >
+            <span>View More</span>
+            <HiChevronRight />
+          </a>
         </div>
       </div>
     </section>
