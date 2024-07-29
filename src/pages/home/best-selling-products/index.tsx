@@ -6,7 +6,13 @@ import sleepingBag from "../../../assets/images/products/sleeping-bag.png";
 import tent from "../../../assets/images/products/tent.png";
 
 import SwiperCore from "swiper";
-import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import {
+  Autoplay,
+  Keyboard,
+  Mousewheel,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
 import ProductCard from "../../../components/product-card";
 import SectionTitle from "../../../components/section-title";
 
@@ -69,11 +75,12 @@ const BestSellingProducts: React.FC<IProps> = () => {
         />
         <Swiper
           className="mb-4"
-          modules={[Navigation, Pagination]}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+          grabCursor={true}
+          autoplay={{ delay: 2000 }}
           spaceBetween={24}
           navigation
           pagination={{ clickable: true }}
-          scrollbar={{ draggable: true }}
           breakpoints={{
             // when window width is <= 640px
             640: {

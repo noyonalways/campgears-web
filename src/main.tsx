@@ -5,6 +5,7 @@ import App from "./App.tsx";
 import "./index.css";
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { store } from "./redux/store.ts";
 
