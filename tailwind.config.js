@@ -8,6 +8,10 @@ export default {
         secondary: "#e7ecef",
         black: "#2d2d2d",
       },
+      fontFamily: {
+        montserrat: ["Montserrat", "sans-serif"],
+        roboto: ["Roboto", "sans-serif"],
+      },
     },
     container: {
       center: true,
@@ -16,8 +20,8 @@ export default {
         sm: "640px",
         md: "768px",
         lg: "1024px",
-        xl: "1100px",
-        "2xl": "1280px",
+        xl: "1280px",
+        "2xl": "1380px",
       },
       padding: {
         DEFAULT: "0.8rem",

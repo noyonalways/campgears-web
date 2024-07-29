@@ -8,7 +8,7 @@ interface IProps {
 
 const ProductCard: React.FC<IProps> = ({ image, title, price }) => {
   return (
-    <div className="border rounded-lg group overflow-hidden flex flex-col">
+    <div className="border rounded-lg group overflow-hidden flex flex-col font-montserrat">
       <figure className="overflow-hidden">
         <img
           className="group-hover:scale-105 duration-200"

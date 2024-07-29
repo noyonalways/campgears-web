@@ -16,7 +16,7 @@ const CategoryCard: React.FC<IProps> = ({ image, title }) => {
           alt="mens-category"
         />
       </figure>
-      <h2 className="text-base lg:text-xl font-bold lg:absolute lg:left-0 lg:bottom-0 lg:pb-2 lg:pl-3">
+      <h2 className="text-base lg:text-xl font-bold lg:absolute lg:left-0 lg:bottom-0 lg:pb-2 lg:pl-3 font-montserrat">
         {title}
       </h2>
     </a>

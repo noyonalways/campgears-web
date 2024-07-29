@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  p {
+    @apply text-[#717171]
+  }
+}
+
 @layer components {
   .btn {
-    @apply inline-block bg-primary hover:bg-[#63c1c4] text-white px-6 py-2 font-medium rounded-lg;
+    @apply inline-block bg-primary hover:bg-[#63c1c4] text-white px-6 py-2 font-medium rounded-lg font-montserrat active:scale-95;
+  }
+
+  .btn-outline {
+    @apply border border-primary hover:bg-primary hover:text-white duration-200 px-4 py-1 rounded-md active:scale-95;
   }
 }
