@@ -11,7 +11,7 @@ const FaqCard: React.FC<IProps> = ({ question, answer }) => {
     <div className="border rounded-lg overflow-hidden">
       <h3
         onClick={() => setIsOpen(!isOpen)}
-        className={`text-lg font-semibold bg-secondary p-3 cursor-pointer duration-100 ${
+        className={`text-lg font-semibold bg-secondary p-3 cursor-pointer duration-100 font-montserrat ${
           isOpen ? "text-primary" : "text-black"
         }`}
       >
@@ -19,7 +19,7 @@ const FaqCard: React.FC<IProps> = ({ question, answer }) => {
         {question}
       </h3>
       <p
-        className={`p-3 bg-white duration-200 ${
+        className={`p-3 bg-white duration-200 font-roboto ${
           isOpen ? "mb-0" : "-mb-24 sm:-mb-[72px] md:-mb-[72px] lg:-mb-[72px]"
         }`}
       >
