@@ -4,22 +4,22 @@ const ConnectWithUs = () => {
       <h2 className="text-lg font-bold text-black">Connect With Us</h2>
       <ul className="space-y-2">
         <li>
-          <a className="hover:underline" href="#">
+          <a className="hover:underline hover:text-primary" href="#">
             Facebook
           </a>
         </li>
         <li>
-          <a className="hover:underline" href="#">
+          <a className="hover:underline hover:text-primary" href="#">
             Instagram
           </a>
         </li>
         <li>
-          <a className="hover:underline" href="#">
+          <a className="hover:underline hover:text-primary" href="#">
             Twitter
           </a>
         </li>
         <li>
-          <a className="hover:underline" href="#">
+          <a className="hover:underline hover:text-primary" href="#">
             YouTube
           </a>
         </li>
