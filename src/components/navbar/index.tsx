@@ -15,16 +15,16 @@ const Navbar = () => {
           <a className="w-48 inline-block" href="#">
             <img src={logo} alt="campgears-logo" />
           </a>
-          <form className="bg-secondary rounded-full pl-4 max-w-md w-full flex justify-between">
+          <form className="border border-secondary rounded-full pl-4 max-w-md w-full flex justify-between">
             <input
-              className="py-2 bg-secondary w-full outline-none"
+              className="py-2 w-full outline-none"
               placeholder="Search Here..."
               type="search"
               name="search"
               id="search"
             />
             <button
-              className="font-semibold px-4 rounded-r-full text-[#717171] hover:bg-primary hover:text-white"
+              className="font-semibold px-4 rounded-r-full text-[#717171] hover:bg-secondary hover:text-black"
               type="submit"
             >
               <HiMiniMagnifyingGlass />
