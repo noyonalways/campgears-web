@@ -7,6 +7,7 @@ import NotFound from "../pages/not-found";
 import ProductDetails from "../pages/product-details";
 import ProductManagement from "../pages/product-management";
 import Products from "../pages/products";
+import Wishlist from "../pages/wishlist";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "/product-management",
         element: <ProductManagement />,
+      },
+      {
+        path: "/wishlist",
+        element: <Wishlist />,
       },
       {
         path: "/about-us",

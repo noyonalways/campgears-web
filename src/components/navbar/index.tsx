@@ -29,7 +29,7 @@ const Navbar = () => {
             ${isOpenSearchBar ? "block" : "hidden lg:inline-block"} 
             `}
           >
-            <form className="border w-full mx-auto max-w-md lg:max-w-md rounded-full pl-4 lg:pl-4 flex lg:justify-between">
+            <form className="border w-full mx-auto max-w-md lg:max-w-md rounded-full pl-4 lg:pl-4 flex lg:justify-between font-montserrat">
               <input
                 className="py-2 w-full outline-none"
                 placeholder="Search Here..."
@@ -71,7 +71,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div
-          className={`bg-white lg:bg-secondary rounded absolute w-full lg:w-auto lg:static duration-200 top-8 ${
+          className={`bg-white lg:bg-secondary rounded absolute w-full lg:w-auto lg:static duration-200 top-8 font-montserrat ${
             isOpen ? "left-0 " : "-left-[105%]"
           }`}
         >
