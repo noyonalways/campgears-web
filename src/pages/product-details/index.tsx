@@ -25,7 +25,7 @@ const ProductDetails: React.FC<IProps> = () => {
   };
 
   return (
-    <section className="py-20">
+    <section className="pb-20">
       <div className="container">
         <div className="flex items-center space-x-2 py-3 mb-4 font-montserrat text-[#717171]">
           <span>Products</span>

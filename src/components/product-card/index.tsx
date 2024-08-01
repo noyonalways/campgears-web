@@ -1,4 +1,4 @@
-import Button from "../ui/button";
+import { Link } from "react-router-dom";
 
 interface IProps {
   image: string;
@@ -20,7 +20,9 @@ const ProductCard: React.FC<IProps> = ({ image, title, price }) => {
         <h2 className="text lg font-bold mb-3">{title}</h2>
         <div className="space-y-2 ">
           <p className="font-medium">$ {price}</p>
-          <Button>See Details</Button>
+          <Link className="btn" to="/products/random-product">
+            See Details
+          </Link>
         </div>
       </div>
     </div>

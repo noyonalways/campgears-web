@@ -8,7 +8,9 @@ const MainLayout: React.FC<IProps> = () => {
   return (
     <>
       <Navbar />
-      <Outlet />
+      <main>
+        <Outlet />
+      </main>
       <Footer />
     </>
   );
