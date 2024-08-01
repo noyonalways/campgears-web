@@ -12,6 +12,7 @@ import logo from "../../assets/images/logo.png";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearchBar, setIsOpenSearchBar] = useState(false);
+
   return (
     <header className="py-4 font-roboto z-10 lg:border-none sticky top-0 bg-white">
       <nav className="container space-y-5">
@@ -23,9 +24,9 @@ const Navbar = () => {
             <img src={logo} alt="campgears-logo" />
           </a>
           <div
-            className={`bg-white px-2 md:px-0 w-full lg:max-w-md absolute lg:static top-[54px] py-4 left-1/2 -translate-x-1/2 lg:translate-x-0 ${
-              isOpenSearchBar ? "block" : "hidden lg:inline-block"
-            }`}
+            className={`bg-white px-2 md:px-0 w-full lg:max-w-md absolute lg:static top-[54px] py-4 lg:py-0 left-1/2 -translate-x-1/2 lg:translate-x-0 
+            ${isOpenSearchBar ? "block" : "hidden lg:inline-block"} 
+            `}
           >
             <form className="border w-full mx-auto max-w-md lg:max-w-md rounded-full pl-4 lg:pl-4 flex lg:justify-between">
               <input
