@@ -15,7 +15,7 @@ const Navbar = () => {
   const [isOpenSearchBar, setIsOpenSearchBar] = useState(false);
 
   return (
-    <header className="py-4 font-roboto z-10 lg:border-none sticky top-0 bg-white">
+    <header className="py-4 lg:py-0 lg:pt-4 font-roboto z-10 lg:border-none sticky top-0 bg-white">
       <nav className="container space-y-5">
         <div className="flex items-center justify-between">
           <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden">
@@ -48,23 +48,22 @@ const Navbar = () => {
           <ul className="flex items-center space-x-4 md:space-x-8">
             <button
               onClick={() => setIsOpenSearchBar(!isOpenSearchBar)}
-              className="text-xl lg:hidden"
+              className="text-xl hover:text-primary lg:hidden"
             >
               <HiMiniMagnifyingGlass />
             </button>
             <li className="hidden md:inline-block">
-              <Link className="text-xl" to="/wishlist">
+              <Link className="text-xl hover:text-primary" to="/wishlist">
                 <HiOutlineHeart />
               </Link>
             </li>
             <li className="hidden md:inline-block">
-              <a className="text-xl" href="#">
+              <a className="text-xl hover:text-primary" href="#">
                 <HiOutlineUser />
               </a>
             </li>
-
             <li className="md:inline-block">
-              <Link className="text-xl" to="/cart">
+              <Link className="text-xl hover:text-primary" to="/cart">
                 <HiOutlineShoppingCart />
               </Link>
             </li>
