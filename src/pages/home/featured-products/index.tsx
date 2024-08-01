@@ -95,7 +95,7 @@ const FeaturedProducts: React.FC<IProps> = () => {
               key={product.title}
             >
               <ProductCard
-                title={product.title}
+                name={product.title}
                 image={product.image}
                 price={product.price}
               />
