@@ -9,6 +9,7 @@ import { HiOutlineHeart } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
 import Button from "../../components/ui/button";
 import { useGetProductQuery } from "../../redux/features/product/productApi";
+import { useGetAllreviewQuery } from "../../redux/features/review/reviewApi";
 
 interface IProps {}
 
@@ -30,6 +31,16 @@ const ProductDetails: React.FC<IProps> = () => {
   const params = useParams();
   const id = params?.slug?.split("_")[params?.slug?.split("_")?.length - 1];
   const { data, isLoading, error } = useGetProductQuery(id!);
+  const { data: reviews } = useGetAllreviewQuery({ productId: id });
+  const totalRating =
+    reviews?.data && reviews?.data.length > 0
+      ? reviews?.data!.reduce((acc, cur) => acc + cur.rating, 0)
+      : 0;
+  const averageRating =
+    reviews?.data && reviews?.data.length > 0
+      ? totalRating / reviews?.data.length
+      : 0;
+
   const {
     brand,
     category,
@@ -114,11 +125,16 @@ const ProductDetails: React.FC<IProps> = () => {
                 <div className="flex items-center space-x-5 mb-2 font-roboto">
                   <div className="text-sm space-x-2 flex items-center text-[#898989]">
                     <HiOutlineStar />
-                    <span>4.5</span>
+                    <span>{averageRating.toFixed(1)}</span>
                   </div>
                   <span>|</span>
                   <div>
-                    <span className="text-[#167D7F] text-sm">1592 reviews</span>
+                    <span className="text-[#167D7F] text-sm">
+                      {reviews?.data && reviews?.data.length > 0
+                        ? reviews?.data.length
+                        : 0}{" "}
+                      reviews
+                    </span>
                   </div>
                 </div>
                 <div className="mb-4 space-y-1 font-montserrat">

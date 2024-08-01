@@ -5,9 +5,10 @@ const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getAllProduct: builder.query<TGetAllProductResponse, any>({
-      query: () => {
+      query: (getQuery) => {
+        const { query } = getQuery || {};
         return {
-          url: "/products",
+          url: `${query ? "/products?" + query : "/products"}`,
           method: "GET",
         };
       },
