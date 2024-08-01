@@ -7,6 +7,7 @@ interface IProps {
   price: number;
   quantity: number;
   category: string;
+  productId: string;
 }
 
 const ProductManagementCard: React.FC<IProps> = ({
@@ -15,6 +16,7 @@ const ProductManagementCard: React.FC<IProps> = ({
   price,
   quantity,
   category,
+  productId,
 }) => {
   return (
     <div className="px-2 pb-4 pt-2 lg:p-4 border flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center justify-between rounded">
@@ -42,7 +44,7 @@ const ProductManagementCard: React.FC<IProps> = ({
         <div className=" flex flex-col items-center lg:space-y-0">
           <span className="lg:hidden font-semibold mb-2">Actions</span>
           <div className="flex space-x-4">
-            <DeleteConfirmationModal />
+            <DeleteConfirmationModal productId={productId} />
             <UpdateProductModal />
           </div>
         </div>

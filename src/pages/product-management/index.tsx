@@ -34,6 +34,7 @@ const ProductManagement: React.FC<IProps> = () => {
             {data?.data?.map((product) => (
               <ProductManagementCard
                 key={product._id}
+                productId={product._id}
                 name={product.name}
                 image={product.image}
                 price={product.price}
