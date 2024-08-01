@@ -82,9 +82,23 @@ const AddProductModal: React.FC<IProps> = () => {
                       className="border border-gray-300 rounded p-2"
                     />
                   </div>
+
                   <div className="grid grid-cols-1 gap-4 flex-1">
                     <label htmlFor="status">Status</label>
                     <StatusDropdown />
+
+                    <label htmlFor="featured">Featured</label>
+                    <input
+                      type="checkbox"
+                      id="featured"
+                      className="size-4 border border-gray-300 rounded p-2"
+                    />
+                    <label htmlFor="tags">Tags</label>
+                    <input
+                      type="text"
+                      id="tags"
+                      className="border border-gray-300 rounded p-2"
+                    />
 
                     <label htmlFor="image">Image</label>
                     <input
