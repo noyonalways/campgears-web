@@ -5,7 +5,7 @@ type TGalleryImage = {
   alt: string;
 };
 
-export type TProduct = {
+type TProduct = {
   _id: string;
   name: string;
   price: number;
@@ -24,4 +24,18 @@ export type TProduct = {
   createdAt: Date;
   updatedAt: Date;
   slug: string;
+};
+
+export type TGetAllProductResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TProduct[];
+};
+
+export type TGetProductResponse = {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: TProduct;
 };

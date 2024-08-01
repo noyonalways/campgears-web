@@ -46,9 +46,9 @@ const Products: React.FC<IProps> = () => {
               </ul>
             </div>
           </div>
-          <div className="relative space-y-4 basis-full lg:basis-[81.5%] lg:-mt-10">
-            <div className="sticky lg:top-[138px] z-10">
-              <div className="flex items-center space-x-6 justify-end pb-4 w-full bg-white">
+          <div className="relative space-y-4 basis-full lg:basis-[81.5%] lg:-mt-16">
+            <div className="sticky lg:top-[126px] z-10">
+              <div className="flex items-center space-x-6 justify-end py-4 w-full bg-white">
                 <span className="font-medium">View as</span>
                 <div className="flex items-center space-x-4 text-[#898989]">
                   <button className="text-xl text-primary">
@@ -90,6 +90,8 @@ const Products: React.FC<IProps> = () => {
                     name={product.name}
                     image={product.image}
                     price={product.price}
+                    slug={product.slug}
+                    _id={product._id}
                   />
                 ))}
               </div>

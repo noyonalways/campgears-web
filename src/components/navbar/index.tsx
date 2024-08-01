@@ -99,6 +99,14 @@ const Navbar = () => {
                 Product Management
               </Link>
             </li>
+            <li className="lg:hidden">
+              <Link
+                className="font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary"
+                to="/wishlist"
+              >
+                Wishlist
+              </Link>
+            </li>
             <li>
               <Link
                 className="font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto"
