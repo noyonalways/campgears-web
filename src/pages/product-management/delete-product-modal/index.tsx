@@ -1,7 +1,14 @@
 import { useState } from "react";
+import { toast } from "sonner";
+import { useDeleteProductMutation } from "../../../redux/features/product/productApi";
 
-const DeleteConfirmationModal = () => {
+interface IProps {
+  productId: string;
+}
+
+const DeleteConfirmationModal: React.FC<IProps> = ({ productId }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [deleteProduct, { data }] = useDeleteProductMutation();
 
   const handleOpen = () => {
     setIsOpen(true);
@@ -12,7 +19,7 @@ const DeleteConfirmationModal = () => {
   };
 
   const handleConfirm = () => {
-    // onConfirm();
+    deleteProduct(productId);
     handleClose();
   };
 
@@ -20,6 +27,14 @@ const DeleteConfirmationModal = () => {
     // onCancel();
     handleClose();
   };
+
+  if (data?.success) {
+    toast.success(data?.message, {
+      id: productId,
+      position: "top-right",
+      className: "text-primary",
+    });
+  }
 
   return (
     <>

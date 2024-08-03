@@ -4,8 +4,8 @@ import {
   HiOutlineListBullet,
   HiOutlineSquares2X2,
 } from "react-icons/hi2";
-import tent from "../../assets/images/products/tent.png";
 import ProductCard from "../../components/product-card";
+import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import CategoryList from "./category-list";
 
 interface IProps {}
@@ -26,48 +26,8 @@ const categories: ICategory[] = [
   { id: 7, title: "Camping", url: "#" },
 ];
 
-interface IProduct {
-  id: string;
-  image: string;
-  title: string;
-  price: number;
-}
-
-const products: IProduct[] = [
-  {
-    id: "product-1",
-    image: tent,
-    title: "Inflatable Camping Tent Air Seconds 4.1 F&B 4 Person 1 Bedroom.",
-    price: 299.99,
-  },
-  {
-    id: "product-2",
-    image: tent,
-    title: "CAMPING SLEEPING BAGARPENAZ 10°",
-    price: 24.99,
-  },
-  {
-    id: "product-3",
-    image: tent,
-    title: "Itiwit Inflatable Touring Kayak w/ Pump 2 person",
-    price: 199.99,
-  },
-  {
-    id: "product-4",
-    image: tent,
-    title: "SELF-INFLATABLE CAMPING MATTRESS ULTIM COMFORT 70 CM 1 PERSON",
-    price: 89.99,
-  },
-
-  {
-    id: "product-5",
-    image: tent,
-    title: "SELF-INFLATABLE CAMPING MATTRESS ULTIM COMFORT 70 CM 1 PERSON",
-    price: 89.99,
-  },
-];
-
 const Products: React.FC<IProps> = () => {
+  const { data, isLoading } = useGetAllProductQuery(undefined);
   return (
     <section className="font-montserrat pb-10">
       <div className="container">
@@ -86,9 +46,9 @@ const Products: React.FC<IProps> = () => {
               </ul>
             </div>
           </div>
-          <div className="relative space-y-4 basis-full lg:basis-[81.5%] lg:-mt-10">
-            <div className="sticky lg:top-[138px] z-10">
-              <div className="flex items-center space-x-6 justify-end pb-4 w-full bg-white">
+          <div className="relative space-y-4 basis-full lg:basis-[81.5%] lg:-mt-16">
+            <div className="sticky lg:top-[126px] z-10">
+              <div className="flex items-center space-x-6 justify-end py-4 w-full bg-white">
                 <span className="font-medium">View as</span>
                 <div className="flex items-center space-x-4 text-[#898989]">
                   <button className="text-xl text-primary">
@@ -101,7 +61,9 @@ const Products: React.FC<IProps> = () => {
               </div>
               <div className=" bg-secondary py-2 px-3 flex items-center lg:justify-between rounded lg:space-x-4">
                 <div className="absolute top-0 left-0 lg:static flex items-center flex-1">
-                  <h3 className="font-medium">08 Products Found</h3>
+                  <h3 className="font-medium">
+                    {data?.data.length} Products Found
+                  </h3>
                 </div>
                 <div className="space-x-4 flex">
                   <button className="text-sm md:text-base px-2 text-black flex items-center bg-white lg:px-4 py-1 space-x-3 rounded-sm">
@@ -118,16 +80,22 @@ const Products: React.FC<IProps> = () => {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-              {products.map((product) => (
-                <ProductCard
-                  key={product.id}
-                  title={product.title}
-                  image={product.image}
-                  price={product.price}
-                />
-              ))}
-            </div>
+            {isLoading ? (
+              <div className="">Loading....</div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {data?.data.map((product) => (
+                  <ProductCard
+                    key={product._id}
+                    name={product.name}
+                    image={product.image}
+                    price={product.price}
+                    slug={product.slug}
+                    _id={product._id}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

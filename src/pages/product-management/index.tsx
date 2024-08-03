@@ -1,9 +1,12 @@
+import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import AddProductModal from "./add-product-modal";
-import Card from "./card";
+import ProductManagementCard from "./product-management-card";
 
 interface IProps {}
 
 const ProductManagement: React.FC<IProps> = () => {
+  const { data, isLoading } = useGetAllProductQuery(undefined);
+
   return (
     <section className="font-montserrat py-10">
       <div className="container">
@@ -24,11 +27,23 @@ const ProductManagement: React.FC<IProps> = () => {
             <span>Actions</span>
           </div>
         </div>
-        <div className="space-y-4">
-          <Card />
-          <Card />
-          <Card />
-        </div>
+        {isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="space-y-4">
+            {data?.data?.map((product) => (
+              <ProductManagementCard
+                key={product._id}
+                productId={product._id}
+                name={product.name}
+                image={product.image}
+                price={product.price}
+                category={product.category}
+                quantity={product.stockQuantity}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

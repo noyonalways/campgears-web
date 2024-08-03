@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import "./index.css";
 // Import Swiper styles
 import { RouterProvider } from "react-router-dom";
+import { Toaster } from "sonner";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -15,5 +16,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
+    <Toaster />
   </React.StrictMode>
 );
