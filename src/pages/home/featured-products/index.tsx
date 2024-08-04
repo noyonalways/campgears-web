@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { HiChevronRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
@@ -9,9 +10,11 @@ import { useGetAllProductQuery } from "../../../redux/features/product/productAp
 interface IProps {}
 
 const FeaturedProducts: React.FC<IProps> = () => {
-  const { data, isLoading } = useGetAllProductQuery({
-    query: "isFeatured=true",
+  const [queryParams, setQueryParams] = useState({
+    isFeatured: true,
   });
+
+  const { data, isLoading } = useGetAllProductQuery(queryParams);
   return (
     <section className="pb-20">
       <div className="container">

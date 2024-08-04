@@ -183,7 +183,7 @@ const ProductDetails: React.FC<IProps> = () => {
                   </div>
                 </div>
                 <p className="font-montserrat text-black">
-                  <span className="font-semibold">Categories:</span>{" "}
+                  <span className="font-semibold">Category:</span>{" "}
                   <span>{subCategory}</span>
                 </p>
               </div>
