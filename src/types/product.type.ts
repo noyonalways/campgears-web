@@ -39,3 +39,13 @@ export type TGetProductResponse = {
   message: string;
   data: TProduct;
 };
+
+export type TProductErrorResponse = {
+  status: number;
+  data: {
+    success: boolean;
+    message: string;
+    statusCode: number;
+    data?: TProduct[];
+  };
+};

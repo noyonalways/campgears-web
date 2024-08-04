@@ -1,14 +1,15 @@
+import { Link } from "react-router-dom";
+
 interface IProps {
-  url: string;
   title: string;
 }
 
-const CategoryList: React.FC<IProps> = ({ url, title }) => {
+const CategoryList: React.FC<IProps> = ({ title }) => {
   return (
     <li>
-      <a className="hover:text-primary" href={url}>
+      <Link className="hover:text-primary" to={`/products?category=${title}`}>
         {title}
-      </a>
+      </Link>
     </li>
   );
 };
