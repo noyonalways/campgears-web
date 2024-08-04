@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HiChevronRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
@@ -10,9 +9,9 @@ import { useGetAllProductQuery } from "../../../redux/features/product/productAp
 interface IProps {}
 
 const FeaturedProducts: React.FC<IProps> = () => {
-  const [queryParams, setQueryParams] = useState({
+  const queryParams = {
     isFeatured: true,
-  });
+  };
 
   const { data, isLoading } = useGetAllProductQuery(queryParams);
   return (
