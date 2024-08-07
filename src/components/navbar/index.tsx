@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { HiX } from "react-icons/hi";
 import {
   HiBars3,
@@ -7,12 +7,22 @@ import {
   HiOutlineShoppingCart,
   HiOutlineUser,
 } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearchBar, setIsOpenSearchBar] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+
+  const searchHandler = (e: FormEvent) => {
+    e.preventDefault();
+    if (searchQuery) {
+      navigate(`/products?searchTerm=${searchQuery}`);
+    }
+    setSearchQuery("");
+  };
 
   return (
     <header className="py-4 lg:py-0 lg:pt-4 font-roboto z-10 lg:border-none sticky top-0 bg-white">
@@ -29,13 +39,18 @@ const Navbar = () => {
             ${isOpenSearchBar ? "block" : "hidden lg:inline-block"} 
             `}
           >
-            <form className="border w-full mx-auto max-w-md lg:max-w-md rounded-full pl-4 lg:pl-4 flex lg:justify-between font-montserrat">
+            <form
+              onSubmit={searchHandler}
+              className="border w-full mx-auto max-w-md lg:max-w-md rounded-full pl-4 lg:pl-4 flex lg:justify-between font-montserrat"
+            >
               <input
                 className="py-2 w-full outline-none"
                 placeholder="Search Here..."
                 type="search"
                 name="search"
                 id="search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button
                 className="font-semibold px-4 rounded-r-full text-[#717171] hover:bg-secondary hover:text-black"

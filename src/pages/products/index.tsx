@@ -30,21 +30,29 @@ const Products: React.FC = () => {
   const location = useLocation();
   const [queryParams, setQueryParams] = useState({
     category: new URLSearchParams(location.search).get("category") || "",
+    searchTerm: new URLSearchParams(location.search).get("searchTerm") || "",
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const { data, error, isFetching } = useGetAllProductQuery(
-    queryParams.category ? `category=${queryParams.category}` : "",
-    {
-      // This ensures the query is not skipped
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  const query = queryParams.searchTerm
+    ? `searchTerm=${queryParams.searchTerm}`
+    : queryParams.category
+    ? `category=${queryParams.category}`
+    : "";
+
+  const { data, error, isFetching } = useGetAllProductQuery(query, {
+    // This ensures the query is not skipped
+    refetchOnMountOrArgChange: true,
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const category = params.get("category");
-    setQueryParams({ category: category || "" });
+    const searchTerm = params.get("searchTerm");
+    setQueryParams({
+      category: category || "",
+      searchTerm: searchTerm || "",
+    });
   }, [location.search]);
 
   useEffect(() => {
@@ -110,7 +118,7 @@ const Products: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setQueryParams({ category: "" });
+                      setQueryParams({ category: "", searchTerm: "" });
                       window.history.pushState({}, "", "/products");
                     }}
                     className="text-sm md:text-base px-2 text-black bg-white lg:px-4 py-1 rounded-sm"
