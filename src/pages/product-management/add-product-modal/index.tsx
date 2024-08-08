@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { HiX } from "react-icons/hi";
+import { CgSpinner } from "react-icons/cg";
+import { HiOutlineCloudUpload, HiX } from "react-icons/hi";
+import { toast } from "sonner";
 import StatusDropdown from "../update-product-modal/status-dropdown";
 
 interface IProps {}
@@ -16,12 +18,23 @@ interface IFormInputs {
   status: string;
   featured: boolean;
   tags: string;
-  image: FileList | null;
+  image: string;
   galleryImages: FileList | null;
 }
 
+type TImageUploadResult = {
+  status: number;
+  success: boolean;
+  data: Record<string, string>;
+};
+
 const AddProductModal: React.FC<IProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [image, setImage] = useState<File | null>(null);
+  const [imageUploadLoading, setImageUploadLoading] = useState(false);
+  const [imageUploadResult, setImageUploadResult] =
+    useState<TImageUploadResult>({ data: {}, status: 0, success: false });
+
   const {
     register,
     handleSubmit,
@@ -39,7 +52,7 @@ const AddProductModal: React.FC<IProps> = () => {
       status: "",
       featured: false,
       tags: "",
-      image: null,
+      image: "",
       galleryImages: null,
     },
   });
@@ -48,26 +61,59 @@ const AddProductModal: React.FC<IProps> = () => {
     setIsOpen(!isOpen);
   };
 
-  const onSubmit = async (data: IFormInputs) => {
-    console.log("Form Data:", data);
-    console.log("Image File:", data.image);
-    console.log("Gallery Images:", data.galleryImages);
-    // Handle form submission logic here
+  const handleUploadImage = async () => {
+    if (!image) {
+      toast.error("No Image Selected", {
+        id: "uploadImage",
+        position: "top-right",
+        className: "text-red-500",
+      });
+      return;
+    }
 
-    const response = await fetch(
-      `https://api.imgbb.com/1/upload?key=${
-        import.meta.env.VITE_IMGBB_API_KEY
-      }`,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-        body: data.image![0],
-        method: "POST",
+    setImageUploadLoading(true);
+    const form = new FormData();
+    form.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_API_KEY
+    }`;
+
+    const config = {
+      method: "POST",
+      body: form,
+    };
+
+    try {
+      const response = await fetch(url, config);
+      if (!response.ok) {
+        toast.error("Failed to upload image", {
+          id: "uploadImage",
+          position: "top-right",
+          className: "text-red-500",
+        });
       }
-    );
 
-    console.log(response);
+      const json = await response.json();
+      setImageUploadResult(json);
+      if (json.success) {
+        toast.success("Image uploaded successfully", {
+          id: "uploadImageSuccess",
+          position: "top-right",
+          className: "text-primary",
+        });
+      }
+      setImageUploadLoading(false);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+      setImageUploadLoading(false);
+    }
+  };
+
+  const onSubmit = async (data: IFormInputs) => {
+    data.image = imageUploadResult.data.url;
+    console.log("Data:", data);
+    console.log("Errors:", errors);
   };
 
   return (
@@ -163,7 +209,7 @@ const AddProductModal: React.FC<IProps> = () => {
                     type="text"
                     id="color"
                     {...register("color", {
-                      required: "Price is required",
+                      required: "Color is required",
                     })}
                     className="border border-gray-300 rounded p-2"
                   />
@@ -239,24 +285,39 @@ const AddProductModal: React.FC<IProps> = () => {
                   />
 
                   <label htmlFor="image">Image</label>
-                  <input
-                    type="file"
-                    id="image"
-                    {...register("image", { required: "Image is required" })}
-                    className="border border-gray-300 rounded p-2"
-                  />
+                  {imageUploadLoading ? (
+                    <span className="p-2 inline-flex items-center space-x-2 mx-auto">
+                      <CgSpinner className="animate-spin text-primary text-3xl" />
+                      <span>Uploading...</span>
+                    </span>
+                  ) : (
+                    <div className="flex justify-between space-x-2">
+                      <input
+                        type="file"
+                        id="image"
+                        {...register("image", {
+                          required: "Image is required",
+                        })}
+                        className="border border-gray-300 rounded p-2 w-full"
+                        onChange={(e) =>
+                          setImage(e.target.files ? e.target.files[0] : null)
+                        }
+                      />
+                      <button
+                        onClick={handleUploadImage}
+                        title="Upload Image"
+                        type="button"
+                        className="bg-primary text-white px-4 py-1 rounded border"
+                      >
+                        <HiOutlineCloudUpload />
+                      </button>
+                    </div>
+                  )}
                   {errors.image && (
                     <span className="text-red-500">{errors.image.message}</span>
                   )}
 
                   <label htmlFor="gallery-images">Gallery Images</label>
-                  <input
-                    type="file"
-                    id="gallery-images"
-                    {...register("galleryImages")}
-                    className="border border-gray-300 rounded p-2"
-                    multiple
-                  />
 
                   <div className="flex justify-end mt-4">
                     <button
