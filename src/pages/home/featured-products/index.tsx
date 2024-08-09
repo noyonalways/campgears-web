@@ -2,6 +2,7 @@ import { HiChevronRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Loading from "../../../components/loading";
 import ProductCard from "../../../components/product-card";
 import SectionTitle from "../../../components/section-title";
 import { useGetAllProductQuery } from "../../../redux/features/product/productApi";
@@ -17,18 +18,16 @@ const FeaturedProducts: React.FC<IProps> = () => {
   return (
     <section className="pb-20">
       <div className="container">
+        <SectionTitle
+          title="Featured Products"
+          description="Check out our featured products, handpicked for their quality and performance. Click on any item to view detailed information and make your purchase."
+        />
         {isLoading ? (
-          <div>
-            <div className="py-10 text-center">
-              <p>Loading.....</p>
-            </div>
+          <div className="flex items-center justify-center h-[30vh]">
+            <Loading />
           </div>
         ) : (
           <>
-            <SectionTitle
-              title="Featured Products"
-              description="Check out our featured products, handpicked for their quality and performance. Click on any item to view detailed information and make your purchase."
-            />
             <Swiper
               className="mb-4"
               modules={[Navigation, Pagination, Mousewheel, Keyboard]}

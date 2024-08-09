@@ -10,6 +10,7 @@ import {
   Navigation,
   Pagination,
 } from "swiper/modules";
+import Loading from "../../../components/loading";
 import ProductCard from "../../../components/product-card";
 import SectionTitle from "../../../components/section-title";
 import { useGetAllProductQuery } from "../../../redux/features/product/productApi";
@@ -22,18 +23,16 @@ const BestSellingProducts: React.FC<IProps> = () => {
   return (
     <section className="pb-20">
       <div className="container">
+        <SectionTitle
+          title="Best Selling Products"
+          description="Explore our top rated and recommended camping gear. Upgrade your adventure with the best products on the market."
+        />
         {isLoading ? (
-          <div>
-            <div className="py-10 text-center">
-              <p>Loading.....</p>
-            </div>
+          <div className="flex items-center justify-center h-[30vh]">
+            <Loading />
           </div>
         ) : (
           <>
-            <SectionTitle
-              title="Best Selling Products"
-              description="Explore our top rated and recommended camping gear. Upgrade your adventure with the best products on the market."
-            />
             <Swiper
               className="mb-4"
               modules={[Navigation, Pagination, Mousewheel, Keyboard]}
