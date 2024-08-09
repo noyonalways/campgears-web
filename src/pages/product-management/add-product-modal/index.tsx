@@ -1,25 +1,27 @@
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { CgSpinner } from "react-icons/cg";
 import { HiOutlineCloudUpload, HiX } from "react-icons/hi";
 import { toast } from "sonner";
+import { useAddProductMutation } from "../../../redux/features/product/productApi";
+import { TGalleryImage } from "../../../types";
 import StatusDropdown from "../update-product-modal/status-dropdown";
 
 interface IProps {}
 
-interface IFormInputs {
+export interface IFormInputs {
   name: string;
   description: string;
   price: number;
-  quantity: number;
+  stockQuantity: number;
   color: string;
   category: string;
   subCategory: string;
+  brand: string;
   status: string;
-  featured: boolean;
-  tags: string;
+  isFeatured: boolean;
+  tags: string[];
   image: string;
-  galleryImages: FileList | null;
+  galleryImages: TGalleryImage[] | null;
 }
 
 type TImageUploadResult = {
@@ -30,10 +32,13 @@ type TImageUploadResult = {
 
 const AddProductModal: React.FC<IProps> = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [image, setImage] = useState<File | null>(null);
   const [imageUploadLoading, setImageUploadLoading] = useState(false);
-  const [imageUploadResult, setImageUploadResult] =
-    useState<TImageUploadResult>({ data: {}, status: 0, success: false });
+  const [image, setImage] = useState<File | null>(null);
+  const [galleryImagesUploadResult, setGalleryImagesUploadResult] = useState<
+    TImageUploadResult[] | null
+  >([]);
+  const [addProduct, { isLoading, data: ResponseData, error, isSuccess }] =
+    useAddProductMutation();
 
   const {
     register,
@@ -45,13 +50,14 @@ const AddProductModal: React.FC<IProps> = () => {
       name: "",
       description: "",
       price: 0,
-      quantity: 0,
+      stockQuantity: 0,
       color: "",
       category: "",
+      brand: "",
       subCategory: "",
       status: "",
-      featured: false,
-      tags: "",
+      isFeatured: false,
+      tags: [""],
       image: "",
       galleryImages: null,
     },
@@ -61,10 +67,10 @@ const AddProductModal: React.FC<IProps> = () => {
     setIsOpen(!isOpen);
   };
 
-  const handleUploadImage = async () => {
+  const handleUploadImages = async (image: File) => {
     if (!image) {
       toast.error("No Image Selected", {
-        id: "uploadImage",
+        id: "uploadGalleryImages",
         position: "top-right",
         className: "text-red-500",
       });
@@ -95,7 +101,15 @@ const AddProductModal: React.FC<IProps> = () => {
       }
 
       const json = await response.json();
-      setImageUploadResult(json);
+      if (json.success) {
+        setGalleryImagesUploadResult((prev) => {
+          if (prev === null) {
+            return [json];
+          }
+          return [...prev, json];
+        });
+      }
+
       if (json.success) {
         toast.success("Image uploaded successfully", {
           id: "uploadImageSuccess",
@@ -111,9 +125,48 @@ const AddProductModal: React.FC<IProps> = () => {
   };
 
   const onSubmit = async (data: IFormInputs) => {
-    data.image = imageUploadResult.data.url;
-    console.log("Data:", data);
-    console.log("Errors:", errors);
+    if (galleryImagesUploadResult?.length === 0) {
+      toast.error("Please select at least one image or gallery image", {
+        id: "uploadGalleryImages",
+        position: "top-right",
+        className: "text-red-500",
+      });
+      return;
+    }
+
+    data.image = galleryImagesUploadResult![0]?.data.url;
+    if (galleryImagesUploadResult!.length > 1) {
+      data.galleryImages = galleryImagesUploadResult!
+        .slice(1)!
+        .map((image) => ({ url: image.data.url, alt: image.data.title }));
+    }
+    data.galleryImages = [];
+
+    console.log("Form Data:", data);
+    // console.log("Errors:", errors);
+
+    console.log("isSuccess:", isSuccess);
+    console.log("Data:", ResponseData);
+    console.log("Error:", error);
+
+    data.tags = data.tags.toString().split(",");
+
+    try {
+      await addProduct(data);
+      toast.success("Product added successfully", {
+        id: "addProductSuccess",
+        position: "top-right",
+        className: "text-primary",
+      });
+      toggleModal();
+    } catch (error) {
+      console.error("Error adding product:", error);
+      toast.error("Failed to add product", {
+        id: "addProductError",
+        position: "top-right",
+        className: "text-red-500",
+      });
+    }
   };
 
   return (
@@ -188,19 +241,19 @@ const AddProductModal: React.FC<IProps> = () => {
                     <span className="text-red-500">{errors.price.message}</span>
                   )}
 
-                  <label htmlFor="quantity">Quantity</label>
+                  <label htmlFor="stockQuantity">Quantity</label>
                   <input
                     type="number"
-                    id="quantity"
-                    {...register("quantity", {
+                    id="stockQuantity"
+                    {...register("stockQuantity", {
                       required: "Quantity is required",
                       valueAsNumber: true,
                     })}
                     className="border border-gray-300 rounded p-2"
                   />
-                  {errors.quantity && (
+                  {errors.stockQuantity && (
                     <span className="text-red-500">
-                      {errors.quantity.message}
+                      {errors.stockQuantity.message}
                     </span>
                   )}
 
@@ -231,9 +284,7 @@ const AddProductModal: React.FC<IProps> = () => {
                       {errors.category.message}
                     </span>
                   )}
-                </div>
 
-                <div className="grid grid-cols-1 gap-4 flex-1">
                   <label htmlFor="sub-category">Sub Category</label>
                   <input
                     type="text"
@@ -247,6 +298,21 @@ const AddProductModal: React.FC<IProps> = () => {
                     <span className="text-red-500">
                       {errors.subCategory.message}
                     </span>
+                  )}
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 flex-1">
+                  <label htmlFor="category">Brand</label>
+                  <input
+                    type="text"
+                    id="brand"
+                    {...register("brand", {
+                      required: "Brand is required",
+                    })}
+                    className="border border-gray-300 rounded p-2"
+                  />
+                  {errors.brand && (
+                    <span className="text-red-500">{errors.brand.message}</span>
                   )}
 
                   <label htmlFor="status">Status</label>
@@ -272,7 +338,7 @@ const AddProductModal: React.FC<IProps> = () => {
                   <input
                     type="checkbox"
                     id="featured"
-                    {...register("featured")}
+                    {...register("isFeatured")}
                     className="size-4 border border-gray-300 rounded p-2"
                   />
 
@@ -284,27 +350,24 @@ const AddProductModal: React.FC<IProps> = () => {
                     className="border border-gray-300 rounded p-2"
                   />
 
-                  <label htmlFor="image">Image</label>
-                  {imageUploadLoading ? (
-                    <span className="p-2 inline-flex items-center space-x-2 mx-auto">
-                      <CgSpinner className="animate-spin text-primary text-3xl" />
-                      <span>Uploading...</span>
-                    </span>
-                  ) : (
+                  <>
+                    <label htmlFor="image">
+                      Image{" "}
+                      {imageUploadLoading && (
+                        <span className="text-primary ml-4">Uploading...</span>
+                      )}{" "}
+                    </label>
                     <div className="flex justify-between space-x-2">
                       <input
                         type="file"
                         id="image"
-                        {...register("image", {
-                          required: "Image is required",
-                        })}
                         className="border border-gray-300 rounded p-2 w-full"
                         onChange={(e) =>
                           setImage(e.target.files ? e.target.files[0] : null)
                         }
                       />
                       <button
-                        onClick={handleUploadImage}
+                        onClick={() => handleUploadImages(image!)}
                         title="Upload Image"
                         type="button"
                         className="bg-primary text-white px-4 py-1 rounded border"
@@ -312,12 +375,49 @@ const AddProductModal: React.FC<IProps> = () => {
                         <HiOutlineCloudUpload />
                       </button>
                     </div>
-                  )}
-                  {errors.image && (
-                    <span className="text-red-500">{errors.image.message}</span>
-                  )}
 
-                  <label htmlFor="gallery-images">Gallery Images</label>
+                    {!image && (
+                      <span className="text-red-500">Image is required</span>
+                    )}
+
+                    <label htmlFor="gallery-images">Gallery Images</label>
+                    <div className="flex justify-between space-x-2">
+                      <input
+                        type="file"
+                        id="image"
+                        className="border border-gray-300 rounded p-2 w-full"
+                        onChange={(e) =>
+                          setImage(e.target.files ? e.target.files[0] : null)
+                        }
+                      />
+                      <button
+                        onClick={() => handleUploadImages(image!)}
+                        title="Upload Image"
+                        type="button"
+                        className="bg-primary text-white px-4 py-1 rounded border"
+                      >
+                        <HiOutlineCloudUpload />
+                      </button>
+                    </div>
+                    <div className="flex justify-between space-x-2">
+                      <input
+                        type="file"
+                        id="image"
+                        className="border border-gray-300 rounded p-2 w-full"
+                        onChange={(e) =>
+                          setImage(e.target.files ? e.target.files[0] : null)
+                        }
+                      />
+                      <button
+                        onClick={() => handleUploadImages(image!)}
+                        title="Upload Image"
+                        type="button"
+                        className="bg-primary text-white px-4 py-1 rounded border"
+                      >
+                        <HiOutlineCloudUpload />
+                      </button>
+                    </div>
+                  </>
 
                   <div className="flex justify-end mt-4">
                     <button
