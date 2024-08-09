@@ -7,6 +7,7 @@ import {
 } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
+import Loading from "../../components/loading";
 import Button from "../../components/ui/button";
 import { useGetProductQuery } from "../../redux/features/product/productApi";
 import { useGetAllreviewQuery } from "../../redux/features/review/reviewApi";
@@ -89,7 +90,9 @@ const ProductDetails: React.FC<IProps> = () => {
     <section className="pb-20">
       <div className="container">
         {isLoading ? (
-          <div>Loading....</div>
+          <div className="flex items-center justify-center h-[60vh]">
+            <Loading />
+          </div>
         ) : (
           <>
             <div className="flex items-center space-x-2 py-3 my-4 font-montserrat text-[#717171]">
@@ -156,14 +159,16 @@ const ProductDetails: React.FC<IProps> = () => {
                 <div className="flex items-end mb-4 font-montserrat justify-between">
                   <div className="space-y-2 basis-[35%]">
                     <span>Quantity</span>
-                    <div className=" items-center flex justify-between">
+                    <div className="items-center flex justify-between">
                       <button
                         onClick={decrement}
                         className="bg-[#e7ecef] size-10 flex justify-center items-center rounded-sm active:scale-95 duration-100"
                       >
                         <HiMinus />
                       </button>
-                      <span>{quantity.toString().padStart(2, "0")}</span>
+                      <span className="h-10 flex-1 flex flex-col justify-center items-center border-t border-b">
+                        {quantity.toString().padStart(2, "0")}
+                      </span>
                       <button
                         onClick={increment}
                         className="bg-[#e7ecef] size-10 flex justify-center items-center rounded-sm active:scale-95 duration-100"

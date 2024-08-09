@@ -1,3 +1,4 @@
+import Loading from "../../components/loading";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import AddProductModal from "./add-product-modal";
 import ProductManagementCard from "./product-management-card";
@@ -28,7 +29,9 @@ const ProductManagement: React.FC<IProps> = () => {
           </div>
         </div>
         {isLoading ? (
-          <div>Loading...</div>
+          <div className="flex items-center justify-center py-20">
+            <Loading />
+          </div>
         ) : (
           <div className="space-y-4">
             {data?.data?.map((product) => (

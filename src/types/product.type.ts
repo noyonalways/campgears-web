@@ -1,6 +1,6 @@
 type TProductStatus = "in-stock" | "out-of-stock" | "discontinued";
 
-type TGalleryImage = {
+export type TGalleryImage = {
   url: string;
   alt: string;
 };

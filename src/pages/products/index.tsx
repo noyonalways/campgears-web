@@ -6,6 +6,7 @@ import {
   HiOutlineSquares2X2,
 } from "react-icons/hi2";
 import { useLocation } from "react-router-dom";
+import Loading from "../../components/loading";
 import ProductCard from "../../components/product-card";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import CategoryList from "./category-list";
@@ -29,21 +30,29 @@ const Products: React.FC = () => {
   const location = useLocation();
   const [queryParams, setQueryParams] = useState({
     category: new URLSearchParams(location.search).get("category") || "",
+    searchTerm: new URLSearchParams(location.search).get("searchTerm") || "",
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const { data, error, isFetching } = useGetAllProductQuery(
-    queryParams.category ? `category=${queryParams.category}` : "",
-    {
-      // This ensures the query is not skipped
-      refetchOnMountOrArgChange: true,
-    }
-  );
+  const query = queryParams.searchTerm
+    ? `searchTerm=${queryParams.searchTerm}`
+    : queryParams.category
+    ? `category=${queryParams.category}`
+    : "";
+
+  const { data, error, isFetching } = useGetAllProductQuery(query, {
+    // This ensures the query is not skipped
+    refetchOnMountOrArgChange: true,
+  });
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const category = params.get("category");
-    setQueryParams({ category: category || "" });
+    const searchTerm = params.get("searchTerm");
+    setQueryParams({
+      category: category || "",
+      searchTerm: searchTerm || "",
+    });
   }, [location.search]);
 
   useEffect(() => {
@@ -80,7 +89,7 @@ const Products: React.FC = () => {
             </div>
           </div>
           <div className="relative space-y-4 basis-full lg:basis-[81.5%] lg:-mt-16">
-            <div className="sticky lg:top-[126px] z-10">
+            <div className="z-10">
               <div className="flex items-center space-x-6 justify-end py-4 w-full bg-white">
                 <span className="font-medium">View as</span>
                 <div className="flex items-center space-x-4 text-[#898989]">
@@ -109,7 +118,7 @@ const Products: React.FC = () => {
                   </button>
                   <button
                     onClick={() => {
-                      setQueryParams({ category: "" });
+                      setQueryParams({ category: "", searchTerm: "" });
                       window.history.pushState({}, "", "/products");
                     }}
                     className="text-sm md:text-base px-2 text-black bg-white lg:px-4 py-1 rounded-sm"
@@ -121,15 +130,7 @@ const Products: React.FC = () => {
             </div>
             {isLoading ? (
               <div className="flex-col gap-4 w-full flex items-center justify-center lg:py-44">
-                <div className="size-16 border-8 text-primary text-4xl animate-spin border-gray-300 flex items-center justify-center border-t-primary rounded-full">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    height="1em"
-                    width="1em"
-                    className="animate-ping"
-                  ></svg>
-                </div>
+                <Loading />
               </div>
             ) : errorMessage ? (
               <div className="text-red-500">{errorMessage}</div>
