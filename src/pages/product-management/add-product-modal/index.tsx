@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import Loading from "../../../components/loading";
 import { useAddProductMutation } from "../../../redux/features/product/productApi";
 import { TGalleryImage } from "../../../types";
-import StatusDropdown from "../update-product-modal/status-dropdown";
+import StatusDropdown from "../status-dropdown";
 
 interface IProps {}
 
