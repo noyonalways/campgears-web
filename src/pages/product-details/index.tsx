@@ -119,7 +119,7 @@ const ProductDetails: React.FC<IProps> = () => {
                   ))}
               </div>
               <div className="basis-1/3">
-                <h3 className="text-sm uppercase font-semibold font-montserrat mb-2 bg-secondary px-3 rounded-md py-1 inline-block">
+                <h3 className="text-sm uppercase font-semibold font-montserrat mb-3 bg-secondary px-3 rounded-md py-1 inline-block">
                   {brand}
                 </h3>
                 <h1 className="text-3xl font-bold mb-3 font-montserrat">

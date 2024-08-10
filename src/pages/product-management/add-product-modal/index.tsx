@@ -4,26 +4,10 @@ import { HiOutlineCloudUpload, HiX } from "react-icons/hi";
 import { toast } from "sonner";
 import Loading from "../../../components/loading";
 import { useAddProductMutation } from "../../../redux/features/product/productApi";
-import { TGalleryImage } from "../../../types";
+import { IFormInputs } from "../../../types";
 import StatusDropdown from "../status-dropdown";
 
 interface IProps {}
-
-export interface IFormInputs {
-  name: string;
-  description: string;
-  price: number;
-  stockQuantity: number;
-  color: string;
-  category: string;
-  subCategory: string;
-  brand: string;
-  status: string;
-  isFeatured: boolean;
-  tags: string[];
-  image: string;
-  galleryImages: TGalleryImage[] | null;
-}
 
 type TImageUploadResult = {
   status: number;

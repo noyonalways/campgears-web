@@ -43,6 +43,7 @@ const ProductManagement: React.FC<IProps> = () => {
                 price={product.price}
                 category={product.category}
                 quantity={product.stockQuantity}
+                slug={product.slug}
               />
             ))}
           </div>

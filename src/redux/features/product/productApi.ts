@@ -1,6 +1,14 @@
-import { IFormInputs } from "../../../pages/product-management/add-product-modal";
-import { TGetAllProductResponse, TGetProductResponse } from "../../../types";
+import {
+  IFormInputs,
+  TGetAllProductResponse,
+  TGetProductResponse,
+} from "../../../types";
 import { baseApi } from "../../api/baseApi";
+
+type TUpdateProductInputs = {
+  id: string;
+  payload: Partial<IFormInputs>;
+};
 
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -31,6 +39,16 @@ const productApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["product"],
     }),
+    updateProduct: builder.mutation<TGetProductResponse, TUpdateProductInputs>({
+      query: ({ id, payload }) => {
+        return {
+          url: `/products/${id}`,
+          method: "PATCH",
+          body: payload,
+        };
+      },
+      invalidatesTags: ["product"],
+    }),
     deleteProduct: builder.mutation<TGetProductResponse, string>({
       query: (productId) => ({
         url: `/products/${productId}`,
@@ -44,6 +62,7 @@ const productApi = baseApi.injectEndpoints({
 export const {
   useGetAllProductQuery,
   useGetProductQuery,
-  useDeleteProductMutation,
   useAddProductMutation,
+  useUpdateProductMutation,
+  useDeleteProductMutation,
 } = productApi;
