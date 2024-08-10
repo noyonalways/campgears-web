@@ -26,6 +26,22 @@ type TProduct = {
   slug: string;
 };
 
+export interface IFormInputs {
+  name: string;
+  description: string;
+  price: number;
+  stockQuantity: number;
+  color: string;
+  category: string;
+  subCategory: string;
+  brand: string;
+  status: string;
+  isFeatured: boolean;
+  tags: string[];
+  image: string;
+  galleryImages: TGalleryImage[] | null;
+}
+
 export type TGetAllProductResponse = {
   success: boolean;
   statusCode: number;

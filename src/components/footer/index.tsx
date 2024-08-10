@@ -29,7 +29,7 @@ const Footer = () => {
             </a>
           </div>
           <div className="flex flex-col space-y-3 lg:space-y-0 lg:flex-row items-center lg:justify-between">
-            <p>
+            <p className="text-center lg:text-left">
               <span>&copy;</span> {new Date().getFullYear()}{" "}
               <a href="#" className="font-bold">
                 CAMPGEARS
@@ -38,7 +38,11 @@ const Footer = () => {
             </p>
             <p className="text-xs">
               Made by{" "}
-              <a className="font-medium" href="#">
+              <a
+                className="font-medium"
+                target="_blank"
+                href="https://linkedin.com/in/noyonalways"
+              >
                 @noyonalways
               </a>
             </p>

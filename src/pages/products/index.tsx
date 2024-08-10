@@ -78,8 +78,8 @@ const Products: React.FC = () => {
     <section className="font-montserrat pb-10">
       <div className="container">
         <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:justify-between lg:items-start pt-4 lg:pt-4">
-          <div className="bg-secondary basis-full lg:basis-[17%] lg:h-screen rounded">
-            <div className="lg:sticky lg:top-[138px] p-4">
+          <div className="bg-secondary basis-full lg:basis-[17%] rounded">
+            <div className="p-4">
               <h2 className="text-xl font-bold mb-4">Categories</h2>
               <ul className="space-y-2">
                 {categories.map((category) => (

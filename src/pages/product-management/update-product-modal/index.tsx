@@ -3,26 +3,12 @@ import { Controller, useForm } from "react-hook-form";
 import { HiOutlineCloudUpload, HiX } from "react-icons/hi";
 import { toast } from "sonner";
 import Loading from "../../../components/loading";
-import { useAddProductMutation } from "../../../redux/features/product/productApi";
-import { TGalleryImage } from "../../../types";
+import { useUpdateProductMutation } from "../../../redux/features/product/productApi";
+import { IFormInputs } from "../../../types";
 import StatusDropdown from "../status-dropdown";
 
-interface IProps {}
-
-export interface IFormInputs {
-  name: string;
-  description: string;
-  price: number;
-  stockQuantity: number;
-  color: string;
-  category: string;
-  subCategory: string;
-  brand: string;
-  status: string;
-  isFeatured: boolean;
-  tags: string[];
-  image: string;
-  galleryImages: TGalleryImage[] | null;
+interface IProps {
+  productId: string;
 }
 
 type TImageUploadResult = {
@@ -31,14 +17,14 @@ type TImageUploadResult = {
   data: Record<string, string>;
 };
 
-const UpdateProductModal: React.FC<IProps> = () => {
+const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [imageUploadLoading, setImageUploadLoading] = useState(false);
   const [image, setImage] = useState<File | null>(null);
   const [galleryImagesUploadResult, setGalleryImagesUploadResult] = useState<
     TImageUploadResult[] | null
   >([]);
-  const [addProduct, { isLoading }] = useAddProductMutation();
+  const [updateProduct, { isLoading }] = useUpdateProductMutation();
 
   const {
     reset,
@@ -126,33 +112,68 @@ const UpdateProductModal: React.FC<IProps> = () => {
   };
 
   const onSubmit = async (data: IFormInputs) => {
-    data.image = galleryImagesUploadResult![0]?.data.url;
-    if (galleryImagesUploadResult!.length > 1) {
-      data.galleryImages = galleryImagesUploadResult!
-        .slice(1)!
-        .map((image) => ({ url: image.data.url, alt: image.data.title }));
+    // Filter out fields with empty strings, empty values, price 0, stockQuantity 0, and empty tags
+    const filteredData: Partial<IFormInputs> = Object.fromEntries(
+      Object.entries(data).filter(([key, value]) => {
+        // Don't include stockQuantity if it is 0
+        if (key === "stockQuantity" && value === 0) {
+          return false;
+        }
+
+        // Don't include price if it is 0
+        if (key === "price" && value === 0) {
+          return false;
+        }
+
+        // Don't include tags if they are an empty string
+        if (key === "tags" && value === "") {
+          return false;
+        }
+
+        // General check for other fields
+        return value !== "" && value !== null && value !== undefined;
+      })
+    );
+
+    // Ensure the main image is included if available
+    if (galleryImagesUploadResult && galleryImagesUploadResult.length > 0) {
+      filteredData.image = galleryImagesUploadResult[0]?.data.url;
+
+      // Handle gallery images if available
+      if (galleryImagesUploadResult.length > 1) {
+        filteredData.galleryImages = galleryImagesUploadResult
+          .slice(1)
+          .map((image) => ({
+            url: image.data.url,
+            alt: image.data.title,
+          }));
+      }
     }
-    data.galleryImages = [];
 
-    console.log("Form Data:", data);
-    // console.log("Errors:", errors);
-
-    data.tags = data.tags.toString().split(",");
+    // Convert tags string to array, if not empty
+    if (filteredData.tags) {
+      filteredData.tags = filteredData.tags.toString().split(",");
+    }
 
     try {
-      const result = await addProduct(data).unwrap();
+      const result = await updateProduct({
+        id: productId,
+        payload: filteredData,
+      }).unwrap();
 
       toast.success(result.message, {
         id: "updateProductSuccess",
         position: "top-right",
         className: "text-primary",
       });
+
       toggleModal();
       reset();
       setGalleryImagesUploadResult(null);
     } catch (error) {
+      console.log(error);
       toast.error("Failed to update product", {
-        id: "addProductError",
+        id: "updateProductError",
         position: "top-right",
         className: "text-red-500",
       });
