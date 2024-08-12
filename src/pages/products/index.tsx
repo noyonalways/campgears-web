@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import {
-  HiOutlineAdjustmentsHorizontal,
-  HiOutlineListBullet,
-  HiOutlineSquares2X2,
-} from "react-icons/hi2";
-import { useLocation } from "react-router-dom";
+import { HiOutlineListBullet, HiOutlineSquares2X2 } from "react-icons/hi2";
+import { useLocation, useNavigate } from "react-router-dom";
 import Loading from "../../components/loading";
 import ProductCard from "../../components/product-card";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import CategoryList from "./category-list";
+import FilterByCategory from "./filter-by-category";
 import SortByPrice from "./sort-by-price";
 
 interface ICategory {
@@ -28,6 +25,7 @@ const categories: ICategory[] = [
 
 const Products: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [queryParams, setQueryParams] = useState({
     category: "",
     searchTerm: "",
@@ -66,6 +64,7 @@ const Products: React.FC = () => {
 
   const handleClearFilter = () => {
     setQueryParams({ category: "", searchTerm: "", sort: "" });
+    navigate(`/products`);
   };
 
   let errorMessage = "";
@@ -113,10 +112,7 @@ const Products: React.FC = () => {
                 <div className="lg:space-x-4 flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center flex-1 lg:flex-none">
                   <div className="flex space-x-4 w-full lg:w-auto justify-between">
                     <SortByPrice onSelect={handleSortChange} />
-                    <button className="border border-primary text-sm md:text-base px-2 text-black flex items-center bg-white lg:px-4 py-1 space-x-3 rounded">
-                      <HiOutlineAdjustmentsHorizontal className="text-[#898989]" />
-                      <span>Filter</span>
-                    </button>
+                    <FilterByCategory />
                   </div>
                   <div className="flex space-x-4 w-full lg:w-auto justify-end">
                     <button
