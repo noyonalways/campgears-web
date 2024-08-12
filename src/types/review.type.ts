@@ -3,11 +3,14 @@ interface IUser {
   email: string;
 }
 
-interface IReview {
+export interface IReview {
+  _id: string;
   product: string;
   user: IUser;
   rating: number;
   comment: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export type TGetAllReviewResponse = {

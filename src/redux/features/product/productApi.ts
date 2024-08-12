@@ -16,6 +16,7 @@ const productApi = baseApi.injectEndpoints({
     getAllProduct: builder.query<TGetAllProductResponse, any>({
       query: (params) => {
         const queryString = new URLSearchParams(params).toString();
+        console.log(queryString);
         return {
           url: `/products?${queryString}`,
           method: "GET",
@@ -28,6 +29,7 @@ const productApi = baseApi.injectEndpoints({
         url: `/products/${productId}`,
         method: "GET",
       }),
+      providesTags: ["single-product"],
     }),
     addProduct: builder.mutation<TGetProductResponse, IFormInputs>({
       query: (payload) => {
