@@ -1,3 +1,4 @@
+import PageTitle from "../../components/page-title";
 import BestSellingProducts from "./best-selling-products";
 import Categories from "./categories";
 import FeatureAdventureGroups from "./featured-adventure-groups";
@@ -10,6 +11,7 @@ interface IProps {}
 const HomePage: React.FC<IProps> = () => {
   return (
     <>
+      <PageTitle title="Home - Campgears Shop" />
       <HeroSection />
       <BestSellingProducts />
       <Categories />
