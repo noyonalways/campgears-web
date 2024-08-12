@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {
-  HiChevronDown,
   HiOutlineAdjustmentsHorizontal,
   HiOutlineListBullet,
   HiOutlineSquares2X2,
@@ -10,6 +9,7 @@ import Loading from "../../components/loading";
 import ProductCard from "../../components/product-card";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import CategoryList from "./category-list";
+import SortByPrice from "./sort-by-price";
 
 interface ICategory {
   id: number | string;
@@ -29,19 +29,19 @@ const categories: ICategory[] = [
 const Products: React.FC = () => {
   const location = useLocation();
   const [queryParams, setQueryParams] = useState({
-    category: new URLSearchParams(location.search).get("category") || "",
-    searchTerm: new URLSearchParams(location.search).get("searchTerm") || "",
+    category: "",
+    searchTerm: "",
+    sort: "",
   });
   const [isLoading, setIsLoading] = useState(true);
 
-  const query = queryParams.searchTerm
-    ? `searchTerm=${queryParams.searchTerm}`
-    : queryParams.category
-    ? `category=${queryParams.category}`
-    : "";
+  const query = new URLSearchParams({
+    ...(queryParams.category && { category: queryParams.category }),
+    ...(queryParams.searchTerm && { searchTerm: queryParams.searchTerm }),
+    ...(queryParams.sort && { sort: queryParams.sort }),
+  }).toString();
 
   const { data, error, isFetching } = useGetAllProductQuery(query, {
-    // This ensures the query is not skipped
     refetchOnMountOrArgChange: true,
   });
 
@@ -49,28 +49,31 @@ const Products: React.FC = () => {
     const params = new URLSearchParams(location.search);
     const category = params.get("category");
     const searchTerm = params.get("searchTerm");
-    setQueryParams({
+    setQueryParams((prev) => ({
+      ...prev,
       category: category || "",
       searchTerm: searchTerm || "",
-    });
+    }));
   }, [location.search]);
 
   useEffect(() => {
-    if (isFetching) {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
+    setIsLoading(isFetching);
   }, [isFetching]);
+
+  const handleSortChange = (sortValue: string) => {
+    setQueryParams((prev) => ({ ...prev, sort: sortValue }));
+  };
+
+  const handleClearFilter = () => {
+    setQueryParams({ category: "", searchTerm: "", sort: "" });
+  };
 
   let errorMessage = "";
   if (error) {
+    errorMessage = "Failed to load products";
     if ("status" in error && error.status === 404) {
       errorMessage =
-        (error?.data as { message: string })?.message ||
-        "Failed to load products";
-    } else {
-      errorMessage = "Failed to load products";
+        (error?.data as { message: string })?.message || errorMessage;
     }
   }
 
@@ -101,30 +104,28 @@ const Products: React.FC = () => {
                   </button>
                 </div>
               </div>
-              <div className=" bg-secondary py-2 px-3 flex items-center lg:justify-between rounded lg:space-x-4">
-                <div className="absolute top-0 left-0 lg:static flex items-center flex-1">
+              <div className="py-2 flex items-center lg:justify-between rounded lg:space-x-4">
+                <div className="absolute top-4 left-0 lg:static flex items-center lg:flex-1 flex-auto">
                   <h3 className="font-medium">
                     {(!error && data?.data.length) || 0} Products Found
                   </h3>
                 </div>
-                <div className="space-x-4 flex">
-                  <button className="text-sm md:text-base px-2 text-black flex items-center bg-white lg:px-4 py-1 space-x-3 rounded-sm">
-                    <span>Sort By</span>
-                    <HiChevronDown className="text-[#898989]" />
-                  </button>
-                  <button className="text-sm md:text-base  px-2 text-black flex items-center bg-white lg:px-4 py-1 space-x-3 rounded-sm">
-                    <HiOutlineAdjustmentsHorizontal className="text-[#898989]" />
-                    <span>Filter</span>
-                  </button>
-                  <button
-                    onClick={() => {
-                      setQueryParams({ category: "", searchTerm: "" });
-                      window.history.pushState({}, "", "/products");
-                    }}
-                    className="text-sm md:text-base px-2 text-black bg-white lg:px-4 py-1 rounded-sm"
-                  >
-                    Clear Filter
-                  </button>
+                <div className="lg:space-x-4 flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center flex-1 lg:flex-none">
+                  <div className="flex space-x-4 w-full lg:w-auto justify-between">
+                    <SortByPrice onSelect={handleSortChange} />
+                    <button className="border border-primary text-sm md:text-base px-2 text-black flex items-center bg-white lg:px-4 py-1 space-x-3 rounded">
+                      <HiOutlineAdjustmentsHorizontal className="text-[#898989]" />
+                      <span>Filter</span>
+                    </button>
+                  </div>
+                  <div className="flex space-x-4 w-full lg:w-auto justify-end">
+                    <button
+                      onClick={handleClearFilter}
+                      className="border border-primary text-sm md:text-base px-2 text-black bg-white lg:px-4 py-1 rounded"
+                    >
+                      Clear Filter
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -137,7 +138,7 @@ const Products: React.FC = () => {
             ) : data?.data.length === 0 ? (
               <div className="text-center">No products found</div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {data?.data.map((product) => (
                   <ProductCard
                     key={product._id}
