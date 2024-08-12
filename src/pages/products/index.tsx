@@ -7,6 +7,7 @@ import ProductCard from "../../components/product-card";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import CategoryList from "./category-list";
 import FilterByCategory from "./filter-by-category";
+import PriceRange from "./price-range";
 import SortByPrice from "./sort-by-price";
 
 interface ICategory {
@@ -31,6 +32,8 @@ const Products: React.FC = () => {
     category: "",
     searchTerm: "",
     sort: "",
+    minPrice: "",
+    maxPrice: "",
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -38,6 +41,8 @@ const Products: React.FC = () => {
     ...(queryParams.category && { category: queryParams.category }),
     ...(queryParams.searchTerm && { searchTerm: queryParams.searchTerm }),
     ...(queryParams.sort && { sort: queryParams.sort }),
+    ...(queryParams.minPrice && { minPrice: queryParams.minPrice }),
+    ...(queryParams.maxPrice && { maxPrice: queryParams.maxPrice }),
   }).toString();
 
   const { data, error, isFetching } = useGetAllProductQuery(query, {
@@ -48,10 +53,14 @@ const Products: React.FC = () => {
     const params = new URLSearchParams(location.search);
     const category = params.get("category");
     const searchTerm = params.get("searchTerm");
+    const minPrice = params.get("minPrice");
+    const maxPrice = params.get("maxPrice");
     setQueryParams((prev) => ({
       ...prev,
       category: category || "",
       searchTerm: searchTerm || "",
+      minPrice: minPrice || "",
+      maxPrice: maxPrice || "",
     }));
   }, [location.search]);
 
@@ -59,12 +68,36 @@ const Products: React.FC = () => {
     setIsLoading(isFetching);
   }, [isFetching]);
 
+  const handlePriceChange = (
+    minPrice: number | null,
+    maxPrice: number | null
+  ) => {
+    setQueryParams((prev) => ({
+      ...prev,
+      minPrice: minPrice?.toString() || "",
+      maxPrice: maxPrice?.toString() || "",
+    }));
+    navigate(
+      `/products?${new URLSearchParams({
+        ...queryParams,
+        minPrice: minPrice?.toString() || "",
+        maxPrice: maxPrice?.toString() || "",
+      }).toString()}`
+    );
+  };
+
   const handleSortChange = (sortValue: string) => {
     setQueryParams((prev) => ({ ...prev, sort: sortValue }));
   };
 
   const handleClearFilter = () => {
-    setQueryParams({ category: "", searchTerm: "", sort: "" });
+    setQueryParams({
+      category: "",
+      searchTerm: "",
+      sort: "",
+      minPrice: "",
+      maxPrice: "",
+    });
     navigate(`/products`);
   };
 
@@ -113,11 +146,12 @@ const Products: React.FC = () => {
                     </h3>
                   </div>
                   <div className="lg:space-x-4 flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center flex-1 lg:flex-none">
-                    <div className="flex space-x-4 w-full lg:w-auto justify-between">
+                    <div className="flex space-x-4 w-full lg:w-auto justify-between items-center">
+                      <PriceRange onPriceChange={handlePriceChange} />
                       <SortByPrice onSelect={handleSortChange} />
-                      <FilterByCategory />
                     </div>
-                    <div className="flex space-x-4 w-full lg:w-auto justify-end">
+                    <div className="flex space-x-4 w-full lg:w-auto justify-between">
+                      <FilterByCategory />
                       <button
                         onClick={handleClearFilter}
                         className="border border-primary text-sm md:text-base px-2 text-black bg-white lg:px-4 py-1 rounded"
