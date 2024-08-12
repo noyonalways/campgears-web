@@ -34,9 +34,8 @@ const ProductDetails: React.FC<IProps> = () => {
   const params = useParams();
   const id = params?.slug?.split("_")[params?.slug?.split("_")?.length - 1];
   const { data, isLoading, error } = useGetProductQuery(id!);
-  const { data: reviews, isLoading: isReviewsLoading } = useGetAllreviewQuery(
-    id!
-  );
+  const { data: reviews } = useGetAllreviewQuery(id!);
+
   const totalRating =
     reviews?.data && reviews?.data.length > 0
       ? reviews?.data!.reduce((acc, cur) => acc + cur.rating, 0)
@@ -73,8 +72,6 @@ const ProductDetails: React.FC<IProps> = () => {
   const increment = () => {
     setQuantity(quantity + 1);
   };
-
-  console.log(data);
 
   if (error)
     return (
@@ -207,7 +204,7 @@ const ProductDetails: React.FC<IProps> = () => {
             <h2 className="text-lg font-medium">Reviews and Ratings</h2>
             <AddReview />
           </div>
-          <ReviewList isLoading={isReviewsLoading} data={reviews!} />
+          <ReviewList />
         </>
       </div>
     </section>

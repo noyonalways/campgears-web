@@ -28,6 +28,7 @@ const productApi = baseApi.injectEndpoints({
         url: `/products/${productId}`,
         method: "GET",
       }),
+      providesTags: ["single-product"],
     }),
     addProduct: builder.mutation<TGetProductResponse, IFormInputs>({
       query: (payload) => {

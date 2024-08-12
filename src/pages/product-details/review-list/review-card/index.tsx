@@ -6,7 +6,7 @@ interface IProps extends IReview {}
 
 const ReviewCard: React.FC<IProps> = ({ comment, createdAt, rating, user }) => {
   return (
-    <div className="space-y-4 border-t py-6">
+    <div className="space-y-4 border-t py-6 font-roboto">
       <div className="flex space-x-4">
         {/* <img src="" alt="" /> */}
         <div className="size-12 bg-slate-300 rounded-full ring-2 ring-offset-2 ring-primary"></div>

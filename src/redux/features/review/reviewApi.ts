@@ -1,5 +1,10 @@
-import { TGetAllReviewResponse } from "../../../types";
+import { IReview, TGetAllReviewResponse } from "../../../types";
 import { baseApi } from "../../api/baseApi";
+
+type TAddReview = {
+  productId: string;
+  payload: Partial<IReview>;
+};
 
 const reviewApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,8 +16,19 @@ const reviewApi = baseApi.injectEndpoints({
           method: "GET",
         };
       },
+      providesTags: ["single-product"],
+    }),
+    addReview: builder.mutation<TGetAllReviewResponse, TAddReview>({
+      query: ({ productId, payload }) => {
+        return {
+          url: `/products/${productId}/reviews`,
+          method: "POST",
+          body: payload,
+        };
+      },
+      invalidatesTags: ["single-product"],
     }),
   }),
 });
 
-export const { useGetAllreviewQuery } = reviewApi;
+export const { useGetAllreviewQuery, useAddReviewMutation } = reviewApi;
