@@ -11,6 +11,8 @@ import Loading from "../../components/loading";
 import Button from "../../components/ui/button";
 import { useGetProductQuery } from "../../redux/features/product/productApi";
 import { useGetAllreviewQuery } from "../../redux/features/review/reviewApi";
+import AddReview from "./add-review";
+import ReviewList from "./review-list";
 
 interface IProps {}
 
@@ -32,7 +34,9 @@ const ProductDetails: React.FC<IProps> = () => {
   const params = useParams();
   const id = params?.slug?.split("_")[params?.slug?.split("_")?.length - 1];
   const { data, isLoading, error } = useGetProductQuery(id!);
-  const { data: reviews } = useGetAllreviewQuery({ productId: id });
+  const { data: reviews, isLoading: isReviewsLoading } = useGetAllreviewQuery(
+    id!
+  );
   const totalRating =
     reviews?.data && reviews?.data.length > 0
       ? reviews?.data!.reduce((acc, cur) => acc + cur.rating, 0)
@@ -70,6 +74,8 @@ const ProductDetails: React.FC<IProps> = () => {
     setQuantity(quantity + 1);
   };
 
+  console.log(data);
+
   if (error)
     return (
       <section>
@@ -77,7 +83,7 @@ const ProductDetails: React.FC<IProps> = () => {
           <div className="py-10 flex items-center justify-center">
             <div className="flex flex-col items-center space-y-2">
               <h1 className="text-xl font-semibold text-center">
-                {customError.data.message}
+                {customError?.data?.message || "Failed to load data"}
               </h1>
               <button className="btn mx-auto">Reload</button>
             </div>
@@ -195,6 +201,14 @@ const ProductDetails: React.FC<IProps> = () => {
             </div>
           </>
         )}
+
+        <>
+          <div className="space-y-4 my-8 font-montserrat">
+            <h2 className="text-lg font-medium">Reviews and Ratings</h2>
+            <AddReview />
+          </div>
+          <ReviewList isLoading={isReviewsLoading} data={reviews!} />
+        </>
       </div>
     </section>
   );
