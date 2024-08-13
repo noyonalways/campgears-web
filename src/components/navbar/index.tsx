@@ -7,7 +7,7 @@ import {
   HiOutlineShoppingCart,
   HiOutlineUser,
 } from "react-icons/hi2";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
 
 const Navbar = () => {
@@ -91,44 +91,79 @@ const Navbar = () => {
         >
           <ul className="flex flex-col w-full lg:flex-row lg:w-auto lg:justify-center lg:space-x-6">
             <li>
-              <Link
-                className="font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto"
+              <NavLink
                 to="/"
+                className={({ isActive }) =>
+                  `font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto 
+                ${
+                  isActive
+                    ? "lg:text-primary bg-primary text-white lg:bg-transparent"
+                    : ""
+                }`
+                }
               >
                 Home
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                className="font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto"
-                to="products"
+              <NavLink
+                className={({ isActive }) =>
+                  `font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto
+                ${
+                  isActive
+                    ? "lg:text-primary bg-primary text-white lg:bg-transparent"
+                    : ""
+                }`
+                }
+                to="/products"
               >
                 Products
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                className="font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto"
+              <NavLink
+                className={({ isActive }) =>
+                  `font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto
+                ${
+                  isActive
+                    ? "lg:text-primary bg-primary text-white lg:bg-transparent"
+                    : ""
+                }`
+                }
                 to="/product-management"
               >
                 Product Management
-              </Link>
+              </NavLink>
             </li>
             <li className="lg:hidden">
-              <Link
-                className="font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary"
+              <NavLink
+                className={({ isActive }) =>
+                  `font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary
+                ${
+                  isActive
+                    ? "lg:text-primary bg-primary text-white lg:bg-transparent"
+                    : ""
+                }`
+                }
                 to="/wishlist"
               >
                 Wishlist
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                className="font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto"
+              <NavLink
+                className={({ isActive }) =>
+                  `font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto
+                ${
+                  isActive
+                    ? "lg:text-primary bg-primary text-white lg:bg-transparent"
+                    : ""
+                }`
+                }
                 to="/about-us"
               >
                 About Us
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
