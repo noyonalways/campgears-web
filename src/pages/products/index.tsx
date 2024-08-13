@@ -113,7 +113,7 @@ const Products: React.FC = () => {
   return (
     <>
       <PageTitle title="Products - Campgears" />
-      <section className="font-montserrat pb-10">
+      <section className="font-montserrat pb-20">
         <div className="container">
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:justify-between lg:items-start pt-4 lg:pt-4">
             <div className="bg-secondary basis-full lg:basis-[17%] rounded">
@@ -171,7 +171,7 @@ const Products: React.FC = () => {
               ) : data?.data.length === 0 ? (
                 <div className="text-center">No products found</div>
               ) : (
-                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                   {data?.data.map((product) => (
                     <ProductCard
                       key={product._id}
@@ -180,6 +180,8 @@ const Products: React.FC = () => {
                       price={product.price}
                       slug={product.slug}
                       _id={product._id}
+                      description={product.description}
+                      category={product.category}
                     />
                   ))}
                 </div>
