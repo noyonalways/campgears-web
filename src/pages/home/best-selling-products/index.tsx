@@ -67,6 +67,8 @@ const BestSellingProducts: React.FC<IProps> = () => {
                     _id={product._id}
                     slug={product.slug}
                     price={product.price}
+                    description={product.description}
+                    category={product.category}
                   />
                 </SwiperSlide>
               ))}

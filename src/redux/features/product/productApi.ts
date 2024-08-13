@@ -16,7 +16,6 @@ const productApi = baseApi.injectEndpoints({
     getAllProduct: builder.query<TGetAllProductResponse, any>({
       query: (params) => {
         const queryString = new URLSearchParams(params).toString();
-        console.log(queryString);
         return {
           url: `/products?${queryString}`,
           method: "GET",
