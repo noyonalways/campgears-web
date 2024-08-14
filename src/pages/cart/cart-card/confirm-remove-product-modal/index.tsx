@@ -37,7 +37,7 @@ const ConfirmRemoveProductModal: React.FC<IProps> = ({ productId }) => {
         <>
           <PageTitle title="Remove Product - Campgears" />
           <div
-            className={`fixed top-0 lg:-left-4 w-full h-screen bg-black/95 transition-all duration-300 z-10 font-montserrat ${
+            className={`fixed top-0 lg:-left-0 w-full h-screen bg-black/95 transition-all duration-300 z-10 font-montserrat ${
               showConfirmModal ? "opacity-100" : "opacity-0"
             }`}
           >

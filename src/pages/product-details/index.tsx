@@ -191,7 +191,9 @@ const ProductDetails: React.FC<IProps> = () => {
                         className="btn cursor-pointer disabled:bg-primary/40 disabled:cursor-not-allowed"
                         disabled={quantity > stockQuantity!}
                         onClick={() =>
-                          dispatch(addToCart({ _id: _id!, quantity }))
+                          dispatch(
+                            addToCart({ _id: _id!, quantity, price: price! })
+                          )
                         }
                       >
                         Add to Cart

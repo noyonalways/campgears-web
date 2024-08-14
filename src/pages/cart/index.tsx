@@ -1,9 +1,11 @@
 import { HiChevronDown } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 import PageTitle from "../../components/page-title";
 import Button from "../../components/ui/button";
+import { updateCart } from "../../redux/features/cart/cartSlice";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
-import { useAppSelector } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import CartCard from "./cart-card";
 import ConfirmClearCartModal from "./confirm-clear-cart-modal";
 
@@ -12,6 +14,7 @@ interface IProps {}
 const Cart: React.FC<IProps> = () => {
   const { items } = useAppSelector((store) => store.cart);
   const { data: products } = useGetAllProductQuery(undefined);
+  const dispatch = useAppDispatch();
 
   // Filter and add quantity from cart items to the cartProducts array
   const cartProducts = products?.data
@@ -20,6 +23,16 @@ const Cart: React.FC<IProps> = () => {
       const cartItem = items.find((item) => item._id === product._id);
       return { ...product, quantity: cartItem?.quantity || 1 };
     });
+
+  const handleUpdateCart = () => {
+    dispatch(updateCart(items));
+    toast.success("Shopping cart updated successfully", {
+      id: "updateCartSuccess",
+      position: "top-right",
+      className: "text-primary",
+      duration: 3000,
+    });
+  };
 
   return (
     <>
@@ -69,7 +82,12 @@ const Cart: React.FC<IProps> = () => {
                     </Link>
                     <div className="flex items-center space-x-3 lg:space-x-4">
                       <ConfirmClearCartModal />
-                      <button className="btn-outline">Update Cart</button>
+                      <button
+                        onClick={handleUpdateCart}
+                        className="btn-outline"
+                      >
+                        Update Cart
+                      </button>
                     </div>
                   </div>
                 </div>
