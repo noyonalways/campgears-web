@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { HiMinus, HiOutlineTrash, HiPlus } from "react-icons/hi2";
+import { HiMinus, HiPlus } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import ConfirmRemoveProductModal from "./confirm-remove-product-modal";
 
 interface IProps {
   _id: string;
@@ -42,19 +43,17 @@ const CartCard: React.FC<IProps> = ({
   };
 
   return (
-    <div className="flex border-t border-b flex-col py-4 px-2 lg:flex-row items-center lg:p-4 lg:border justify-between lg:rounded relative">
-      <button className="absolute lg:right-4 right-2 top-2 lg:top-4 text-[#717171] text-lg hover:bg-[#E7ECEF] p-2 lg:p-3 rounded-full duration-100 active:scale-95">
-        <HiOutlineTrash />
-      </button>
+    <div className="flex border-t border-b flex-col py-6 px-2 lg:flex-row items-center lg:p-4 lg:border justify-between lg:rounded relative">
+      <ConfirmRemoveProductModal productId={_id} />
       <div className="flex items-start lg:items-center space-x-2 lg:space-x-4 basis-full lg:basis-[60%] my-6 lg:my-0">
-        <figure className="w-44 lg:w-40 rounded overflow-hidden">
-          <img src={image} alt="" />
+        <figure className="w-48 lg:w-40 rounded overflow-hidden">
+          <img className="w-full" src={image} alt="" />
         </figure>
         <Link
           to={`/products/${slug! + "_" + _id}`}
           className="font-bold lg:max-w-xs hover:text-primary"
         >
-          {name}
+          {name.length > 30 ? name.substring(0, 30) + "..." : name}
         </Link>
       </div>
       <div className="flex lg:justify-between space-x-8 lg:space-x-0 items-center basis-full lg:basis-[35%]">
