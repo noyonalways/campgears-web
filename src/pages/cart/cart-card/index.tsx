@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { updateQuantity } from "../../../redux/features/cart/cartSlice";
+import { useAppDispatch } from "../../../redux/hook";
 import ConfirmRemoveProductModal from "./confirm-remove-product-modal";
 
 interface IProps {
@@ -24,11 +26,13 @@ const CartCard: React.FC<IProps> = ({
 }) => {
   const [quantity, setQuantity] = useState(cartAddedQuantity);
   const [subtotal, setSubtotal] = useState(cartAddedQuantity * price);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     // Update subtotal whenever quantity changes
     setSubtotal(quantity * price);
-  }, [quantity, price]);
+    dispatch(updateQuantity({ _id, newQuantity: quantity }));
+  }, [quantity, price, dispatch, _id]);
 
   const decrement = () => {
     if (quantity > 1) {
