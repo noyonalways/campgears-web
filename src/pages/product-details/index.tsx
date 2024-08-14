@@ -9,9 +9,10 @@ import { HiOutlineHeart } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/loading";
 import PageTitle from "../../components/page-title";
-import Button from "../../components/ui/button";
+import { addToCart } from "../../redux/features/cart/cartSlice";
 import { useGetProductQuery } from "../../redux/features/product/productApi";
 import { useGetAllreviewQuery } from "../../redux/features/review/reviewApi";
+import { useAppDispatch } from "../../redux/hook";
 import AddReview from "./add-review";
 import ReviewList from "./review-list";
 
@@ -47,6 +48,7 @@ const ProductDetails: React.FC<IProps> = () => {
       : 0;
 
   const {
+    _id,
     brand,
     category,
     name,
@@ -63,9 +65,10 @@ const ProductDetails: React.FC<IProps> = () => {
   const customError = error as TError;
 
   const [quantity, setQuantity] = useState(1);
+  const dispatch = useAppDispatch();
 
   const decrement = () => {
-    if (quantity > 0) {
+    if (quantity > 1) {
       setQuantity(quantity - 1);
     }
   };
@@ -184,7 +187,15 @@ const ProductDetails: React.FC<IProps> = () => {
                       </div>
                     </div>
                     <div className="flex items-center space-x-8">
-                      <Button>Add to Cart</Button>
+                      <button
+                        className="btn cursor-pointer disabled:bg-primary/40 disabled:cursor-not-allowed"
+                        disabled={quantity > stockQuantity!}
+                        onClick={() =>
+                          dispatch(addToCart({ _id: _id!, quantity }))
+                        }
+                      >
+                        Add to Cart
+                      </button>
                       <button className="group active:scale-90 duration-100">
                         <HiOutlineHeart
                           size={28}

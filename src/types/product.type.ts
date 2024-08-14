@@ -5,7 +5,7 @@ export type TGalleryImage = {
   alt: string;
 };
 
-type TProduct = {
+export type TProduct = {
   _id: string;
   name: string;
   price: number;
