@@ -7,6 +7,7 @@ import {
 } from "react-icons/hi";
 import { HiOutlineHeart } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 import Loading from "../../components/loading";
 import PageTitle from "../../components/page-title";
 import { addToCart } from "../../redux/features/cart/cartSlice";
@@ -75,6 +76,16 @@ const ProductDetails: React.FC<IProps> = () => {
 
   const increment = () => {
     setQuantity(quantity + 1);
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ _id: _id!, quantity, price: price! }));
+    toast.success("Product added to the cart", {
+      id: "productAddToCartSuccess",
+      position: "top-right",
+      className: "text-primary",
+      duration: 3000,
+    });
   };
 
   if (error)
@@ -190,11 +201,7 @@ const ProductDetails: React.FC<IProps> = () => {
                       <button
                         className="btn cursor-pointer disabled:bg-primary/40 disabled:cursor-not-allowed"
                         disabled={quantity > stockQuantity!}
-                        onClick={() =>
-                          dispatch(
-                            addToCart({ _id: _id!, quantity, price: price! })
-                          )
-                        }
+                        onClick={handleAddToCart}
                       >
                         Add to Cart
                       </button>
