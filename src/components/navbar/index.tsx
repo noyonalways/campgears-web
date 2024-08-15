@@ -9,12 +9,15 @@ import {
 } from "react-icons/hi2";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
+import { useAppSelector } from "../../redux/hook";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenSearchBar, setIsOpenSearchBar] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
+
+  const totalItems = useAppSelector((store) => store.cart.totalItems);
 
   const searchHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -68,18 +71,26 @@ const Navbar = () => {
               <HiMiniMagnifyingGlass />
             </button>
             <li className="hidden md:inline-block">
-              <Link className="text-xl hover:text-primary" to="/wishlist">
+              <Link className="text-2xl hover:text-primary" to="/wishlist">
                 <HiOutlineHeart />
               </Link>
             </li>
             <li className="hidden md:inline-block">
-              <a className="text-xl hover:text-primary" href="#">
+              <a className="text-2xl hover:text-primary" href="#">
                 <HiOutlineUser />
               </a>
             </li>
             <li className="md:inline-block">
-              <Link className="text-xl hover:text-primary" to="/cart">
+              <Link
+                className="text-xl lg:text-2xl hover:text-primary relative"
+                to="/cart"
+              >
                 <HiOutlineShoppingCart />
+                {totalItems > 0 && (
+                  <p className="flex h-2 w-2 items-center justify-center rounded-full bg-primary p-3 text-xs text-white absolute bottom-2 left-2 lg:left-4">
+                    {totalItems}
+                  </p>
+                )}
               </Link>
             </li>
           </ul>

@@ -1,60 +1,44 @@
 import { useState } from "react";
-import { toast } from "sonner";
-import PageTitle from "../../../components/page-title";
-import { useDeleteProductMutation } from "../../../redux/features/product/productApi";
+import { HiOutlineTrash } from "react-icons/hi";
+import PageTitle from "../../../../components/page-title";
+import { removeFromCart } from "../../../../redux/features/cart/cartSlice";
+import { useAppDispatch } from "../../../../redux/hook";
 
 interface IProps {
   productId: string;
 }
 
-const DeleteConfirmationModal: React.FC<IProps> = ({ productId }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [deleteProduct, { data }] = useDeleteProductMutation();
+const ConfirmRemoveProductModal: React.FC<IProps> = ({ productId }) => {
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const dispatch = useAppDispatch();
 
-  const handleOpen = () => {
-    setIsOpen(true);
+  const handleRemoveProduct = () => {
+    setShowConfirmModal(true);
   };
 
-  const handleClose = () => {
-    setIsOpen(false);
+  const confirmRemoveProduct = () => {
+    dispatch(removeFromCart(productId));
+    setShowConfirmModal(false);
   };
 
-  const handleConfirm = () => {
-    deleteProduct(productId);
-    handleClose();
+  const cancelRemoveProduct = () => {
+    setShowConfirmModal(false);
   };
-
-  const handleCancel = () => {
-    // onCancel();
-    handleClose();
-  };
-
-  if (data?.success) {
-    toast.success(data?.message, {
-      id: productId,
-      position: "top-right",
-      className: "text-primary",
-    });
-  }
 
   return (
     <>
-      {/* Button to open the modal */}
       <button
-        onClick={handleOpen}
-        className="px-4 py-1 rounded active:scale-95 duration-100 text-white bg-red-500 hover:bg-red-700 focus:ring-2 focus:ring-offset-2 focus:ring-red-500 font-medium"
+        onClick={handleRemoveProduct}
+        className="absolute lg:right-4 right-2 top-2 lg:top-4 text-[#717171] text-lg hover:bg-[#E7ECEF] p-2 lg:p-3 rounded-full duration-100 active:scale-95 border"
       >
-        Delete
+        <HiOutlineTrash />
       </button>
-
-      {/* Modal */}
-      {isOpen && (
+      {showConfirmModal && (
         <>
-          (
-          <PageTitle title="Delete Product - Campgears" />
+          <PageTitle title="Remove Product - Campgears" />
           <div
-            className={`fixed top-0 -left-4 w-full h-screen bg-black/95 transition-all duration-300 z-10 ${
-              isOpen ? "opacity-100" : "opacity-0"
+            className={`fixed top-0 lg:-left-0 w-full h-screen bg-black/95 transition-all duration-300 z-10 font-montserrat ${
+              showConfirmModal ? "opacity-100" : "opacity-0"
             }`}
           >
             <div className="flex items-center justify-center min-h-screen px-4 text-center sm:px-0">
@@ -62,11 +46,11 @@ const DeleteConfirmationModal: React.FC<IProps> = ({ productId }) => {
                 <div className="sm:flex sm:items-start">
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left mb-4">
                     <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
-                      Delete a Product
+                      Remove a Product
                     </h3>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to delete this product?
+                        Are you sure you want to remove this product?
                       </p>
                     </div>
                   </div>
@@ -75,14 +59,14 @@ const DeleteConfirmationModal: React.FC<IProps> = ({ productId }) => {
                   <button
                     type="button"
                     className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={handleConfirm}
+                    onClick={confirmRemoveProduct}
                   >
                     Confirm
                   </button>
                   <button
                     type="button"
                     className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:mt-0 sm:w-auto sm:text-sm"
-                    onClick={handleCancel}
+                    onClick={cancelRemoveProduct}
                   >
                     Cancel
                   </button>
@@ -90,11 +74,10 @@ const DeleteConfirmationModal: React.FC<IProps> = ({ productId }) => {
               </div>
             </div>
           </div>
-          )
         </>
       )}
     </>
   );
 };
 
-export default DeleteConfirmationModal;
+export default ConfirmRemoveProductModal;
