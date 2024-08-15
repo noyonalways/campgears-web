@@ -107,7 +107,9 @@ const ApplyDiscountCode = () => {
 
                   <button
                     type="submit"
-                    className="absolute right-1 top-1 bottom-1 px-4 py-2 bg-primary text-white text-sm rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary leading-none"
+                    className={`absolute right-1 top-1 bottom-1 px-4 py-2 bg-primary text-white text-sm rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary leading-none ${
+                      appliedDiscountCode && "hidden"
+                    }`}
                   >
                     Apply
                   </button>
