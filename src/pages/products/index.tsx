@@ -167,7 +167,9 @@ const Products: React.FC = () => {
                   <Loading />
                 </div>
               ) : errorMessage ? (
-                <div className="text-red-500">{errorMessage}</div>
+                <div className="text-red-500 text-center py-20">
+                  {errorMessage}
+                </div>
               ) : data?.data.length === 0 ? (
                 <div className="text-center">No products found</div>
               ) : (
