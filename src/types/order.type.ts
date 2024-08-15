@@ -32,8 +32,8 @@ interface IOrderData {
   totalPrice: number;
   totalPriceAfterDiscount: number;
   _id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 export interface INewOrderItem {
@@ -63,4 +63,11 @@ export interface IOrderResponse {
   statusCode: number;
   message: string;
   data: IOrderData;
+}
+
+export interface IOrdersByEmailResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: IOrderData[];
 }

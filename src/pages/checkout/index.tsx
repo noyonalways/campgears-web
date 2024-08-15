@@ -7,9 +7,10 @@ import { HiChevronLeft } from "react-icons/hi2";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Loading from "../../components/loading";
+import { addOrderedUserEmail } from "../../redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "../../redux/features/order/orderApi";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
-import { useAppSelector } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { INewOrder, INewOrderItem } from "../../types/order.type";
 import CheckoutCalculations from "./checkout-calculations";
 import CheckoutProductCard from "./checkout-product-card";
@@ -39,6 +40,7 @@ const Checkout: React.FC = () => {
 
   const selectedPaymentMethod = watch("paymentMethod");
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const cartProducts = products?.data
     .filter((product) => items.find((item) => item._id === product._id))
@@ -73,6 +75,7 @@ const Checkout: React.FC = () => {
           position: "top-right",
           className: "text-primary",
         });
+        dispatch(addOrderedUserEmail(res.data.userEmail));
         navigate("/order-success");
       }
     } catch (err) {

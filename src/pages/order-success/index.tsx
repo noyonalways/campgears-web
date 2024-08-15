@@ -1,15 +1,20 @@
 import React, { useEffect } from "react";
 import { BsCheckCircle } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { clearCart } from "../../redux/features/cart/cartSlice";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 
 const OrderSuccess: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { orderedUserEmail } = useAppSelector((store) => store.cart);
 
   useEffect(() => {
     dispatch(clearCart());
-  }, [dispatch]);
+    if (!orderedUserEmail) {
+      navigate("/products", { replace: true });
+    }
+  }, [dispatch, orderedUserEmail, navigate]);
 
   return (
     <section className="py-32 font-montserrat">

@@ -5,6 +5,8 @@ import Cart from "../pages/cart";
 import Checkout from "../pages/checkout";
 import HomePage from "../pages/home";
 import NotFound from "../pages/not-found";
+import OrderDetails from "../pages/order-details";
+import OrderHistory from "../pages/order-history";
 import OrderSuccess from "../pages/order-success";
 import ProductDetails from "../pages/product-details";
 import ProductManagement from "../pages/product-management";
@@ -39,6 +41,14 @@ const router = createBrowserRouter([
       {
         path: "/order-success",
         element: <OrderSuccess />,
+      },
+      {
+        path: "/order-history",
+        element: <OrderHistory />,
+      },
+      {
+        path: "/orders/:orderId",
+        element: <OrderDetails />,
       },
       {
         path: "/product-management",
