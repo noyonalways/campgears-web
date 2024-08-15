@@ -84,7 +84,7 @@ const ProductDetails: React.FC<IProps> = () => {
       id: "productAddToCartSuccess",
       position: "top-right",
       className: "text-primary",
-      duration: 3000,
+      duration: 1000,
     });
   };
 
