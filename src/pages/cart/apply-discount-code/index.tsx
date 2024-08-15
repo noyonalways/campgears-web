@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
+import { toast } from "sonner";
 import {
   calculateTotalsAfterDiscount,
   removeDiscount,
@@ -27,6 +28,14 @@ const ApplyDiscountCode = () => {
 
   const handleApplyDiscount = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent form submission
+    if (!discountCode) {
+      toast.error("Please enter a discount code.", {
+        id: "applyDiscountCodeFilledError",
+        position: "top-right",
+        className: "text-red-500",
+      });
+      return;
+    }
     applyCode({ code: discountCode, itemsTotalPrice: totalPrice });
     setDiscountCode("");
   };
