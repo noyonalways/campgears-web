@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { CgSpinner } from "react-icons/cg";
 import { HiChevronDown, HiChevronUp } from "react-icons/hi2";
+import { toast } from "sonner";
 import {
   calculateTotalsAfterDiscount,
   removeDiscount,
@@ -27,6 +28,14 @@ const ApplyDiscountCode = () => {
 
   const handleApplyDiscount = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault(); // Prevent form submission
+    if (!discountCode) {
+      toast.error("Please enter a discount code.", {
+        id: "applyDiscountCodeFilledError",
+        position: "top-right",
+        className: "text-red-500",
+      });
+      return;
+    }
     applyCode({ code: discountCode, itemsTotalPrice: totalPrice });
     setDiscountCode("");
   };
@@ -98,7 +107,9 @@ const ApplyDiscountCode = () => {
 
                   <button
                     type="submit"
-                    className="absolute right-1 top-1 bottom-1 px-4 py-2 bg-primary text-white text-sm rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary leading-none"
+                    className={`absolute right-1 top-1 bottom-1 px-4 py-2 bg-primary text-white text-sm rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary leading-none ${
+                      appliedDiscountCode && "hidden"
+                    }`}
                   >
                     Apply
                   </button>

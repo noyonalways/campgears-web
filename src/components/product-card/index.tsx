@@ -38,12 +38,7 @@ const ProductCard: React.FC<IProps> = ({
         src={image}
         alt=""
       />
-      <Link
-        to={`/products?category=${category}`}
-        className="block font-semibold mb-2 mt-6 text-primary"
-      >
-        {category}
-      </Link>
+      <h4 className="block font-semibold mb-2 mt-6 text-primary">{category}</h4>
       <h1 className="text-xl mb-3 h-26 lg:mb-5 lg:h-20 font-medium">
         {name.length > 40 ? name.substring(0, 40) + "..." : name}
       </h1>

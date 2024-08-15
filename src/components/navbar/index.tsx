@@ -28,13 +28,19 @@ const Navbar = () => {
   };
 
   return (
-    <header className="py-4 lg:py-0 lg:pt-4 font-roboto z-10 lg:border-none sticky top-0 bg-white">
+    <header className="py-4 lg:py-0 lg:pt-4 font-roboto z-10 lg:border-none sticky top-0 bg-white print:static">
       <nav className="container space-y-5">
-        <div className="flex items-center justify-between">
-          <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden">
+        <div className="flex items-center justify-between print:justify-start">
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="lg:hidden print:hidden"
+          >
             {isOpen ? <HiX size={24} /> : <HiBars3 size={24} />}
           </button>
-          <Link className="w-48 inline-block ml-4 md:ml-24 lg:ml-0" to="/">
+          <Link
+            className="w-48 inline-block ml-4 md:ml-24 lg:ml-0 print:ml-0"
+            to="/"
+          >
             <img src={logo} alt="campgears-logo" />
           </Link>
           <div
@@ -63,7 +69,7 @@ const Navbar = () => {
               </button>
             </form>
           </div>
-          <ul className="flex items-center space-x-4 md:space-x-8">
+          <ul className="flex items-center space-x-4 md:space-x-8 print:hidden">
             <button
               onClick={() => setIsOpenSearchBar(!isOpenSearchBar)}
               className="text-xl hover:text-primary lg:hidden"

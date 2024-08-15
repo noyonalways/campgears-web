@@ -16,6 +16,7 @@ interface ICartState {
   appliedDiscountCode?: string;
   discountAmount: number;
   tax: number;
+  orderedUserEmail: string;
 }
 
 const initialState: ICartState = {
@@ -28,6 +29,7 @@ const initialState: ICartState = {
   appliedDiscountCode: "",
   discountAmount: 0,
   tax: 0,
+  orderedUserEmail: "",
 };
 
 const calculateTotals = (state: ICartState) => {
@@ -102,6 +104,9 @@ const cartSlice = createSlice({
       state.shippingCharge = 0;
       state.totalPrice = 0;
       state.totalPriceAfterDiscount = 0;
+      state.appliedDiscountCode = "";
+      state.discountAmount = 0;
+      state.tax = 0;
     },
     calculateTotalsAfterDiscount: (
       state,
@@ -117,6 +122,9 @@ const cartSlice = createSlice({
       state.appliedDiscountCode = "";
       state.discountAmount = 0;
     },
+    addOrderedUserEmail: (state, action: PayloadAction<string>) => {
+      state.orderedUserEmail = action.payload;
+    },
   },
 });
 
@@ -128,6 +136,7 @@ export const {
   removeFromCart,
   calculateTotalsAfterDiscount,
   removeDiscount,
+  addOrderedUserEmail,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -1,25 +1,46 @@
+import { useForm } from "react-hook-form";
 import { BsCashStack } from "react-icons/bs";
+import { CgSpinner } from "react-icons/cg";
 import { FaRegCreditCard, FaStripe } from "react-icons/fa6";
 import { FiMapPin } from "react-icons/fi";
 import { HiChevronLeft } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "sonner";
+import Loading from "../../components/loading";
+import { addOrderedUserEmail } from "../../redux/features/cart/cartSlice";
+import { useCreateOrderMutation } from "../../redux/features/order/orderApi";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
-import { useAppSelector } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { INewOrder, INewOrderItem } from "../../types/order.type";
+import CheckoutCalculations from "./checkout-calculations";
 import CheckoutProductCard from "./checkout-product-card";
 
-interface IProps {}
+interface IFormInputs {
+  userFullName: string;
+  userEmail: string;
+  userPhone: string;
+  shippingAddress: string;
+  paymentMethod: "cash" | "stripe";
+}
 
-const Checkout: React.FC<IProps> = () => {
+const Checkout: React.FC = () => {
+  const { items, appliedDiscountCode, shippingCharge, tax } = useAppSelector(
+    (store) => store.cart
+  );
+  const { data: products, isLoading: productIsLoading } =
+    useGetAllProductQuery(undefined);
+  const [createOrder, { isLoading: orderIsLoading }] = useCreateOrderMutation();
+
   const {
-    items,
-    appliedDiscountCode,
-    subtotal,
-    shippingCharge,
-    discountAmount,
-    totalPrice,
-    totalPriceAfterDiscount,
-  } = useAppSelector((store) => store.cart);
-  const { data: products } = useGetAllProductQuery(undefined);
+    register,
+    handleSubmit,
+    formState: { errors },
+    watch,
+  } = useForm<IFormInputs>();
+
+  const selectedPaymentMethod = watch("paymentMethod");
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const cartProducts = products?.data
     .filter((product) => items.find((item) => item._id === product._id))
@@ -28,137 +49,288 @@ const Checkout: React.FC<IProps> = () => {
       return { ...product, quantity: cartItem?.quantity || 1 };
     });
 
+  const onSubmit = async (data: IFormInputs) => {
+    const orderItems: INewOrderItem[] = cartProducts!.map((product) => ({
+      productId: product._id,
+      name: product.name,
+      quantity: product.quantity,
+      price: product.price,
+      image: product.image,
+    }));
+
+    const discount = appliedDiscountCode ? { code: appliedDiscountCode } : null;
+    const newOrder: INewOrder = {
+      ...data,
+      orderItems,
+      shippingCost: shippingCharge,
+      tax,
+      discount,
+    };
+
+    try {
+      const res = await createOrder(newOrder).unwrap();
+      if (res.success) {
+        toast.success(res.message, {
+          id: "orderSuccess",
+          position: "top-right",
+          className: "text-primary",
+        });
+        dispatch(addOrderedUserEmail(res.data.userEmail));
+        navigate("/order-success");
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to create order. Please try again.", {
+        id: "orderError",
+        position: "top-right",
+        className: "text-red-500",
+      });
+    }
+  };
+
   return (
     <section className="py-8 font-montserrat">
       <div className="container">
-        <div className="flex justify-between mb-8 text-black">
-          <Link to={`/cart`} className="hover:text-primary">
-            <HiChevronLeft size={28} />
-          </Link>
-          <h1 className="text-xl font-medium text-end">Checkout</h1>
-        </div>
-        <div className="flex flex-col space-y-12 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-6 lg:items-start">
-          <div className="lg:flex-1">
-            <div className="w-full">
-              <div className="flex items-center space-x-4">
-                <span className="rounded-full bg-primary text-white size-10 p-2 flex items-center justify-center">
-                  <FiMapPin size={20} className="w-full" />
-                </span>
-                <h2 className="text-lg">Shipping Address</h2>
-              </div>
-              <div className="grid grid-cols-1 gap-4 mt-6 w-full mb-8">
-                <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-                  <div className="lg:basis-1/2 space-y-4">
-                    <label htmlFor="userFullName">Full Name</label>
+        {items.length === 0 ? (
+          <div className="text-center py-8 space-y-3 flex flex-col items-center">
+            <p>Your shopping cart is empty.</p>
+            <Link to="/products" className="btn inline-block">
+              Shop Now
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className="flex justify-between mb-8 text-black">
+              <Link to={`/cart`} className="hover:text-primary">
+                <HiChevronLeft size={28} />
+              </Link>
+              <h1 className="text-xl font-medium text-end">Checkout</h1>
+            </div>
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col space-y-12 lg:space-y-0 lg:flex-row lg:justify-between lg:space-x-6 lg:items-start"
+            >
+              {orderIsLoading ? (
+                <div className="lg:flex-1 flex justify-center items-center h-80">
+                  <Loading />
+                </div>
+              ) : (
+                <div className="lg:flex-1">
+                  <div>
+                    <div className="w-full">
+                      <div className="flex items-center space-x-4">
+                        <span className="rounded-full bg-primary text-white size-10 p-2 flex items-center justify-center">
+                          <FiMapPin size={20} className="w-full" />
+                        </span>
+                        <h2 className="text-lg">Shipping Address</h2>
+                      </div>
+                      <div className="grid grid-cols-1 gap-4 mt-6 w-full mb-8">
+                        <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
+                          <div className="lg:basis-1/2">
+                            <label
+                              className="mb-3 inline-block"
+                              htmlFor="userFullName"
+                            >
+                              Full Name
+                            </label>
+                            <input
+                              className="w-full p-2 focus:border-primary outline-none border rounded"
+                              type="text"
+                              {...register("userFullName", {
+                                required: "Full Name is required",
+                              })}
+                              id="userFullName"
+                            />
+                            {errors.userFullName && (
+                              <span className="text-red-500 text-sm inline-block mt-2">
+                                {errors.userFullName.message}
+                              </span>
+                            )}
+                          </div>
+
+                          <div className="lg:basis-1/2">
+                            <label
+                              className="mb-3 inline-block"
+                              htmlFor="phone"
+                            >
+                              Phone
+                            </label>
+                            <input
+                              className="w-full p-2 focus:border-primary outline-none border rounded"
+                              type="text"
+                              {...register("userPhone", {
+                                required: "Phone number is required",
+                              })}
+                              id="phone"
+                            />
+                            {errors.userPhone && (
+                              <span className="text-red-500 text-sm inline-block mt-2">
+                                {errors.userPhone.message}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="">
+                          <label className="mb-3 inline-block" htmlFor="email">
+                            Email
+                          </label>
+                          <input
+                            className="w-full p-2 focus:border-primary outline-none border rounded"
+                            type="email"
+                            {...register("userEmail", {
+                              required: "Email is required",
+                            })}
+                            id="email"
+                          />
+                          {errors.userEmail && (
+                            <span className="text-red-500 text-sm inline-block mt-2">
+                              {errors.userEmail.message}
+                            </span>
+                          )}
+                        </div>
+
+                        <div>
+                          <label
+                            className="mb-3 inline-block"
+                            htmlFor="shippingAddress"
+                          >
+                            Shipping Address
+                          </label>
+                          <input
+                            className="w-full p-2 focus:border-primary outline-none border rounded"
+                            type="text"
+                            {...register("shippingAddress", {
+                              required: "Shipping Address is required",
+                            })}
+                            id="shippingAddress"
+                          />
+                          {errors.shippingAddress && (
+                            <span className="text-red-500 text-sm mt-2 inline-block">
+                              {errors.shippingAddress.message}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div>
+                        <div className="flex items-center space-x-4 mb-6">
+                          <span className="rounded-full bg-primary text-white size-10 p-2 flex items-center justify-center">
+                            <FaRegCreditCard size={20} className="w-full" />
+                          </span>
+                          <h2 className="text-lg">Payment Method</h2>
+                        </div>
+                        <div className="space-y-4">
+                          <div>
+                            <label
+                              htmlFor="cash"
+                              className={`font-medium cursor-pointer p-4 w-full flex justify-between hover:border-primary rounded ${
+                                selectedPaymentMethod === "cash"
+                                  ? "border-primary border"
+                                  : "border"
+                              }`}
+                            >
+                              <div className="flex space-x-4">
+                                <BsCashStack size={20} />
+                                <span>Cash on Delivery</span>
+                              </div>
+                              <input
+                                type="radio"
+                                value="cash"
+                                {...register("paymentMethod", {
+                                  required: "Select a payment method",
+                                })}
+                                id="cash"
+                              />
+                            </label>
+                          </div>
+                          <div>
+                            <label
+                              htmlFor="stripe"
+                              className={`font-medium cursor-pointer p-4 w-full flex justify-between hover:border-primary rounded ${
+                                selectedPaymentMethod === "stripe"
+                                  ? "border-primary border"
+                                  : "border"
+                              }`}
+                            >
+                              <div className="flex space-x-4">
+                                <FaStripe size={24} />
+                                <span>Stripe</span>
+                              </div>
+                              <input
+                                type="radio"
+                                value="stripe"
+                                {...register("paymentMethod", {
+                                  required: "Select a payment method",
+                                })}
+                                id="stripe"
+                              />
+                            </label>
+                          </div>
+                        </div>
+                        {errors.paymentMethod && (
+                          <span className="text-red-500 text-sm inline-block mt-2">
+                            {errors.paymentMethod.message}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              <div className="bg-secondary lg:basis-2/6 p-4 rounded">
+                <h2 className="text-lg font-medium mb-4">Order Summary</h2>
+                {productIsLoading ? (
+                  <div className="flex justify-center py-4">
+                    <CgSpinner className="animate-spin text-primary text-4xl" />
+                  </div>
+                ) : (
+                  <div className="mb-4 space-y-2">
+                    {cartProducts?.map((product) => (
+                      <CheckoutProductCard
+                        _id={product._id}
+                        image={product.image}
+                        name={product.name}
+                        price={product.price}
+                        quantity={product.quantity}
+                        slug={product.slug}
+                        key={product._id}
+                      />
+                    ))}
+                  </div>
+                )}
+                {appliedDiscountCode && (
+                  <div className="mb-4">
+                    <span className="mb-2 inline-block">
+                      Applied Discount Code
+                    </span>
                     <input
-                      className="w-full p-2 focus:border-primary outline-none border rounded"
+                      className="p-2 w-full rounded outline-none border"
+                      readOnly
                       type="text"
-                      name="userFullName"
-                      id="userFullName"
+                      value={appliedDiscountCode}
                     />
                   </div>
-
-                  <div className="lg:basis-1/2 space-y-4">
-                    <label htmlFor="phone">Phone</label>
-                    <input
-                      className="w-full p-2 focus:border-primary outline-none border rounded"
-                      type="text"
-                      name="phone"
-                      id="phone"
-                    />
+                )}
+                <CheckoutCalculations />
+                {orderIsLoading ? (
+                  <div className="flex justify-center mt-6 items-center space-x-2 bg-primary rounded p-3">
+                    <CgSpinner className="animate-spin text-white text-xl" />
+                    <span className="text-white">Placing Order...</span>
                   </div>
-                </div>
-                <label htmlFor="phone">Email</label>
-                <input
-                  className="w-full p-2 focus:border-primary outline-none border rounded"
-                  type="email"
-                  name="email"
-                  id="email"
-                />
-
-                <label htmlFor="shippingAddress">Shipping Address</label>
-                <input
-                  className="w-full p-2 focus:border-primary outline-none border rounded"
-                  type="text"
-                  name="shippingAddress"
-                  id="shippingAddress"
-                />
+                ) : (
+                  <button
+                    className="btn w-full py-3 rounded mt-6"
+                    type="submit"
+                  >
+                    Place Order
+                  </button>
+                )}
               </div>
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <span className="rounded-full bg-primary text-white size-10 p-2 flex items-center justify-center">
-                    <FaRegCreditCard size={20} className="w-full" />
-                  </span>
-                  <h2 className="text-lg">Payment Method</h2>
-                </div>
-                <div className="space-y-4">
-                  <div className="flex items-center border p-4 space-x-4 rounded text-black hover:border-primary duration-200">
-                    <span>
-                      <BsCashStack size={20} />
-                    </span>
-                    <span className=" font-semibold">Cash on Delivery</span>
-                  </div>
-                  <div className="flex items-center border p-4 space-x-4 rounded text-black hover:border-primary duration-200">
-                    <span>
-                      <FaStripe size={24} />
-                    </span>
-                    <span className=" font-semibold">Stripe</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="bg-secondary lg:basis-2/6 p-4 rounded">
-            <h2 className="text-lg font-medium mb-4">Order Summer</h2>
-            <div className="mb-4 space-y-2">
-              {cartProducts?.map((product) => (
-                <CheckoutProductCard
-                  _id={product._id}
-                  image={product.image}
-                  name={product.name}
-                  price={product.price}
-                  quantity={product.quantity}
-                  slug={product.slug}
-                  key={product._id}
-                />
-              ))}
-            </div>
-            {appliedDiscountCode && (
-              <div className="mb-4">
-                <span className="mb-2 inline-block">Applied Discount code</span>
-                <input
-                  className="p-2 w-full rounded outline-none border"
-                  readOnly
-                  type="text"
-                  value={appliedDiscountCode}
-                />
-              </div>
-            )}
-            <div className="text-sm space-y-4">
-              <div className="font-medium flex justify-between">
-                <span>Cart Subtotal</span>
-                <span>$ {subtotal}</span>
-              </div>
-              <div className="font-medium flex justify-between">
-                <span>Shipping Charge</span>
-                <span>$ {shippingCharge}</span>
-              </div>
-              <div className="font-medium flex justify-between">
-                <span>Discount Amount</span>
-                <span>$ {discountAmount}</span>
-              </div>
-              <div className="font-medium flex justify-between">
-                <span>Total</span>
-                <span>$ {totalPrice}</span>
-              </div>
-              <div className="text-base font-semibold flex justify-between">
-                <span>Order Total</span>
-                <span>$ {totalPriceAfterDiscount}</span>
-              </div>
-              <button className="btn w-full py-3 rounded">Place Order</button>
-            </div>
-          </div>
-        </div>
+            </form>
+          </>
+        )}
       </div>
     </section>
   );
