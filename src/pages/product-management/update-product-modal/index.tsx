@@ -166,6 +166,7 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
         id: "updateProductSuccess",
         position: "top-right",
         className: "text-primary",
+        duration: 1000,
       });
 
       toggleModal();
@@ -177,6 +178,7 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
         id: "updateProductError",
         position: "top-right",
         className: "text-red-500",
+        duration: 1000,
       });
     }
   };

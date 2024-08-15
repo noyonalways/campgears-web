@@ -36,7 +36,9 @@ type TError = {
 const ProductDetails: React.FC<IProps> = () => {
   const params = useParams();
   const id = params?.slug?.split("_")[params?.slug?.split("_")?.length - 1];
-  const { data, isLoading, error } = useGetProductQuery(id!);
+  const { data, isLoading, error } = useGetProductQuery(id!, {
+    refetchOnMountOrArgChange: true,
+  });
   const { data: reviews } = useGetAllreviewQuery(id!);
 
   const totalRating =

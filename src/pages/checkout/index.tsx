@@ -4,7 +4,7 @@ import { CgSpinner } from "react-icons/cg";
 import { FaRegCreditCard, FaStripe } from "react-icons/fa6";
 import { FiMapPin } from "react-icons/fi";
 import { HiChevronLeft } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Loading from "../../components/loading";
 import { useCreateOrderMutation } from "../../redux/features/order/orderApi";
@@ -38,6 +38,7 @@ const Checkout: React.FC = () => {
   } = useForm<IFormInputs>();
 
   const selectedPaymentMethod = watch("paymentMethod");
+  const navigate = useNavigate();
 
   const cartProducts = products?.data
     .filter((product) => items.find((item) => item._id === product._id))
@@ -56,7 +57,6 @@ const Checkout: React.FC = () => {
     }));
 
     const discount = appliedDiscountCode ? { code: appliedDiscountCode } : null;
-
     const newOrder: INewOrder = {
       ...data,
       orderItems,
@@ -73,6 +73,7 @@ const Checkout: React.FC = () => {
           position: "top-right",
           className: "text-primary",
         });
+        navigate("/order-success");
       }
     } catch (err) {
       console.log(err);

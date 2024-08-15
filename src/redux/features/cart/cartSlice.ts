@@ -102,6 +102,9 @@ const cartSlice = createSlice({
       state.shippingCharge = 0;
       state.totalPrice = 0;
       state.totalPriceAfterDiscount = 0;
+      state.appliedDiscountCode = "";
+      state.discountAmount = 0;
+      state.tax = 0;
     },
     calculateTotalsAfterDiscount: (
       state,

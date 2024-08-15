@@ -34,6 +34,7 @@ const DeleteConfirmationModal: React.FC<IProps> = ({ productId }) => {
       id: productId,
       position: "top-right",
       className: "text-primary",
+      duration: 1000,
     });
   }
 

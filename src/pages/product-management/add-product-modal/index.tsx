@@ -59,6 +59,7 @@ const AddProductModal: React.FC<IProps> = () => {
         id: "uploadGalleryImages",
         position: "top-right",
         className: "text-red-500",
+        duration: 1000,
       });
       return;
     }
@@ -83,6 +84,7 @@ const AddProductModal: React.FC<IProps> = () => {
           id: "uploadImage",
           position: "top-right",
           className: "text-red-500",
+          duration: 1000,
         });
       }
 
@@ -101,6 +103,7 @@ const AddProductModal: React.FC<IProps> = () => {
           id: "uploadImageSuccess",
           position: "top-right",
           className: "text-primary",
+          duration: 1000,
         });
       }
       setImageUploadLoading(false);
