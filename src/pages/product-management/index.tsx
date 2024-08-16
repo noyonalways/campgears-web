@@ -7,7 +7,16 @@ import ProductManagementCard from "./product-management-card";
 interface IProps {}
 
 const ProductManagement: React.FC<IProps> = () => {
-  const { data, isLoading } = useGetAllProductQuery(undefined);
+  const { data, isLoading, error } = useGetAllProductQuery(undefined);
+
+  let errorMessage = "";
+  if (error) {
+    errorMessage = "Failed to load products";
+    if ("status" in error && error.status === 404) {
+      errorMessage =
+        (error?.data as { message: string })?.message || errorMessage;
+    }
+  }
 
   return (
     <>
@@ -36,20 +45,28 @@ const ProductManagement: React.FC<IProps> = () => {
               <Loading />
             </div>
           ) : (
-            <div className="space-y-4">
-              {data?.data?.map((product) => (
-                <ProductManagementCard
-                  key={product._id}
-                  productId={product._id}
-                  name={product.name}
-                  image={product.image}
-                  price={product.price}
-                  category={product.category}
-                  quantity={product.stockQuantity}
-                  slug={product.slug}
-                />
-              ))}
-            </div>
+            <>
+              {errorMessage ? (
+                <div className="text-red-500 text-center font-montserrat py-10">
+                  {errorMessage}
+                </div>
+              ) : (
+                <div className="space-y-4">
+                  {data?.data?.map((product) => (
+                    <ProductManagementCard
+                      key={product._id}
+                      productId={product._id}
+                      name={product.name}
+                      image={product.image}
+                      price={product.price}
+                      category={product.category}
+                      quantity={product.stockQuantity}
+                      slug={product.slug}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>

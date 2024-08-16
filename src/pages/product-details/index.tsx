@@ -13,6 +13,7 @@ import PageTitle from "../../components/page-title";
 import { addToCart } from "../../redux/features/cart/cartSlice";
 import { useGetProductQuery } from "../../redux/features/product/productApi";
 import { useGetAllreviewQuery } from "../../redux/features/review/reviewApi";
+import { addToWishlist } from "../../redux/features/wishlist/wishlistSlice";
 import { useAppDispatch } from "../../redux/hook";
 import AddReview from "./add-review";
 import ReviewList from "./review-list";
@@ -207,7 +208,11 @@ const ProductDetails: React.FC<IProps> = () => {
                       >
                         Add to Cart
                       </button>
-                      <button className="group active:scale-90 duration-100">
+                      <button
+                        title="Add to Wishlist"
+                        onClick={() => dispatch(addToWishlist({ _id: _id! }))}
+                        className="group active:scale-90 duration-100"
+                      >
                         <HiOutlineHeart
                           size={28}
                           className="group-hover:fill-pink-500 group-hover:text-pink-500"

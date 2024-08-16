@@ -4,13 +4,17 @@ import MainLayout from "./components/layouts/main-layout";
 import { useAppSelector } from "./redux/hook";
 
 function App() {
-  const { items } = useAppSelector((store) => store.cart);
+  const cartTotalItems = useAppSelector((store) => store.cart.totalItems);
+  const wishlistTotalItems = useAppSelector(
+    (store) => store.wishlist.totalItems
+  );
   useEffect(() => {
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (items.length > 0) {
+      if (cartTotalItems > 0 || wishlistTotalItems > 0) {
         event.preventDefault();
-        event.returnValue =
-          "You have items in your cart. Are you sure you want to leave?";
+        event.returnValue = `You have items in your ${
+          cartTotalItems > 0 ? "cart" : "wishlist"
+        }. Are you sure you want to leave?`;
       }
     };
 
@@ -20,7 +24,7 @@ function App() {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, [items]);
+  }, [cartTotalItems, wishlistTotalItems]);
 
   return <MainLayout />;
 }
