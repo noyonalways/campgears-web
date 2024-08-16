@@ -1,7 +1,7 @@
-import { HiOutlineTrash } from "react-icons/hi2";
 import { addToCart } from "../../../redux/features/cart/cartSlice";
 import { removeFromWishlist } from "../../../redux/features/wishlist/wishlistSlice";
 import { useAppDispatch } from "../../../redux/hook";
+import RemoveProductConfirmationModal from "../remove-product-modal";
 interface IProps {
   _id: string;
   image: string;
@@ -29,14 +29,9 @@ const WishlistCard: React.FC<IProps> = ({
   };
 
   return (
-    <div className="border lg:border-b lg:border-0 flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center justify-between rounded pb-6 pt-10 lg:p-2 relative">
+    <div className="border lg:border-b lg:border-0 flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:items-center justify-between rounded pb-6 pt-12 lg:p-2 relative">
       <div className="flex lg:items-center space-x-2 lg:space-x-6 lg:mr-6 lg:basis-1/2">
-        <button
-          onClick={() => dispatch(removeFromWishlist({ _id }))}
-          className="absolute lg:static right-2 top-2 lg:top-4 text-[#717171] text-lg hover:bg-[#E7ECEF] p-2 lg:p-3 rounded-full duration-100 active:scale-95"
-        >
-          <HiOutlineTrash />
-        </button>
+        <RemoveProductConfirmationModal productId={_id} />
         <figure className="max-w-24 md:max-w-32 lg:max-w-24 rounded overflow-hidden">
           <img src={image} alt="product-image" />
         </figure>

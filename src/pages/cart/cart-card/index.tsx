@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi2";
 import { Link } from "react-router-dom";
@@ -47,7 +48,12 @@ const CartCard: React.FC<IProps> = ({
   };
 
   return (
-    <div className="flex border-t border-b flex-col py-6 px-2 lg:flex-row items-center lg:p-4 lg:border justify-between lg:rounded relative">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex border-t border-b flex-col py-6 px-2 lg:flex-row items-center lg:p-4 lg:border justify-between lg:rounded relative"
+    >
       <ConfirmRemoveProductModal productId={_id} />
       <div className="flex items-start lg:items-center space-x-2 lg:space-x-4 basis-full lg:basis-[60%] my-6 lg:my-0">
         <figure className="w-48 lg:w-40 rounded overflow-hidden">
@@ -90,7 +96,7 @@ const CartCard: React.FC<IProps> = ({
           <span>$ {subtotal}</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

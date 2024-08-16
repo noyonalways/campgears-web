@@ -59,7 +59,7 @@ const Cart: React.FC<IProps> = () => {
             <>
               <>
                 <div className="flex justify-between items-center mb-8">
-                  <Link to={`/cart`} className="hover:text-primary">
+                  <Link to={`/products`} className="hover:text-primary">
                     <HiChevronLeft size={28} />
                   </Link>
                   <h1 className="text-xl font-medium text-end">

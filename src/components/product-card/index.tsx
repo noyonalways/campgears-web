@@ -1,4 +1,5 @@
 import { Rating } from "@smastrom/react-rating";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useGetAllreviewQuery } from "../../redux/features/review/reviewApi";
 
@@ -32,7 +33,12 @@ const ProductCard: React.FC<IProps> = ({
       : 0;
 
   return (
-    <div className="font-montserrat p-5 py-5 text-left transform duration-500 hover:-translate-y-2 hover:shadow-xl cursor-pointer rounded border  border-slate-200 lg:border-slate-100/70 group overflow-hidden">
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="font-montserrat p-5 py-5 text-left transform duration-500 hover:-translate-y-2 hover:shadow-xl cursor-pointer rounded border  border-slate-200 lg:border-slate-100/70 group overflow-hidden"
+    >
       <img
         className="size-64 lg:size-52 :object-cover mx-auto group-hover:scale-105 duration-200 rounded"
         src={image}
@@ -42,14 +48,13 @@ const ProductCard: React.FC<IProps> = ({
       <h1 className="text-xl mb-3 h-26 lg:mb-5 lg:h-20 font-medium">
         {name.length > 40 ? name.substring(0, 40) + "..." : name}
       </h1>
-      <div className="space-x-1 flex mb-5">
+      <div className="mb-5">
         <Rating
           className="max-w-24"
           readOnly
           orientation="horizontal"
           value={averageRating}
         />
-        <span className="font-roboto">({reviews?.data.length})</span>
       </div>
       <p className="mb-5 font-roboto">
         {description?.length > 30
@@ -63,7 +68,7 @@ const ProductCard: React.FC<IProps> = ({
       >
         See Details
       </Link>
-    </div>
+    </motion.div>
   );
 };
 
