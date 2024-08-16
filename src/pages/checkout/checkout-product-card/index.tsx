@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
 interface IProps {
@@ -18,7 +19,12 @@ const CheckoutProductCard: React.FC<IProps> = ({
   quantity,
 }) => {
   return (
-    <div className="flex space-x-2 bg-white rounded p-2">
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="flex space-x-2 bg-white rounded p-2"
+    >
       <img className="size-24 rounded" src={image} alt={name + "-image"} />
       <div className="flex-1 space-y-1">
         <Link
@@ -32,7 +38,7 @@ const CheckoutProductCard: React.FC<IProps> = ({
           <span>$ {price * quantity}</span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

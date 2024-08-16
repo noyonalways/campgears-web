@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { forwardRef, useState } from "react";
 import { HiChevronDown } from "react-icons/hi2";
 
@@ -27,7 +28,12 @@ const StatusDropdown = forwardRef<HTMLButtonElement, StatusDropdownProps>(
     };
 
     return (
-      <div className="relative w-full group">
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="relative w-full group"
+      >
         <button
           type="button"
           className={`py-2.5 px-3 w-full md:text-sm text-site bg-transparent border border-dimmed focus:border-brand focus:outline-none focus:ring-0 peer flex items-center justify-between rounded ${
@@ -61,7 +67,7 @@ const StatusDropdown = forwardRef<HTMLButtonElement, StatusDropdownProps>(
             Out of Stock
           </div>
         </div>
-      </div>
+      </motion.div>
     );
   }
 );

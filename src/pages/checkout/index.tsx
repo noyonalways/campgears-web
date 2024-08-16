@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { BsCashStack } from "react-icons/bs";
 import { CgSpinner } from "react-icons/cg";
@@ -129,7 +130,12 @@ const Checkout: React.FC = () => {
                         </div>
                         <div className="grid grid-cols-1 gap-4 mt-6 w-full mb-8">
                           <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
-                            <div className="lg:basis-1/2">
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5 }}
+                              className="lg:basis-1/2"
+                            >
                               <label
                                 className="mb-3 inline-block"
                                 htmlFor="userFullName"
@@ -149,9 +155,14 @@ const Checkout: React.FC = () => {
                                   {errors.userFullName.message}
                                 </span>
                               )}
-                            </div>
+                            </motion.div>
 
-                            <div className="lg:basis-1/2">
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.5 }}
+                              className="lg:basis-1/2"
+                            >
                               <label
                                 className="mb-3 inline-block"
                                 htmlFor="phone"
@@ -171,10 +182,14 @@ const Checkout: React.FC = () => {
                                   {errors.userPhone.message}
                                 </span>
                               )}
-                            </div>
+                            </motion.div>
                           </div>
 
-                          <div className="">
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
+                          >
                             <label
                               className="mb-3 inline-block"
                               htmlFor="email"
@@ -194,9 +209,13 @@ const Checkout: React.FC = () => {
                                 {errors.userEmail.message}
                               </span>
                             )}
-                          </div>
+                          </motion.div>
 
-                          <div>
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7 }}
+                          >
                             <label
                               className="mb-3 inline-block"
                               htmlFor="shippingAddress"
@@ -216,7 +235,7 @@ const Checkout: React.FC = () => {
                                 {errors.shippingAddress.message}
                               </span>
                             )}
-                          </div>
+                          </motion.div>
                         </div>
 
                         <div>
@@ -227,7 +246,11 @@ const Checkout: React.FC = () => {
                             <h2 className="text-lg">Payment Method</h2>
                           </div>
                           <div className="space-y-4">
-                            <div>
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.8 }}
+                            >
                               <label
                                 htmlFor="cash"
                                 className={`font-medium cursor-pointer p-4 w-full flex justify-between hover:border-primary rounded ${
@@ -249,8 +272,12 @@ const Checkout: React.FC = () => {
                                   id="cash"
                                 />
                               </label>
-                            </div>
-                            <div>
+                            </motion.div>
+                            <motion.div
+                              initial={{ opacity: 0, y: 20 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.9 }}
+                            >
                               <label
                                 htmlFor="stripe"
                                 className={`font-medium cursor-pointer p-4 w-full flex justify-between hover:border-primary rounded ${
@@ -272,7 +299,7 @@ const Checkout: React.FC = () => {
                                   id="stripe"
                                 />
                               </label>
-                            </div>
+                            </motion.div>
                           </div>
                           {errors.paymentMethod && (
                             <span className="text-red-500 text-sm inline-block mt-2">

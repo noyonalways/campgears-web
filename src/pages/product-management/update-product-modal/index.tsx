@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { HiOutlineCloudUpload, HiX } from "react-icons/hi";
@@ -72,7 +73,6 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
     const url = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_IMGBB_API_KEY
     }`;
-
     const config = {
       method: "POST",
       body: form,
@@ -220,8 +220,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                     className="p-6 lg:px-0 lg:flex lg:justify-between lg:items-start lg:space-x-4"
                   >
                     <div className="grid grid-cols-1 gap-4 basis-1/2">
-                      <label htmlFor="name">Product Name</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        htmlFor="name"
+                      >
+                        Product Name
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
                         type="text"
                         id="name"
                         {...register("name")}
@@ -233,8 +243,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="description">Description</label>
-                      <textarea
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        htmlFor="description"
+                      >
+                        Description
+                      </motion.label>
+                      <motion.textarea
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
                         rows={4}
                         id="description"
                         {...register("description")}
@@ -246,8 +266,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="price">Price</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        htmlFor="price"
+                      >
+                        Price
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
                         type="number"
                         id="price"
                         {...register("price", {
@@ -261,8 +291,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="stockQuantity">Quantity</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        htmlFor="stockQuantity"
+                      >
+                        Quantity
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
                         type="number"
                         id="stockQuantity"
                         {...register("stockQuantity", {
@@ -276,8 +316,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="color">Color</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        htmlFor="color"
+                      >
+                        Color
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
                         type="text"
                         id="color"
                         {...register("color")}
@@ -289,8 +339,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="category">Category</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7 }}
+                        htmlFor="category"
+                      >
+                        Category
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7 }}
                         type="text"
                         id="category"
                         {...register("category")}
@@ -302,8 +362,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="sub-category">Sub Category</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        htmlFor="sub-category"
+                      >
+                        Sub Category
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
                         type="text"
                         id="sub-category"
                         {...register("subCategory")}
@@ -317,8 +387,18 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                     </div>
 
                     <div className="grid grid-cols-1 gap-4 flex-1">
-                      <label htmlFor="category">Brand</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        htmlFor="category"
+                      >
+                        Brand
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
                         type="text"
                         id="brand"
                         {...register("brand")}
@@ -330,7 +410,14 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="status">Status</label>
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        htmlFor="status"
+                      >
+                        Status
+                      </motion.label>
                       <Controller
                         name="status"
                         control={control}
@@ -348,16 +435,36 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         </span>
                       )}
 
-                      <label htmlFor="featured">Featured</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
+                        htmlFor="featured"
+                      >
+                        Featured
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4 }}
                         type="checkbox"
                         id="featured"
                         {...register("isFeatured")}
                         className="size-4 border border-gray-300 rounded p-2"
                       />
 
-                      <label htmlFor="tags">Tags</label>
-                      <input
+                      <motion.label
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
+                        htmlFor="tags"
+                      >
+                        Tags
+                      </motion.label>
+                      <motion.input
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
                         type="text"
                         id="tags"
                         {...register("tags")}
@@ -365,16 +472,24 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                       />
 
                       <>
-                        <label htmlFor="image">
+                        <motion.label
+                          initial={{ opacity: 0, y: 40 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.6 }}
+                          htmlFor="image"
+                        >
                           Image{" "}
                           {imageUploadLoading && (
                             <span className="text-primary ml-4">
                               Uploading...
                             </span>
                           )}{" "}
-                        </label>
+                        </motion.label>
                         <div className="flex justify-between space-x-2">
-                          <input
+                          <motion.input
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
                             type="file"
                             id="image"
                             className="border border-gray-300 rounded p-2 w-full"
@@ -384,19 +499,32 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                               )
                             }
                           />
-                          <button
+                          <motion.button
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6 }}
                             onClick={() => handleUploadImages(image!)}
                             title="Upload Image"
                             type="button"
                             className="bg-primary text-white px-4 py-1 rounded border"
                           >
                             <HiOutlineCloudUpload />
-                          </button>
+                          </motion.button>
                         </div>
 
-                        <label htmlFor="gallery-images">Gallery Images</label>
+                        <motion.label
+                          initial={{ opacity: 0, y: 40 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.7 }}
+                          htmlFor="gallery-images"
+                        >
+                          Gallery Images
+                        </motion.label>
                         <div className="flex justify-between space-x-2">
-                          <input
+                          <motion.input
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7 }}
                             type="file"
                             id="image"
                             className="border border-gray-300 rounded p-2 w-full"
@@ -406,17 +534,23 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                               )
                             }
                           />
-                          <button
+                          <motion.button
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.7 }}
                             onClick={() => handleUploadImages(image!)}
                             title="Upload Image"
                             type="button"
                             className="bg-primary text-white px-4 py-1 rounded border"
                           >
                             <HiOutlineCloudUpload />
-                          </button>
+                          </motion.button>
                         </div>
                         <div className="flex justify-between space-x-2">
-                          <input
+                          <motion.input
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
                             type="file"
                             id="image"
                             className="border border-gray-300 rounded p-2 w-full"
@@ -426,24 +560,30 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                               )
                             }
                           />
-                          <button
+                          <motion.button
+                            initial={{ opacity: 0, y: 40 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8 }}
                             onClick={() => handleUploadImages(image!)}
                             title="Upload Image"
                             type="button"
                             className="bg-primary text-white px-4 py-1 rounded border"
                           >
                             <HiOutlineCloudUpload />
-                          </button>
+                          </motion.button>
                         </div>
                       </>
 
                       <div className="flex justify-end mt-4">
-                        <button
+                        <motion.button
+                          initial={{ opacity: 0, y: 40 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.9 }}
                           type="submit"
                           className="btn focus:ring-2 focus:ring-offset-2 focus:ring-primary"
                         >
                           Update Product
-                        </button>
+                        </motion.button>
                       </div>
                     </div>
                   </form>
