@@ -17,7 +17,10 @@ const Navbar = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
-  const totalItems = useAppSelector((store) => store.cart.totalItems);
+  const cartTotalItems = useAppSelector((store) => store.cart.totalItems);
+  const wishlistTotalItems = useAppSelector(
+    (store) => store.wishlist.totalItems
+  );
 
   const searchHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -77,8 +80,16 @@ const Navbar = () => {
               <HiMiniMagnifyingGlass />
             </button>
             <li className="hidden md:inline-block">
-              <Link className="text-2xl hover:text-primary" to="/wishlist">
+              <Link
+                className="text-2xl hover:text-primary relative"
+                to="/wishlist"
+              >
                 <HiOutlineHeart />
+                {wishlistTotalItems > 0 && (
+                  <p className="flex h-2 w-2 items-center justify-center rounded-full bg-primary p-3 text-xs text-white absolute bottom-2 left-2 lg:left-4">
+                    {wishlistTotalItems}
+                  </p>
+                )}
               </Link>
             </li>
             <li className="hidden md:inline-block">
@@ -92,9 +103,9 @@ const Navbar = () => {
                 to="/cart"
               >
                 <HiOutlineShoppingCart />
-                {totalItems > 0 && (
+                {cartTotalItems > 0 && (
                   <p className="flex h-2 w-2 items-center justify-center rounded-full bg-primary p-3 text-xs text-white absolute bottom-2 left-2 lg:left-4">
-                    {totalItems}
+                    {cartTotalItems}
                   </p>
                 )}
               </Link>
