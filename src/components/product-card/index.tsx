@@ -42,14 +42,13 @@ const ProductCard: React.FC<IProps> = ({
       <h1 className="text-xl mb-3 h-26 lg:mb-5 lg:h-20 font-medium">
         {name.length > 40 ? name.substring(0, 40) + "..." : name}
       </h1>
-      <div className="space-x-1 flex mb-5">
+      <div className="mb-5">
         <Rating
           className="max-w-24"
           readOnly
           orientation="horizontal"
           value={averageRating}
         />
-        <span className="font-roboto">({reviews?.data.length})</span>
       </div>
       <p className="mb-5 font-roboto">
         {description?.length > 30
