@@ -10,8 +10,8 @@ import {
   Navigation,
   Pagination,
 } from "swiper/modules";
-import Loading from "../../../components/loading";
 import ProductCard from "../../../components/product-card";
+import ProductCardSkeleton from "../../../components/product-card-skeleton";
 import SectionTitle from "../../../components/section-title";
 import { useGetAllProductQuery } from "../../../redux/features/product/productApi";
 
@@ -38,8 +38,11 @@ const BestSellingProducts: React.FC<IProps> = () => {
           description="Explore our top rated and recommended camping gear. Upgrade your adventure with the best products on the market."
         />
         {isLoading ? (
-          <div className="flex items-center justify-center h-[30vh]">
-            <Loading />
+          <div className="grid lg:grid-cols-4 gap-6">
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
           </div>
         ) : (
           <>
