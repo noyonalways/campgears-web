@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { HiOutlineListBullet, HiOutlineSquares2X2 } from "react-icons/hi2";
 import { useLocation, useNavigate } from "react-router-dom";
-import Loading from "../../components/loading";
 import PageTitle from "../../components/page-title";
 import ProductCard from "../../components/product-card";
+import ProductCardSkeleton from "../../components/product-card-skeleton";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import CategoryList from "./category-list";
 import FilterByCategory from "./filter-by-category";
@@ -163,8 +163,11 @@ const Products: React.FC = () => {
                 </div>
               </div>
               {isLoading ? (
-                <div className="flex-col gap-4 w-full flex items-center justify-center lg:py-44">
-                  <Loading />
+                <div className="grid lg:grid-cols-4 gap-6">
+                  <ProductCardSkeleton />
+                  <ProductCardSkeleton />
+                  <ProductCardSkeleton />
+                  <ProductCardSkeleton />
                 </div>
               ) : errorMessage ? (
                 <div className="text-red-500 text-center py-20">

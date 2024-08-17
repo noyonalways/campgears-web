@@ -9,7 +9,7 @@ interface IProps {
 const FaqCard: React.FC<IProps> = ({ question, answer }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="border rounded-lg overflow-hidden">
+    <div className="border rounded-md relative duration-200 overflow-hidden">
       <h3
         onClick={() => setIsOpen(!isOpen)}
         className={`font-semibold bg-secondary p-3 cursor-pointer duration-100 font-montserrat flex items-center ${
@@ -23,7 +23,7 @@ const FaqCard: React.FC<IProps> = ({ question, answer }) => {
       </h3>
       <p
         className={`p-3 bg-white duration-200 font-roboto ${
-          isOpen ? "mb-0" : "-mb-24 sm:-mb-[72px] md:-mb-[72px] lg:-mb-[72px]"
+          isOpen ? "static" : " top-[72px] absolute"
         }`}
       >
         {answer}

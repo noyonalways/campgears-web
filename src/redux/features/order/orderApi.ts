@@ -2,7 +2,7 @@ import {
   INewOrder,
   IOrderResponse,
   IOrdersByEmailResponse,
-} from "../../../types/order.type";
+} from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const orderApi = baseApi.injectEndpoints({

@@ -2,8 +2,8 @@ import { HiChevronRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { Keyboard, Mousewheel, Navigation, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Loading from "../../../components/loading";
 import ProductCard from "../../../components/product-card";
+import ProductCardSkeleton from "../../../components/product-card-skeleton";
 import SectionTitle from "../../../components/section-title";
 import { useGetAllProductQuery } from "../../../redux/features/product/productApi";
 
@@ -33,8 +33,11 @@ const FeaturedProducts: React.FC<IProps> = () => {
           description="Check out our featured products, handpicked for their quality and performance. Click on any item to view detailed information and make your purchase."
         />
         {isLoading ? (
-          <div className="flex items-center justify-center h-[30vh]">
-            <Loading />
+          <div className="grid lg:grid-cols-4 gap-6">
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
+            <ProductCardSkeleton />
           </div>
         ) : (
           <>

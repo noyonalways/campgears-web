@@ -1,4 +1,4 @@
-import { TDiscountResponse } from "../../../types/discount.type";
+import { TDiscountResponse } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 type TDiscountPayload = {
