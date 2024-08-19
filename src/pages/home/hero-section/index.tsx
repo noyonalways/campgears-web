@@ -27,15 +27,21 @@ const HeroSection: React.FC<IProps> = () => {
                   />
                 </div>
               </div>
-              <div className="bg-violet-500 w-full h-48"></div>
+              <div className="w-full lg:h-48">
+                <img
+                  className="h-full"
+                  src="https://i.ibb.co/ChjdHBM/equipments-banner.png"
+                  alt=""
+                />
+              </div>
             </div>
           </div>
           <div className="flex flex-col lg:flex-row">
             <div className="w-full lg:w-[60%] bg-green-500"></div>
             <div className="flex flex-1">
-              <div className="bg-orange-500 w-full">
+              <div className="w-full">
                 <img
-                  src="https://i.ibb.co/2hpjLcn/wemon-poster.jpg"
+                  src="https://i.ibb.co/1n6581q/backpacks-banner.png"
                   alt="water-bottle-banner-image"
                 />
               </div>
