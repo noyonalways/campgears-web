@@ -3,3 +3,16 @@
 .swiper-pagination-bullet-active {
   background: #57a1a2 !important;
 }
+
+.swiper-button-prev {
+  color: #57a1a2;
+}
+
+.swiper-button-next {
+  color: #57a1a2;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 25px;
+}

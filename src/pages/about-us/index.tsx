@@ -99,9 +99,9 @@ function AboutUs() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
             <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300">
               <img
-                src="https://via.placeholder.com/150"
+                src="https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="John Doe"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
+                className="w-32 h-32 mx-auto rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-semibold text-gray-800">John Doe</h3>
               <p className="text-gray-500">Founder & CEO</p>
@@ -112,9 +112,9 @@ function AboutUs() {
             </div>
             <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300">
               <img
-                src="https://via.placeholder.com/150"
+                src="https://images.pexels.com/photos/3211476/pexels-photo-3211476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Jane Smith"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
+                className="w-32 h-32 mx-auto rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-semibold text-gray-800">
                 Jane Smith
@@ -128,9 +128,9 @@ function AboutUs() {
             </div>
             <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300">
               <img
-                src="https://via.placeholder.com/150"
+                src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Sam Wilson"
-                className="w-32 h-32 mx-auto rounded-full mb-4"
+                className="w-32 h-32 mx-auto rounded-full mb-4 object-cover"
               />
               <h3 className="text-xl font-semibold text-gray-800">
                 Sam Wilson
