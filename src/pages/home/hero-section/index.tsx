@@ -51,10 +51,10 @@ const HeroSection: React.FC<IProps> = () => {
                     alt="water-bottle-banner-image"
                   />
                 </Link>
-                <Link to={`/products?category=Women`} className="w-full">
+                <Link to={`/products?category=Backpack`} className="w-full">
                   <img
-                    src="https://i.ibb.co/2hpjLcn/wemon-poster.jpg"
-                    alt="women-jacket-banner-image"
+                    src="https://i.ibb.co/1n6581q/backpacks-banner.png"
+                    alt="backpack-banner-image"
                   />
                 </Link>
               </div>
@@ -78,12 +78,13 @@ const HeroSection: React.FC<IProps> = () => {
               />
             </Link>
             <div className="flex flex-1">
-              <Link to={`/products?category=Backpack`} className="w-full">
+              <Link to={`/products?category=Women`} className="w-full">
                 <img
-                  src="https://i.ibb.co/1n6581q/backpacks-banner.png"
-                  alt="backpack-banner-image"
+                  src="https://i.ibb.co/2hpjLcn/wemon-poster.jpg"
+                  alt="women-jacket-banner-image"
                 />
               </Link>
+
               <Link
                 to={`/products?category=Men`}
                 className="bg-lime-500  w-full"

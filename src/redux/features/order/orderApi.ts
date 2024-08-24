@@ -2,6 +2,7 @@ import {
   INewOrder,
   IOrderResponse,
   IOrdersByEmailResponse,
+  ISingleOrderResponse,
 } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
@@ -24,7 +25,7 @@ const orderApi = baseApi.injectEndpoints({
         };
       },
     }),
-    getSingleOrder: builder.query<IOrderResponse, string>({
+    getSingleOrder: builder.query<ISingleOrderResponse, string>({
       query: (orderId) => {
         return {
           url: `/orders/${orderId}`,

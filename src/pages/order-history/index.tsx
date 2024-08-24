@@ -1,24 +1,23 @@
 import React from "react";
 import { HiChevronLeft } from "react-icons/hi2";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loading from "../../components/loading";
 import PageTitle from "../../components/page-title";
 import { useGetOrdersByEmailQuery } from "../../redux/features/order/orderApi";
-import { useAppSelector } from "../../redux/hook";
 
 const OrderHistory: React.FC = () => {
-  const { orderedUserEmail } = useAppSelector((store) => store.cart);
-  const { data: orders, isLoading } = useGetOrdersByEmailQuery(
-    orderedUserEmail,
-    { refetchOnMountOrArgChange: true }
-  );
+  const params = useParams();
+  console.log(params);
+  const { data: orders, isLoading } = useGetOrdersByEmailQuery(params.email!, {
+    refetchOnMountOrArgChange: true,
+  });
 
   return (
     <>
       <PageTitle title="Order History - Campgears" />
       <section className="pb-20 font-montserrat">
         <div className="container">
-          {!orderedUserEmail || orders?.data?.length === 0 ? (
+          {!params.email || orders?.data?.length === 0 ? (
             <div className="py-20 space-y-4 text-center">
               <h1>You have no orders</h1>
               <Link className="btn" to="/products">
@@ -48,7 +47,7 @@ const OrderHistory: React.FC = () => {
                     <thead>
                       <tr>
                         <th className="py-3 px-6 bg-gray-50 font-bold uppercase text-gray-600 border-b border-gray-200 text-xs text-left">
-                          Order ID
+                          TXN ID
                         </th>
                         <th className="py-3 px-6 bg-gray-50 font-bold uppercase text-gray-600 border-b border-gray-200 text-xs text-left">
                           Date
@@ -76,7 +75,9 @@ const OrderHistory: React.FC = () => {
                           key={order._id}
                           className="border-b border-gray-200 hover:bg-gray-100"
                         >
-                          <td className="py-4 px-6 text-sm">{order._id}</td>
+                          <td className="py-4 px-6 text-sm">
+                            {order.transactionId}
+                          </td>
                           <td className="py-4 px-6 text-sm">
                             {new Date(order.createdAt).toLocaleDateString()}
                           </td>
@@ -89,7 +90,7 @@ const OrderHistory: React.FC = () => {
                               .join(", ")}
                           </td>
                           <td className="py-4 px-6 text-sm">
-                            ${order.totalPriceAfterDiscount.toFixed(2)}
+                            ${order.totalPriceAfterDiscount?.toFixed(2)}
                           </td>
                           <td className="py-4 px-6 text-sm">{order.status}</td>
                           <td>
