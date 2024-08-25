@@ -13,24 +13,29 @@ interface IDiscount {
   description: string;
 }
 
+export type TOrderStatus = "pending" | "shipped" | "delivered" | "cancelled";
+export type TPaymentMethod = "cash" | "stripe";
+export type TPaymentStatus = "pending" | "paid" | "failed";
+
 interface IOrderData {
   userFullName: string;
   userEmail: string;
   userPhone: string;
+  transactionId: string;
   orderItems: IOrderItem[];
   shippingAddress: string;
-  paymentMethod: string;
-  status: string;
+  paymentMethod: TPaymentMethod;
   itemsPrice: number;
-  deliveredAt: string | null;
-  isDelivered: boolean;
-  isPaid: boolean;
-  paidAt: string | null;
-  shippingCost: number;
-  discount: IDiscount;
   tax: number;
+  shippingCost: number;
   totalPrice: number;
-  totalPriceAfterDiscount: number;
+  paymentStatus: TPaymentStatus;
+  paidAt: Date;
+  isDelivered: boolean;
+  deliveredAt: Date;
+  status: TOrderStatus;
+  discount: IDiscount;
+  totalPriceAfterDiscount?: number;
   _id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -59,6 +64,17 @@ export interface INewOrder {
 }
 
 export interface IOrderResponse {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: {
+    transactionId: string;
+    sessionId?: string;
+    email: string;
+  };
+}
+
+export interface ISingleOrderResponse {
   success: boolean;
   statusCode: number;
   message: string;

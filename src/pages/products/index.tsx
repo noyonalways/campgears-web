@@ -187,6 +187,8 @@ const Products: React.FC = () => {
                       _id={product._id}
                       description={product.description}
                       category={product.category}
+                      status={product.status}
+                      stockQuantity={product.stockQuantity}
                     />
                   ))}
                 </div>

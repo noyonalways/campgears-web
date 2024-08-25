@@ -29,7 +29,7 @@ const CheckoutCalculations: React.FC<IProps> = () => {
         <span>$ {totalPrice}</span>
       </div>
       <div className="text-base font-semibold flex justify-between">
-        <span>Order Total</span>
+        <span>Grand Total</span>
         <span>$ {totalPriceAfterDiscount}</span>
       </div>
     </div>

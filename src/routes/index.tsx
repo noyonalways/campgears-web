@@ -5,9 +5,10 @@ import Cart from "../pages/cart";
 import Checkout from "../pages/checkout";
 import HomePage from "../pages/home";
 import NotFound from "../pages/not-found";
+import OrderCancel from "../pages/order-cancel";
+import OrderConfirm from "../pages/order-confirmation";
 import OrderDetails from "../pages/order-details";
 import OrderHistory from "../pages/order-history";
-import OrderSuccess from "../pages/order-success";
 import ProductDetails from "../pages/product-details";
 import ProductManagement from "../pages/product-management";
 import Products from "../pages/products";
@@ -39,11 +40,15 @@ const router = createBrowserRouter([
         element: <Checkout />,
       },
       {
-        path: "/order-success",
-        element: <OrderSuccess />,
+        path: "/payment/confirmation",
+        element: <OrderConfirm />,
       },
       {
-        path: "/order-history",
+        path: "/payment/order-cancel",
+        element: <OrderCancel />,
+      },
+      {
+        path: "/order-history/:email",
         element: <OrderHistory />,
       },
       {

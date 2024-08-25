@@ -22,6 +22,10 @@ const OrderDetails: React.FC = () => {
     isDelivered,
     totalPriceAfterDiscount,
     discount,
+    paymentStatus,
+    paidAt,
+    transactionId,
+    userEmail,
   } = data?.data || {};
 
   return (
@@ -36,7 +40,7 @@ const OrderDetails: React.FC = () => {
           <div className="my-6 flex justify-between items-center print:justify-end">
             <Link
               className="hover:text-primary text-2xl text-black print:hidden"
-              to={"/order-history"}
+              to={`/order-history/${userEmail}`}
             >
               <HiChevronLeft />
             </Link>
@@ -50,7 +54,7 @@ const OrderDetails: React.FC = () => {
           ) : (
             <>
               <h1 className="text-2xl font-semibold mb-8 text-center">
-                Order # {_id}
+                # {transactionId}
               </h1>
               <div className="bg-white border-gray-200 rounded">
                 <div className="mb-4">
@@ -107,17 +111,34 @@ const OrderDetails: React.FC = () => {
                 </div>
 
                 {/* Order Summary */}
-                <div className="mb-6">
+                <div className="mb-8">
                   <h2 className="font-bold text-lg mb-4">Order Information</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="flex flex-col space-y-4 lg:space-y-0 md:flex-row lg:space-x-32">
                     <div>
                       <h3 className="font-semibold mb-2">Shipping Address</h3>
                       <p>{shippingAddress}</p>
                     </div>
                     <div>
                       <h3 className="font-semibold mb-2">Payment Method</h3>
-                      <p>{paymentMethod}</p>
+                      <p>
+                        {(paymentMethod === "cash" && "Cash on Delivery") ||
+                          (paymentMethod === "stripe" && "Stripe")}
+                      </p>
                     </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Payment Status</h3>
+                      <p>
+                        {(paymentStatus === "pending" && "Pending") ||
+                          (paymentStatus === "paid" && "Paid") ||
+                          (paymentStatus === "failed" && "Failed")}
+                      </p>
+                    </div>
+                    {paidAt && (
+                      <div>
+                        <h3 className="font-semibold mb-2">Paid At</h3>
+                        <p>{new Date(paidAt!).toLocaleString()}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -146,7 +167,7 @@ const OrderDetails: React.FC = () => {
                           Discount:
                         </td>
                         <td className="py-2 px-4">
-                          ${discount?.amount.toFixed(2)}
+                          ${discount?.amount.toFixed(2) || 0}
                         </td>
                       </tr>
                       <tr>

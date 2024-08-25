@@ -1,3 +1,4 @@
+import { loadStripe } from "@stripe/stripe-js";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { BsCashStack } from "react-icons/bs";
@@ -9,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Loading from "../../components/loading";
 import PageTitle from "../../components/page-title";
-import { addOrderedUserEmail } from "../../redux/features/cart/cartSlice";
+import { clearCart } from "../../redux/features/cart/cartSlice";
 import { useCreateOrderMutation } from "../../redux/features/order/orderApi";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
@@ -52,6 +53,9 @@ const Checkout: React.FC = () => {
     });
 
   const onSubmit = async (data: IFormInputs) => {
+    const stripe = await loadStripe(
+      import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
+    );
     const orderItems: INewOrderItem[] = cartProducts!.map((product) => ({
       productId: product._id,
       name: product.name,
@@ -72,13 +76,14 @@ const Checkout: React.FC = () => {
     try {
       const res = await createOrder(newOrder).unwrap();
       if (res.success) {
-        toast.success(res.message, {
-          id: "orderSuccess",
-          position: "top-right",
-          className: "text-primary",
-        });
-        dispatch(addOrderedUserEmail(res.data.userEmail));
-        navigate("/order-success");
+        if (res.data.transactionId && res.data.sessionId) {
+          stripe?.redirectToCheckout({ sessionId: res.data.sessionId });
+          dispatch(clearCart());
+        } else {
+          navigate(
+            `/payment/confirmation?email=${res.data.email}&transactionId=${res.data.transactionId}`
+          );
+        }
       }
     } catch (err) {
       console.log(err);
