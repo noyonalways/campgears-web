@@ -42,7 +42,7 @@ const FeaturedProducts: React.FC<IProps> = () => {
         ) : (
           <>
             {errorMessage ? (
-              <div className="text-red-500 text-center font-montserrat py-10">
+              <div className="text-red-500 text-center font-montserrat py-28">
                 {errorMessage}
               </div>
             ) : (

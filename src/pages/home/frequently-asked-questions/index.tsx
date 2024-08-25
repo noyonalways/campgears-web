@@ -6,7 +6,15 @@ import FaqCardSkeleton from "./faq-card-skeleton";
 interface IProps {}
 
 const FrequentlyAskedQuestions: React.FC<IProps> = () => {
-  const { data, isLoading } = useGetAllFaqQuestionQuery(undefined);
+  const { data, isLoading, error } = useGetAllFaqQuestionQuery(undefined);
+  let errorMessage = "";
+  if (error) {
+    errorMessage = "Failed to load frequently asked questions";
+    if ("status" in error && error.status === 404) {
+      errorMessage =
+        (error?.data as { message: string })?.message || errorMessage;
+    }
+  }
   return (
     <section className="pb-20">
       <div className="container">
@@ -21,15 +29,23 @@ const FrequentlyAskedQuestions: React.FC<IProps> = () => {
             <FaqCardSkeleton />
           </div>
         ) : (
-          <div className="w-full md:max-w-2xl mx-auto space-y-4">
-            {data?.data?.map((faq) => (
-              <FaqCard
-                key={faq._id}
-                question={faq.question}
-                answer={faq.answer}
-              />
-            ))}
-          </div>
+          <>
+            {errorMessage ? (
+              <div className="text-red-500 text-center font-montserrat py-24">
+                {errorMessage}
+              </div>
+            ) : (
+              <div className="w-full md:max-w-2xl mx-auto space-y-4">
+                {data?.data?.map((faq) => (
+                  <FaqCard
+                    key={faq._id}
+                    question={faq.question}
+                    answer={faq.answer}
+                  />
+                ))}
+              </div>
+            )}
+          </>
         )}
       </div>
     </section>
