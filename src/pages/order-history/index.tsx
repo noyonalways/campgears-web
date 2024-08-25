@@ -7,7 +7,6 @@ import { useGetOrdersByEmailQuery } from "../../redux/features/order/orderApi";
 
 const OrderHistory: React.FC = () => {
   const params = useParams();
-  console.log(params);
   const { data: orders, isLoading } = useGetOrdersByEmailQuery(params.email!, {
     refetchOnMountOrArgChange: true,
   });

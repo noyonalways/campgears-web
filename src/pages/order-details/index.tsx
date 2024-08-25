@@ -167,7 +167,7 @@ const OrderDetails: React.FC = () => {
                           Discount:
                         </td>
                         <td className="py-2 px-4">
-                          ${discount?.amount.toFixed(2)}
+                          ${discount?.amount.toFixed(2) || 0}
                         </td>
                       </tr>
                       <tr>

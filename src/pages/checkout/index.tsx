@@ -80,7 +80,9 @@ const Checkout: React.FC = () => {
           stripe?.redirectToCheckout({ sessionId: res.data.sessionId });
           dispatch(clearCart());
         } else {
-          navigate(`/payment/confirmation?email=${res.data.email}`);
+          navigate(
+            `/payment/confirmation?email=${res.data.email}&transactionId=${res.data.transactionId}`
+          );
         }
       }
     } catch (err) {

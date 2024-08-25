@@ -16,18 +16,14 @@ const OrderConfirm: React.FC = () => {
   const userEmail = params.get("email");
 
   const dispatch = useAppDispatch();
-
-  const [verifyPayment, { isLoading, data }] = useVerifyPaymentMutation();
+  const [verifyPayment, { isLoading }] = useVerifyPaymentMutation();
 
   useEffect(() => {
     if (sessionId && transactionId) {
       verifyPayment({ sessionId, transactionId });
     }
-
     dispatch(clearCart());
   }, [sessionId, transactionId, verifyPayment, dispatch]);
-
-  console.log(data);
 
   return (
     <>

@@ -82,6 +82,8 @@ const FeaturedProducts: React.FC<IProps> = () => {
                       price={product.price}
                       description={product.description}
                       category={product.category}
+                      status={product.status}
+                      stockQuantity={product.stockQuantity}
                     />
                   </SwiperSlide>
                 ))}

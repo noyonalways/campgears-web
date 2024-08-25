@@ -14,7 +14,15 @@ const paymentApi = baseApi.injectEndpoints({
         };
       },
     }),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    deleteCancelPaymentOrder: builder.mutation<any, { transactionId: string }>({
+      query: (payload) => ({
+        url: `/payment/delete?transactionId=${payload.transactionId}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useVerifyPaymentMutation } = paymentApi;
+export const { useVerifyPaymentMutation, useDeleteCancelPaymentOrderMutation } =
+  paymentApi;
