@@ -17,7 +17,7 @@ function AboutUs() {
             className="bg-cover bg-center h-[400px] flex items-center justify-center rounded-md shadow-md"
           >
             <div className="p-8 rounded-md shadow-lg">
-              <h1 className="text-5xl font-bold mb-4 font-sans text-gray-100">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 font-sans text-gray-100">
                 About Us | CAMPGEARS
               </h1>
               <p className="max-w-2xl mx-auto font-light text-gray-200">
@@ -56,7 +56,7 @@ function AboutUs() {
             <h2 className="text-3xl font-semibold mb-8 text-gray-800">
               Contact Information
             </h2>
-            <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-16 text-lg text-gray-700">
+            <div className="text-left flex flex-col md:flex-row lg:justify-center space-y-4 md:space-y-0 md:space-x-16 text-lg text-gray-700">
               <p>
                 <strong>Phone:</strong> (123) 456-7890
               </p>
@@ -97,7 +97,7 @@ function AboutUs() {
             Meet Our Team
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-            <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <img
                 src="https://plus.unsplash.com/premium_photo-1689977968861-9c91dbb16049?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 alt="John Doe"
@@ -110,7 +110,7 @@ function AboutUs() {
                 started Campgears to share his passion for nature with others.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <img
                 src="https://images.pexels.com/photos/3211476/pexels-photo-3211476.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Jane Smith"
@@ -126,7 +126,7 @@ function AboutUs() {
                 trails.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300">
+            <div className="bg-white p-8 rounded-lg shadow text-center hover:shadow-xl transition-shadow duration-300 cursor-pointer">
               <img
                 src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 alt="Sam Wilson"
@@ -149,7 +149,7 @@ function AboutUs() {
       {/* Social Media Links */}
       <section className="pb-20">
         <div className="container mx-auto">
-          <div className="bg-white rounded-lg shadow-sm text-center p-12">
+          <div className="bg-white rounded-lg text-center p-12">
             <h2 className="text-3xl font-semibold mb-8 text-gray-800">
               Connect With Us
             </h2>

@@ -101,7 +101,7 @@ const Checkout: React.FC = () => {
       <section className="py-8 font-montserrat">
         <div className="container">
           {items.length === 0 ? (
-            <div className="text-center py-8 space-y-3 flex flex-col items-center">
+            <div className="text-center py-28 space-y-4 flex flex-col items-center">
               <p>Your shopping cart is empty.</p>
               <Link to="/products" className="btn inline-block">
                 Shop Now
