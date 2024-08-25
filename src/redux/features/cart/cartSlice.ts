@@ -111,7 +111,7 @@ const cartSlice = createSlice({
       action: PayloadAction<{ discountAmount: number; discountCode: string }>
     ) => {
       state.totalPriceAfterDiscount =
-        state.totalPrice - action.payload.discountAmount;
+        state.subtotal - action.payload.discountAmount + state.shippingCharge;
       state.appliedDiscountCode = action.payload.discountCode;
       state.discountAmount = action.payload.discountAmount;
     },

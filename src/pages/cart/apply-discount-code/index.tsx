@@ -15,7 +15,7 @@ const ApplyDiscountCode = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   // Get state from Redux store
-  const { totalPrice, appliedDiscountCode } = useAppSelector(
+  const { subtotal, appliedDiscountCode } = useAppSelector(
     (store) => store.cart
   );
 
@@ -36,13 +36,14 @@ const ApplyDiscountCode = () => {
       });
       return;
     }
-    applyCode({ code: discountCode, itemsTotalPrice: totalPrice });
+    applyCode({ code: discountCode, itemsTotalPrice: subtotal });
     setDiscountCode("");
   };
 
   // Effect to handle discount application
   useEffect(() => {
     if (isSuccess) {
+      console.log(discount);
       dispatch(
         calculateTotalsAfterDiscount({
           discountAmount: discount.data.amount,
@@ -55,9 +56,9 @@ const ApplyDiscountCode = () => {
   // Effect to reapply discount when the total price changes (e.g., quantity update)
   useEffect(() => {
     if (appliedDiscountCode) {
-      applyCode({ code: appliedDiscountCode, itemsTotalPrice: totalPrice });
+      applyCode({ code: appliedDiscountCode, itemsTotalPrice: subtotal });
     }
-  }, [totalPrice, appliedDiscountCode, applyCode]);
+  }, [subtotal, appliedDiscountCode, applyCode]);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
