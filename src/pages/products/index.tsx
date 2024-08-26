@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { HiOutlineListBullet, HiOutlineSquares2X2 } from "react-icons/hi2";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -113,7 +114,17 @@ const Products: React.FC = () => {
   return (
     <>
       <PageTitle title="Products - Campgears" />
-      <section className="font-montserrat pb-20">
+      <motion.section
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="font-montserrat pb-20"
+      >
         <div className="container">
           <div className="flex flex-col space-y-4 lg:space-y-0 lg:flex-row lg:justify-between lg:items-start pt-4 lg:pt-4">
             <div className="bg-secondary basis-full lg:basis-[17%] rounded">
@@ -196,7 +207,7 @@ const Products: React.FC = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 };

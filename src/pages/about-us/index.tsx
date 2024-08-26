@@ -1,10 +1,20 @@
+import { motion } from "framer-motion";
 import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 import bannerImage from "../../assets/images/about-us/about-us-banner.png";
 import PageTitle from "../../components/page-title";
 
 function AboutUs() {
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <PageTitle title="About Us - Campgears" />
 
       {/* Banner Section */}
@@ -77,7 +87,7 @@ function AboutUs() {
           <h2 className="text-3xl font-semibold text-center mb-8 text-gray-800">
             Our Location
           </h2>
-          <div className="w-full h-96 overflow-hidden rounded-lg shadow">
+          <div className="w-full h-96 overflow-hidden rounded-md shadow">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345097066!2d144.95373531568347!3d-37.81720974202192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11fd81%3A0x5045675218ce6e0!2zTWVsYm91cm5lIFZJQyAzMDAwLCDguJTguK3guLfguKPguJnguY7guK3guKPguLjguYzguITguJTguKnguYwuINC60L7Qu9GD0YrQsNGA0L7QutCw0Y8g0ZbQs9GA0L7QtA!5e0!3m2!1sen!2sus!4v1630871445446!5m2!1sen!2sus"
               width="100%"
@@ -176,7 +186,7 @@ function AboutUs() {
           </div>
         </div>
       </section>
-    </>
+    </motion.div>
   );
 }
 

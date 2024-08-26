@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { HiChevronLeft } from "react-icons/hi2";
 import { Link, useParams } from "react-router-dom";
@@ -12,7 +13,16 @@ const OrderHistory: React.FC = () => {
   });
 
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <PageTitle title="Order History - Campgears" />
       <section className="pb-20 font-montserrat">
         <div className="container">
@@ -110,7 +120,7 @@ const OrderHistory: React.FC = () => {
           )}
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
 

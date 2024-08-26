@@ -96,7 +96,16 @@ const Checkout: React.FC = () => {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <PageTitle title="Checkout - Campgears" />
       <section className="py-8 font-montserrat">
         <div className="container">
@@ -371,7 +380,7 @@ const Checkout: React.FC = () => {
           )}
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
 

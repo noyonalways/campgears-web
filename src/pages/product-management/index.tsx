@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import Loading from "../../components/loading";
 import PageTitle from "../../components/page-title";
 import { useGetAllProductQuery } from "../../redux/features/product/productApi";
@@ -21,7 +22,17 @@ const ProductManagement: React.FC<IProps> = () => {
   return (
     <>
       <PageTitle title="Product Management - Campgears" />
-      <section className="font-montserrat py-10">
+      <motion.section
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+        className="font-montserrat py-10"
+      >
         <div className="container">
           <div className="mb-6">
             <AddProductModal />
@@ -69,7 +80,7 @@ const ProductManagement: React.FC<IProps> = () => {
             </>
           )}
         </div>
-      </section>
+      </motion.section>
     </>
   );
 };

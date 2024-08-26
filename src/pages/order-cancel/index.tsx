@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useEffect } from "react";
 import { BsXCircle } from "react-icons/bs";
 import { Link, useLocation } from "react-router-dom";
@@ -22,7 +23,16 @@ const OrderCancel: React.FC<IProps> = () => {
   }, [transactionId, deleteCancelPaymentOrder]);
 
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <PageTitle title="Order Cancel - Campgears" />
       <section className="py-32 font-montserrat">
         <div className="container text-center">
@@ -56,7 +66,7 @@ const OrderCancel: React.FC<IProps> = () => {
           )}
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
 

@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState } from "react";
 import {
   HiMinus,
@@ -20,19 +21,19 @@ import ReviewList from "./review-list";
 
 interface IProps {}
 
-type TError = {
-  status: number;
-  data: {
-    success: boolean;
-    message: string;
-    errorMessages?: {
-      path: string;
-      message: string;
-    }[];
-    statusCode?: number;
-    stack?: string;
-  };
-};
+// type TError = {
+//   status: number;
+//   data: {
+//     success: boolean;
+//     message: string;
+//     errorMessages?: {
+//       path: string;
+//       message: string;
+//     }[];
+//     statusCode?: number;
+//     stack?: string;
+//   };
+// };
 
 const ProductDetails: React.FC<IProps> = () => {
   const params = useParams();
@@ -66,7 +67,7 @@ const ProductDetails: React.FC<IProps> = () => {
     galleryImages,
   } = data?.data || {};
 
-  const customError = error as TError;
+  // const customError = error as TError;
 
   const [quantity, setQuantity] = useState(1);
   const dispatch = useAppDispatch();
@@ -93,22 +94,40 @@ const ProductDetails: React.FC<IProps> = () => {
 
   if (error)
     return (
-      <section>
+      <motion.section
+        initial={{
+          opacity: 0,
+        }}
+        animate={{
+          opacity: 1,
+        }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
         <div className="container">
-          <div className="py-10 flex items-center justify-center">
-            <div className="flex flex-col items-center space-y-2">
+          <div className="py-28 flex items-center justify-center">
+            <div className="flex flex-col items-center space-y-4">
               <h1 className="text-xl font-semibold text-center">
-                {customError?.data?.message || "Failed to load data"}
+                {"Failed to load data"}
               </h1>
               <button className="btn mx-auto">Reload</button>
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     );
 
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <PageTitle title={name!} />
       <section className="pb-20">
         <div className="container">
@@ -238,7 +257,7 @@ const ProductDetails: React.FC<IProps> = () => {
           </>
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
 
