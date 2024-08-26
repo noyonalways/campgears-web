@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { HiOutlineChevronRight } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import PageTitle from "../../components/page-title";
@@ -19,12 +20,21 @@ const Wishlist: React.FC<IProps> = () => {
     });
 
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+    >
       <PageTitle title="Wishlist - Campgears" />
       <section className="pb-20 font-montserrat">
         <div className="container">
           {totalItems === 0 ? (
-            <div className="text-center py-20 space-y-3 flex flex-col items-center">
+            <div className="text-center py-28 space-y-4 flex flex-col items-center">
               <p>Your Wishlist is empty.</p>
               <Link to="/products" className="btn inline-block">
                 See Products
@@ -69,7 +79,7 @@ const Wishlist: React.FC<IProps> = () => {
           )}
         </div>
       </section>
-    </>
+    </motion.div>
   );
 };
 

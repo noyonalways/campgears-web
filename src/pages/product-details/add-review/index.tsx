@@ -5,6 +5,7 @@ import { HiX } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
 import Loading from "../../../components/loading";
+import PageTitle from "../../../components/page-title";
 import Button from "../../../components/ui/button";
 import { useAddReviewMutation } from "../../../redux/features/review/reviewApi";
 
@@ -85,98 +86,101 @@ const AddReviewModal: React.FC = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex justify-center lg:items-center overflow-x-hidden overflow-y-auto bg-white lg:bg-black/90 lg:py-8">
-          <div className="relative w-full max-w-lg">
-            {isLoading ? (
-              <div className="flex justify-center items-center h-[60vh]">
-                <Loading />
-              </div>
-            ) : (
-              <div className="bg-white p-1 lg:p-4 lg:rounded">
-                <div className="flex justify-between items-center p-4 lg:px-0 border-b">
-                  <h2 className="text-lg font-medium">Add Your Review</h2>
-                  <button
-                    title="Close"
-                    onClick={toggleModal}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    <HiX size={24} />
-                  </button>
+        <>
+          <PageTitle title="Add Review" />
+          <div className="fixed inset-0 z-50 flex justify-center lg:items-center overflow-x-hidden overflow-y-auto bg-white lg:bg-black/90 lg:py-8 h-screen">
+            <div className="relative w-full max-w-lg">
+              {isLoading ? (
+                <div className="flex justify-center items-center h-[60vh]">
+                  <Loading />
                 </div>
-
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="p-4 lg:p-6 lg:px-0"
-                >
-                  <div className="grid grid-cols-1 gap-4">
-                    <Rating
-                      value={rating}
-                      className="max-w-56 mx-auto mb-4"
-                      onChange={onRatingChange}
-                    />
-                    {errors.rating && (
-                      <span className="text-red-500">Rating is required</span>
-                    )}
-
-                    <label htmlFor="fullName">Full Name</label>
-                    <input
-                      type="text"
-                      id="fullName"
-                      {...register("fullName", {
-                        required: "Full Name is required",
-                      })}
-                      className="border border-gray-300 rounded p-2"
-                    />
-                    {errors.fullName && (
-                      <span className="text-red-500">
-                        {errors.fullName.message}
-                      </span>
-                    )}
-
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="email"
-                      id="email"
-                      {...register("email", {
-                        required: "Email is required",
-                      })}
-                      className="border border-gray-300 rounded p-2"
-                    />
-                    {errors.email && (
-                      <span className="text-red-500">
-                        {errors.email.message}
-                      </span>
-                    )}
-
-                    <label htmlFor="comment">Comment</label>
-                    <textarea
-                      rows={4}
-                      id="comment"
-                      {...register("comment", {
-                        required: "Comment is required",
-                      })}
-                      className="border border-gray-300 rounded p-2 resize-none"
-                    />
-                    {errors.comment && (
-                      <span className="text-red-500">
-                        {errors.comment.message}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex justify-end mt-4">
-                    <Button
-                      type="submit"
-                      className="btn focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+              ) : (
+                <div className="bg-white p-1 lg:p-4 lg:rounded">
+                  <div className="flex justify-between items-center p-4 lg:px-0 border-b">
+                    <h2 className="text-lg font-medium">Add Your Review</h2>
+                    <button
+                      title="Close"
+                      onClick={toggleModal}
+                      className="text-gray-500 hover:text-gray-700"
                     >
-                      Submit Review
-                    </Button>
+                      <HiX size={24} />
+                    </button>
                   </div>
-                </form>
-              </div>
-            )}
+
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="p-4 lg:p-6 lg:px-0"
+                  >
+                    <div className="grid grid-cols-1 gap-4">
+                      <Rating
+                        value={rating}
+                        className="max-w-56 mx-auto mb-4"
+                        onChange={onRatingChange}
+                      />
+                      {errors.rating && (
+                        <span className="text-red-500">Rating is required</span>
+                      )}
+
+                      <label htmlFor="fullName">Full Name</label>
+                      <input
+                        type="text"
+                        id="fullName"
+                        {...register("fullName", {
+                          required: "Full Name is required",
+                        })}
+                        className="border border-gray-300 rounded p-2"
+                      />
+                      {errors.fullName && (
+                        <span className="text-red-500">
+                          {errors.fullName.message}
+                        </span>
+                      )}
+
+                      <label htmlFor="email">Email</label>
+                      <input
+                        type="email"
+                        id="email"
+                        {...register("email", {
+                          required: "Email is required",
+                        })}
+                        className="border border-gray-300 rounded p-2"
+                      />
+                      {errors.email && (
+                        <span className="text-red-500">
+                          {errors.email.message}
+                        </span>
+                      )}
+
+                      <label htmlFor="comment">Comment</label>
+                      <textarea
+                        rows={4}
+                        id="comment"
+                        {...register("comment", {
+                          required: "Comment is required",
+                        })}
+                        className="border border-gray-300 rounded p-2 resize-none"
+                      />
+                      {errors.comment && (
+                        <span className="text-red-500">
+                          {errors.comment.message}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className="flex justify-end mt-4">
+                      <Button
+                        type="submit"
+                        className="btn focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                      >
+                        Submit Review
+                      </Button>
+                    </div>
+                  </form>
+                </div>
+              )}
+            </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
