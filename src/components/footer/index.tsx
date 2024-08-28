@@ -24,9 +24,9 @@ const Footer = () => {
                 Cookie & Privacy Policy
               </a>
             </div>
-            <a className="w-64" href="#">
+            <div className="w-64">
               <img src={PaymentMethods} alt="payment-methods-logo-image" />
-            </a>
+            </div>
           </div>
           <div className="flex flex-col space-y-3 lg:space-y-0 lg:flex-row items-center lg:justify-between">
             <p className="text-center lg:text-left">

@@ -128,13 +128,15 @@ const AddProductModal: React.FC<IProps> = () => {
       data.galleryImages = galleryImagesUploadResult!
         .slice(1)!
         .map((image) => ({ url: image.data.url, alt: image.data.title }));
+    } else {
+      data.galleryImages = [];
     }
-    data.galleryImages = [];
 
-    console.log("Form Data:", data);
+    // console.log("Form Data:", data);
     // console.log("Errors:", errors);
 
     data.tags = data.tags.toString().split(",");
+    console.log(data);
 
     try {
       const result = await addProduct(data).unwrap();
@@ -258,9 +260,12 @@ const AddProductModal: React.FC<IProps> = () => {
                           transition={{ duration: 0.4 }}
                           type="number"
                           id="price"
+                          step="any"
                           {...register("price", {
                             required: "Price is required",
                             valueAsNumber: true,
+
+                            min: { value: 1, message: "Minimum value is 1" },
                           })}
                           className="border border-gray-300 rounded p-2"
                         />
@@ -276,7 +281,7 @@ const AddProductModal: React.FC<IProps> = () => {
                           transition={{ duration: 0.5 }}
                           htmlFor="stockQuantity"
                         >
-                          Quantity
+                          Stock Quantity
                         </motion.label>
                         <motion.input
                           initial={{ opacity: 0, y: 40 }}
@@ -287,6 +292,7 @@ const AddProductModal: React.FC<IProps> = () => {
                           {...register("stockQuantity", {
                             required: "Quantity is required",
                             valueAsNumber: true,
+                            min: { value: 1, message: "Minimum value is 1" },
                           })}
                           className="border border-gray-300 rounded p-2"
                         />

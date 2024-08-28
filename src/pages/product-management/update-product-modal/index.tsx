@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { HiOutlineCloudUpload, HiX } from "react-icons/hi";
 import { toast } from "sonner";
 import Loading from "../../../components/loading";
 import PageTitle from "../../../components/page-title";
-import { useUpdateProductMutation } from "../../../redux/features/product/productApi";
+import {
+  useGetProductQuery,
+  useUpdateProductMutation,
+} from "../../../redux/features/product/productApi";
 import { IFormInputs } from "../../../types";
 import StatusDropdown from "../status-dropdown";
 
@@ -28,6 +31,9 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
   >([]);
   const [updateProduct, { isLoading }] = useUpdateProductMutation();
 
+  const { data: prevData, isLoading: productLoading } =
+    useGetProductQuery(productId);
+
   const {
     reset,
     register,
@@ -36,7 +42,7 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
     formState: { errors },
   } = useForm<IFormInputs>({
     defaultValues: {
-      name: "",
+      name: prevData?.data.name,
       description: "",
       price: 0,
       stockQuantity: 0,
@@ -51,6 +57,26 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
       galleryImages: null,
     },
   });
+
+  useEffect(() => {
+    if (prevData && !productLoading) {
+      reset({
+        name: prevData.data.name,
+        description: prevData.data.description,
+        price: prevData.data.price,
+        stockQuantity: prevData.data.stockQuantity,
+        color: prevData.data.color,
+        category: prevData.data.category,
+        brand: prevData.data.brand,
+        subCategory: prevData.data.subCategory,
+        status: prevData.data.status,
+        isFeatured: prevData.data.isFeatured,
+        tags: prevData.data.tags,
+        image: prevData.data.image,
+        galleryImages: prevData.data.galleryImages,
+      });
+    }
+  }, [prevData, reset, productLoading]);
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
@@ -280,8 +306,10 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         transition={{ duration: 0.4 }}
                         type="number"
                         id="price"
+                        step="any"
                         {...register("price", {
                           valueAsNumber: true,
+                          min: { value: 0, message: "Minimum value is 0" },
                         })}
                         className="border border-gray-300 rounded p-2"
                       />
@@ -297,7 +325,7 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         transition={{ duration: 0.5 }}
                         htmlFor="stockQuantity"
                       >
-                        Quantity
+                        Stock Quantity
                       </motion.label>
                       <motion.input
                         initial={{ opacity: 0, y: 40 }}
@@ -307,6 +335,7 @@ const UpdateProductModal: React.FC<IProps> = ({ productId }) => {
                         id="stockQuantity"
                         {...register("stockQuantity", {
                           valueAsNumber: true,
+                          min: { value: 0, message: "Minimum value is 0" },
                         })}
                         className="border border-gray-300 rounded p-2"
                       />
