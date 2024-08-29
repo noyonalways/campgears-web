@@ -9,6 +9,7 @@ import {
 import { HiOutlineHeart } from "react-icons/hi2";
 import { useParams } from "react-router-dom";
 import { toast } from "sonner";
+import ImageMagnifier from "../../components/image-magnifier";
 import Loading from "../../components/loading";
 import PageTitle from "../../components/page-title";
 import { addToCart } from "../../redux/features/cart/cartSlice";
@@ -145,19 +146,23 @@ const ProductDetails: React.FC<IProps> = () => {
                 <span>{subCategory}</span>
               </div>
               <div className="flex flex-col space-y-6 lg:space-y-0 lg:flex-row lg:space-x-6">
-                <div className="grid grid-cols-2 gap-2 lg:gap-6 lg:basis-2/3">
-                  <div>
-                    <img
-                      className="rounded w-full"
-                      src={image}
-                      alt={name + "-image"}
-                    />
-                  </div>
+                <div className="grid md:grid-cols-2 gap-2 lg:gap-6 lg:basis-2/3">
+                  <ImageMagnifier
+                    src={image!}
+                    className="w-full rounded"
+                    alt={name + "-image"}
+                    height={100}
+                    width={100}
+                  />
                   {galleryImages &&
                     galleryImages?.map((img) => (
-                      <div key={img.alt + img.url}>
-                        <img className="rounded" src={img.url} alt={img.alt} />
-                      </div>
+                      <ImageMagnifier
+                        src={img.url}
+                        className="w-full rounded"
+                        alt={img.alt + "-image"}
+                        height={100}
+                        width={100}
+                      />
                     ))}
                 </div>
                 <div className="basis-1/3">
