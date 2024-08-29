@@ -45,7 +45,9 @@ const calculateTotals = (state: ICartState) => {
 
   // calculate the total price price after discount
   if (state.discountAmount > 0) {
-    state.totalPriceAfterDiscount = state.totalPrice - state.discountAmount;
+    state.totalPriceAfterDiscount = Number(
+      (state.totalPrice - state.discountAmount).toFixed(2)
+    );
   } else {
     state.totalPriceAfterDiscount = state.totalPrice;
   }
@@ -110,13 +112,16 @@ const cartSlice = createSlice({
       state,
       action: PayloadAction<{ discountAmount: number; discountCode: string }>
     ) => {
-      state.totalPriceAfterDiscount =
-        state.subtotal - action.payload.discountAmount + state.shippingCharge;
+      state.totalPriceAfterDiscount = Number(
+        state.subtotal -
+          action.payload.discountAmount +
+          state.shippingCharge.toFixed(2)
+      );
       state.appliedDiscountCode = action.payload.discountCode;
       state.discountAmount = action.payload.discountAmount;
     },
     removeDiscount: (state) => {
-      state.totalPriceAfterDiscount = state.totalPrice;
+      state.totalPriceAfterDiscount = Number(state.totalPrice.toFixed(2));
       state.appliedDiscountCode = "";
       state.discountAmount = 0;
     },

@@ -31,7 +31,7 @@ const Checkout: React.FC = () => {
     (store) => store.cart
   );
   const { data: products, isLoading: productIsLoading } =
-    useGetAllProductQuery(undefined);
+    useGetAllProductQuery("limit=12");
   const [createOrder, { isLoading: orderIsLoading }] = useCreateOrderMutation();
 
   const {

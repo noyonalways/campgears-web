@@ -21,7 +21,7 @@ const Cart: React.FC<IProps> = () => {
     totalPriceAfterDiscount,
     shippingCharge,
   } = useAppSelector((store) => store.cart);
-  const { data: products, isLoading } = useGetAllProductQuery(undefined);
+  const { data: products, isLoading } = useGetAllProductQuery("limit=12");
 
   const dispatch = useAppDispatch();
 
