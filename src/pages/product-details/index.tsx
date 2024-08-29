@@ -155,7 +155,7 @@ const ProductDetails: React.FC<IProps> = () => {
                   </div>
                   {galleryImages &&
                     galleryImages?.map((img) => (
-                      <div>
+                      <div key={img.alt + img.url}>
                         <img className="rounded" src={img.url} alt={img.alt} />
                       </div>
                     ))}

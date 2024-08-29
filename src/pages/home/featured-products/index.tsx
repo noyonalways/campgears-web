@@ -50,9 +50,10 @@ const FeaturedProducts: React.FC<IProps> = () => {
                 className="mb-4"
                 modules={[Navigation, Pagination, Mousewheel, Keyboard]}
                 grabCursor={true}
-                autoplay={{ delay: 2000 }}
+                autoplay={{ delay: 3000 }}
                 spaceBetween={24}
                 navigation
+                loop
                 pagination={{ clickable: true }}
                 breakpoints={{
                   // when window width is <= 640px

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
+import CartSidebar from "./components/cart-sidebar";
 import MainLayout from "./components/layouts/main-layout";
 import { useAppSelector } from "./redux/hook";
 
@@ -26,7 +27,12 @@ function App() {
     };
   }, [cartTotalItems, wishlistTotalItems]);
 
-  return <MainLayout />;
+  return (
+    <>
+      <MainLayout />
+      <CartSidebar />
+    </>
+  );
 }
 
 export default App;

@@ -46,7 +46,7 @@ const ProductCard: React.FC<IProps> = ({
     toast.success("Product added to cart", {
       id: _id,
       position: "top-right",
-      duration: 2000,
+      duration: 1000,
       className: "text-green-500",
     });
   };
@@ -103,7 +103,11 @@ const ProductCard: React.FC<IProps> = ({
           See Details
         </Link>
         <button
-          disabled={stockQuantity < 1}
+          disabled={
+            stockQuantity < 1 ||
+            status === "out-of-stock" ||
+            status === "discontinued"
+          }
           onClick={handleAddToCart}
           className="btn bg-primary/80 hover:bg-primary px-2 text-lg rounded disabled:opacity-20 disabled:cursor-not-allowed"
         >

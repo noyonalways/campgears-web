@@ -35,6 +35,7 @@ const Products: React.FC = () => {
     sort: "",
     minPrice: "",
     maxPrice: "",
+    limit: "12", // Add limit to the queryParams state
   });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -44,6 +45,7 @@ const Products: React.FC = () => {
     ...(queryParams.sort && { sort: queryParams.sort }),
     ...(queryParams.minPrice && { minPrice: queryParams.minPrice }),
     ...(queryParams.maxPrice && { maxPrice: queryParams.maxPrice }),
+    limit: queryParams.limit, // Include limit in the query string
   }).toString();
 
   const { data, error, isFetching } = useGetAllProductQuery(query, {
@@ -98,6 +100,7 @@ const Products: React.FC = () => {
       sort: "",
       minPrice: "",
       maxPrice: "",
+      limit: "12", // Reset limit on clearing filters
     });
     navigate(`/products`);
   };

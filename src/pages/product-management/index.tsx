@@ -8,7 +8,7 @@ import ProductManagementCard from "./product-management-card";
 interface IProps {}
 
 const ProductManagement: React.FC<IProps> = () => {
-  const { data, isLoading, error } = useGetAllProductQuery(undefined);
+  const { data, isLoading, error } = useGetAllProductQuery("limit=12");
 
   let errorMessage = "";
   if (error) {

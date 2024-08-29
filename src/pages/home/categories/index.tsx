@@ -24,8 +24,8 @@ const Categories: React.FC<IProps> = () => {
           <CategoryCard image={women} title={"Women"} />
           <CategoryCard image={kids} title={"Kids"} />
           <CategoryCard image={footwear} title={"Footwear"} />
-          <CategoryCard image={backpacks} title={"Backpacks"} />
-          <CategoryCard image={equipments} title={"Equipments"} />
+          <CategoryCard image={backpacks} title={"Backpack"} />
+          <CategoryCard image={equipments} title={"Equipment"} />
           <CategoryCard image={camping} title={"Camping"} />
           <CategoryCard image={kayaks} title={"Kayaks"} />
         </div>
