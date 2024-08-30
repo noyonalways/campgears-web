@@ -1,3 +1,5 @@
+<div align="center">
+
 [![Youtube][youtube-shield]][youtube-url]
 [![Facebook][facebook-shield]][facebook-url]
 [![Facebook Page][facebook-shield]][facebook-group-url]
@@ -6,7 +8,21 @@
 [![VS Code Theme][vscode-shield]][vscode-theme-url]
 [![NPM Package][npm-shield]][npm-package-url]
 
-# Campgears E-Commerce Application
+</div>
+
+<br />
+<div align="center">
+  <a href="https://github.com/noyonalways/l2-assignment-3">
+    <img src="https://i.ibb.co/c64q254/noyon-logo-dark.png" alt="Logo" width="80" height="80">
+  </a>
+  <h2 align="center">Campgears E-Commerce Application</h2>
+    <div align="center">
+
+[![Live site link][live-site-shield]][live-site-link]
+[![Overview Video][overview-video-shield]][overview-video-url]
+
+  </div>
+</div>
 
 ## Introduction
 
@@ -25,7 +41,7 @@ Campgears is a fully-featured e-commerce website that allows users to browse, se
 - **User Authentication**: Secure user registration, login, and profile management.
 - **Responsive Design**: The application is fully responsive, providing a consistent experience across devices.
 
-## **Technology Stack**
+## Technology Stack
 
 - **Frontend**: React, Tailwind CSS, Framer Motion
 - **Backend**: Node.js, Express, TypeScript
@@ -46,11 +62,11 @@ Campgears is a fully-featured e-commerce website that allows users to browse, se
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-username/campgears-web.git
+   git clone https://github.com/noyonalways/campgears-web.git
    ```
 2. Navigate to the project directory:
    ```bash
-   cd campgears
+   cd campgears-web
    ```
 3. Install the dependencies:
    ```bash
@@ -66,10 +82,11 @@ Campgears is a fully-featured e-commerce website that allows users to browse, se
 1. Create a `.env.local` file in the root directory:
    ```
    VITE_API_BASE_URL=your_backend_api_server_url
-   VITE_IMGBB_API_KEY=your_imgbb_api_key    VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+   VITE_IMGBB_API_KEY=your_imgbb_api_key
+   VITE_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
    ```
 
-### **Usage**
+### Usage
 
 1. **Running the application:**
 
@@ -93,6 +110,12 @@ Campgears is a fully-featured e-commerce website that allows users to browse, se
    - **Filter and Sort**: Narrow down the product list by price, category, or other filters.
    - **Add to Cart**: Add desired products to your cart and proceed to checkout.
 
+## Contact:
+
+- Email: [noyonrahman2003@gmail.com](mailto:noyonrahman2003@gmail.com)
+- LinkedIn: [Noyon Rahman](https://linkedin.com/in/noyonalways)
+- Portfolio: [noyonrahman.xyz](https://noyonrahman.xyz)
+
 [youtube-shield]: https://img.shields.io/badge/-Youtube-black.svg?style=round-square&logo=youtube&color=555&logoColor=white
 [youtube-url]: https://youtube.com/@deskofnoyon
 [facebook-shield]: https://img.shields.io/badge/-Facebook-black.svg?style=round-square&logo=facebook&color=555&logoColor=white
@@ -110,3 +133,5 @@ Campgears is a fully-featured e-commerce website that allows users to browse, se
 [postman-api-doc-url]: https://documenter.getpostman.com/view/20724567/2sA3XV8esS
 [overview-video-shield]: https://img.shields.io/badge/-Overview_Video-black.svg?style=round-square&logo=youtube&color=555&logoColor=c4302b
 [overview-video-url]: https://youtu.be/J4QolLkmus4
+[live-site-link]: https://campgears.vercel.app
+[live-site-shield]: https://img.shields.io/badge/-Live_site_Link-Black.svg?style=round-square&color=555&logoColor=c4302b
