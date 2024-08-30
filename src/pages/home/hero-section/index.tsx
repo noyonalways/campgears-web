@@ -23,7 +23,7 @@ const HeroSection: React.FC<IProps> = () => {
                     className="bg-[#06bcf9]"
                   >
                     <img
-                      src="https://i.ibb.co/x5ydLDY/tent-banner-slider.png"
+                      src="https://i.ibb.co/f8TRMR1/tent-banner-slider.png"
                       alt="tents-banner-image"
                     />
                   </Link>
