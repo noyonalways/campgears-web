@@ -92,11 +92,6 @@ const Navbar = () => {
                 )}
               </Link>
             </li>
-            <li className="hidden md:inline-block">
-              <a className="text-2xl hover:text-primary" href="#">
-                <HiOutlineUser />
-              </a>
-            </li>
             <li className="md:inline-block">
               <Link
                 className="text-xl lg:text-2xl hover:text-primary relative"
@@ -109,6 +104,11 @@ const Navbar = () => {
                   </p>
                 )}
               </Link>
+            </li>
+            <li className="hidden md:inline-block">
+              <a className="text-2xl hover:text-primary" href="#">
+                <HiOutlineUser />
+              </a>
             </li>
           </ul>
         </div>
@@ -148,21 +148,7 @@ const Navbar = () => {
                 Products
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  `font-medium p-3 block hover:bg-primary hover:text-white lg:hover:bg-transparent lg:hover:text-primary lg:inline-block lg:w-auto
-                ${
-                  isActive
-                    ? "lg:text-primary bg-primary text-white lg:bg-transparent"
-                    : ""
-                }`
-                }
-                to="/product-management"
-              >
-                Product Management
-              </NavLink>
-            </li>
+
             <li className="lg:hidden">
               <NavLink
                 className={({ isActive }) =>
