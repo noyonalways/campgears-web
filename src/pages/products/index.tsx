@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import PageTitle from "../../components/page-title";
-import { useGetAllProductQuery } from "../../redux/features/product/productApi";
 import CategoryList from "./category-list";
 
 interface ICategory {
@@ -21,43 +18,43 @@ const categories: ICategory[] = [
 ];
 
 const Products: React.FC = () => {
-  const location = useLocation();
-  const [queryParams, setQueryParams] = useState({
-    category: "",
-    searchTerm: "",
-    sort: "",
-    minPrice: "",
-    maxPrice: "",
-    limit: "12", // Add limit to the queryParams state
-  });
+  // const location = useLocation();
+  // const [queryParams, setQueryParams] = useState({
+  //   category: "",
+  //   searchTerm: "",
+  //   sort: "",
+  //   minPrice: "",
+  //   maxPrice: "",
+  //   limit: "12", // Add limit to the queryParams state
+  // });
 
-  const query = new URLSearchParams({
-    ...(queryParams.category && { category: queryParams.category }),
-    ...(queryParams.searchTerm && { searchTerm: queryParams.searchTerm }),
-    ...(queryParams.sort && { sort: queryParams.sort }),
-    ...(queryParams.minPrice && { minPrice: queryParams.minPrice }),
-    ...(queryParams.maxPrice && { maxPrice: queryParams.maxPrice }),
-    limit: queryParams.limit, // Include limit in the query string
-  }).toString();
+  // const query = new URLSearchParams({
+  //   ...(queryParams.category && { category: queryParams.category }),
+  //   ...(queryParams.searchTerm && { searchTerm: queryParams.searchTerm }),
+  //   ...(queryParams.sort && { sort: queryParams.sort }),
+  //   ...(queryParams.minPrice && { minPrice: queryParams.minPrice }),
+  //   ...(queryParams.maxPrice && { maxPrice: queryParams.maxPrice }),
+  //   limit: queryParams.limit, // Include limit in the query string
+  // }).toString();
 
-  const { data, error, isFetching } = useGetAllProductQuery(query, {
-    refetchOnMountOrArgChange: true,
-  });
+  // const { data, error, isFetching } = useGetAllProductQuery(query, {
+  //   refetchOnMountOrArgChange: true,
+  // });
 
-  useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    const category = params.get("category");
-    const searchTerm = params.get("searchTerm");
-    const minPrice = params.get("minPrice");
-    const maxPrice = params.get("maxPrice");
-    setQueryParams((prev) => ({
-      ...prev,
-      category: category || "",
-      searchTerm: searchTerm || "",
-      minPrice: minPrice || "",
-      maxPrice: maxPrice || "",
-    }));
-  }, [location.search]);
+  // useEffect(() => {
+  //   const params = new URLSearchParams(location.search);
+  //   const category = params.get("category");
+  //   const searchTerm = params.get("searchTerm");
+  //   const minPrice = params.get("minPrice");
+  //   const maxPrice = params.get("maxPrice");
+  //   setQueryParams((prev) => ({
+  //     ...prev,
+  //     category: category || "",
+  //     searchTerm: searchTerm || "",
+  //     minPrice: minPrice || "",
+  //     maxPrice: maxPrice || "",
+  //   }));
+  // }, [location.search]);
 
   return (
     <>
