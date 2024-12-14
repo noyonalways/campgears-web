@@ -124,7 +124,3 @@ const HeroSection: React.FC<IProps> = () => {
 };
 
 export default HeroSection;
-
-// https://i.ibb.co/99w7mJ3/tents-poster.png
-// https://i.ibb.co/2hpjLcn/wemon-poster.jpg
-// https://i.ibb.co/bHQbgdw/bottele-poster.png
