@@ -1,5 +1,5 @@
 {
-  // Place your campgears-web workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+  // Place your found-x-web workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
   // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
   // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
   // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
@@ -15,18 +15,23 @@
   // 	],
   // 	"description": "Log output to console"
   // }
-  "create a react component": {
+
+  "React Stateless Componet": {
     "prefix": "ccr",
     "body": [
       "interface IProps {}",
       "",
-      "const ${1:MainLayout}: React.FC<IProps> = () => {",
-      "  return <div>This is ${1:MainLayout}</div>;",
+      "const ${1:Component} = ({}: IProps) => {",
+      "  return (",
+      "    <div>",
+      "      <h1>${2:Component}</h1>",
+      "    </div>",
+      "  );",
       "};",
       "",
-      "export default ${1:MainLayout};",
-      ""
+      "export default ${1:Component};"
     ],
-    "description": "create a react component"
+    "description": "React Stateless Componet",
+    "scope": "javascriptreact, typescriptreact"
   }
 }
