@@ -1,4 +1,4 @@
-import { lato, quickSand, roboto } from "@/lib/fonts";
+import { inter, lato, quickSand, roboto } from "@/lib/fonts";
 import Providers from "@/lib/providers";
 import type { Metadata } from "next";
 import { ReactNode } from "react";
@@ -18,7 +18,7 @@ export default function RootLayout({
     <Providers>
       <html lang="en">
         <body
-          className={`${roboto.variable} ${quickSand.variable} ${lato.variable}`}
+          className={`${roboto.variable} ${quickSand.variable} ${lato.variable} ${inter.variable} font-inter`}
         >
           {children}
         </body>

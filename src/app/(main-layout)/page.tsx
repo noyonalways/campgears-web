@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button";
+import Home from "@/modules/home";
 
-const Home = () => {
+const HOmePage = () => {
   return (
-    <div className="container">
-      <h1>Home Page</h1>
-      <Button>Click Me</Button>
-    </div>
+    <>
+      <Home></Home>
+    </>
   );
 };
 
-export default Home;
+export default HOmePage;

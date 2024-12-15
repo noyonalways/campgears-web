@@ -18,6 +18,7 @@ export default {
         lato: ["Lato", "serif"],
         quickSand: ["Quicksand", "serif"],
         roboto: ["Roboto", "serif"],
+        inter: ["Inter", "sans-serif"],
       },
       colors: {
         background: "hsl(var(--background))",

@@ -1,4 +1,4 @@
-import { Lato, Quicksand, Roboto } from "next/font/google";
+import { Inter, Lato, Quicksand, Roboto } from "next/font/google";
 
 export const roboto = Roboto({
   variable: "--font-roboto",
@@ -16,4 +16,10 @@ export const lato = Lato({
   variable: "--font-lato",
   subsets: ["latin"],
   weight: ["100", "300", "400", "700", "900"],
+});
+
+export const inter = Inter({
+  variable: "--font-lato",
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "600", "500", "700", "800", "900"],
 });
