@@ -17,7 +17,7 @@ export default function Newsletter() {
               Join our community of outdoor enthusiasts and get exclusive deals
               on camping gear
             </p>
-            <form className="mt-6 flex items-stretch max-w-md ">
+            <form className="mt-6 flex items-stretch lg:max-w-md w-full">
               <Input
                 className="bg-white rounded-r-none h-14"
                 type="email"
@@ -29,7 +29,7 @@ export default function Newsletter() {
             </form>
           </div>
           <div className="">
-            <Tent className="h-64 w-64 text-primary opacity-50" />
+            <Tent className="h-64 w-64 text-primary/50" />
           </div>
         </div>
       </div>
