@@ -30,7 +30,7 @@ const MobileDockCategories = () => {
         </div>
       </SheetTrigger>
       <SheetContent className="px-0" side={"right"}>
-        <SheetHeader className="px-2">
+        <SheetHeader className="x">
           <SheetTitle className="text-left">All Categories</SheetTitle>
         </SheetHeader>
         <ul className="grid py-4">

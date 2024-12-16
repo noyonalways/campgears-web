@@ -11,7 +11,7 @@ import UserDropdown from "./user-dropdown";
 
 const Navbar = () => {
   return (
-    <header>
+    <header className="sticky top-0 bg-background z-50">
       {/* top bar */}
       <div className="bg-primary text-white ">
         {/* mobile dock menu */}
@@ -21,92 +21,94 @@ const Navbar = () => {
           <div className="flex justify-center md:justify-between items-center text-xs md:text-sm">
             <div className="hidden md:flex items-center space-x-2">
               <MapPin size={14} />
-              <p>Test Location</p>
+              <p>Dhaka, Bangladesh</p>
             </div>
 
             <WordRotate
               duration={3000}
               words={[
-                "New Arrival!",
-                "Winter Sale!",
-                "20% Off on Camping Gear!",
-                "Free Shipping on Orders Over $50",
-                "Limited Time Offer - Don't Miss Out!",
+                "Explore the Outdoors with New Arrivals!",
+                "Gear Up for Winter Adventures – Sale On Now!",
+                "Exclusive: 20% Off All Camping Essentials!",
+                "Enjoy Free Shipping on Orders Over $50!",
+                "Hurry! Limited-Time Offers on Outdoor Gear!",
               ]}
             />
 
             <div className="hidden md:inline-block">
               <p>
                 <span>Need Help? Call Us:</span>
-                <span className="font-medium">+880172345641</span>
+                <span className="font-medium">+8801712345678</span>
               </p>
             </div>
           </div>
         </div>
       </div>
 
-      {/* logo, search, account */}
-      <div className="py-4">
-        <div className="container">
-          <div className="flex items-center justify-between">
-            {/* mobile menu bars */}
-            <MobileMenu />
-            <>
-              <Link href={"/"}>
-                <h1 className="text-3xl font-quickSand font-bold">
-                  Camp<span className="text-primary">gears</span>
-                </h1>
-              </Link>
-            </>
+      <div>
+        {/* logo, search, account */}
+        <div className="py-3 md:py-4">
+          <div className="container">
+            <div className="flex items-center justify-between">
+              {/* mobile menu bars */}
+              <MobileMenu />
+              <>
+                <Link href={"/"}>
+                  <h1 className="text-3xl font-quickSand font-bold">
+                    Camp<span className="text-primary">gears</span>
+                  </h1>
+                </Link>
+              </>
 
-            {/* mobile user menu */}
-            <div className="lg:hidden">
-              <UserDropdown />
-            </div>
+              {/* mobile user menu */}
+              <div className="lg:hidden">
+                <UserDropdown />
+              </div>
 
-            <div className="hidden md:flex w-full max-w-xl">
-              <Input
-                className="rounded-r-none h-12"
-                type="text"
-                placeholder="I'am search for...."
-              />
-              <Button className="rounded-l-none py-6 px-6">
-                <Search />
-              </Button>
-            </div>
+              <div className="hidden lg:flex w-full max-w-xl">
+                <Input
+                  className="rounded-r-none h-12"
+                  type="text"
+                  placeholder="I'am search for...."
+                />
+                <Button className="rounded-l-none py-6 px-6">
+                  <Search />
+                </Button>
+              </div>
 
-            <div className="hidden md:flex items-center space-x-6">
-              <Link className="hover:text-primary" href={"/wishlist"}>
-                <Heart />
-              </Link>
-              <Link className="hover:text-primary" href={"/cart"}>
-                <ShoppingCart />
-              </Link>
-              <UserDropdown />
+              <div className="hidden lg:flex items-center space-x-6">
+                <Link className="hover:text-primary" href={"/wishlist"}>
+                  <Heart />
+                </Link>
+                <Link className="hover:text-primary" href={"/cart"}>
+                  <ShoppingCart />
+                </Link>
+                <UserDropdown />
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* nav links */}
-      <div className="py-2">
-        <div className="container">
-          <div className="flex justify-between items-center">
-            <div className="hidden md:inline-block">
-              <AllCategories />
-            </div>
+        {/* nav links */}
+        <div className="md:pt-2 md:pb-4 hidden lg:block">
+          <div className="container">
+            <div className="flex justify-between items-center">
+              <div className="hidden md:inline-block">
+                <AllCategories />
+              </div>
 
-            <div className="hidden md:inline-block">
-              <MainMenubar />
-            </div>
+              <div className="hidden md:inline-block">
+                <MainMenubar />
+              </div>
 
-            <div className="hidden md:inline-block">
-              <Button
-                size="icon"
-                className="text-primary bg-primary/10 hover:bg-primary/20 hover:text-primary"
-              >
-                <Zap />
-              </Button>
+              <div className="hidden md:inline-block">
+                <Button
+                  size="icon"
+                  className="text-primary bg-primary/10 hover:bg-primary/20 hover:text-primary"
+                >
+                  <Zap />
+                </Button>
+              </div>
             </div>
           </div>
         </div>

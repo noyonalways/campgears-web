@@ -48,25 +48,25 @@ const Footer = () => {
       >
         <div className="container">
           <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 justify-between pb-10 border-b border-dashed">
-            <div className="flex items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
+            <div className="flex md:flex-col lg:flex-row  items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
               <Package size={32} />
               <p>Premium Outdoor Essentials</p>
             </div>
-            <div className="flex items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
+            <div className="flex md:flex-col lg:flex-row  items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
               <Truck size={32} />
               <p>Free Delivery on Orders Over $50</p>
             </div>
-            <div className="flex items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
+            <div className="flex md:flex-col lg:flex-row  items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
               <BadgePercent size={32} />
               <p>Exclusive Deals for Outdoor Enthusiasts</p>
             </div>
-            <div className="flex items-center text-muted-foreground space-x-4">
+            <div className="flex md:flex-col lg:flex-row items-center text-muted-foreground space-x-4">
               <ShieldCheck size={32} />
               <p>Unmatched Quality at the Best Prices</p>
             </div>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-5 pt-10">
+          <div className="grid gap-4 md:gap-6 lg:gap-4 md:grid-cols-3 lg:grid-cols-5 pt-10">
             {/* Brand Section */}
             <div className="space-y-4">
               <Link href={"/"}>
@@ -170,13 +170,13 @@ const Footer = () => {
           </div>
 
           {/* Footer Bottom Section */}
-          <div className="mt-8 pb-14 lg:pb-0 border-t border-dashed pt-4 flex flex-col-reverse md:flex-row items-center justify-between text-sm">
+          <div className="mt-8 pb-14 lg:pb-0 border-t border-dashed pt-4 flex flex-col-reverse md:flex-row items-center justify-between text-sm md:text-xs lg:text-sm">
             <p className="text-muted-foreground">
               ©2022 Campgears. All rights reserved
             </p>
             <div className="my-4 md:my-0">
               <Image
-                width={300}
+                width={280}
                 height={20}
                 src={"/payments.png"}
                 alt="payments-icons"
