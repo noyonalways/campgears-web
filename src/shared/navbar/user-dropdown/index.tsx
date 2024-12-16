@@ -28,7 +28,7 @@ export default function UserDropdown() {
           <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
         </DropdownMenuItem>
 
-        <DropdownMenuItem>
+        <DropdownMenuItem className="text-destructive hover:!text-white hover:!bg-destructive">
           Log out
           <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
         </DropdownMenuItem>

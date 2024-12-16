@@ -5,6 +5,8 @@ import { Heart, MapPin, Search, ShoppingCart, Zap } from "lucide-react";
 import Link from "next/link";
 import AllCategories from "./all-cagories";
 import MainMenubar from "./menubar";
+import MobileDockMenu from "./mobile-dock-menu";
+import MobileMenu from "./mobile-menu";
 import UserDropdown from "./user-dropdown";
 
 const Navbar = () => {
@@ -12,6 +14,9 @@ const Navbar = () => {
     <header>
       {/* top bar */}
       <div className="bg-primary text-white ">
+        {/* mobile dock menu */}
+        <MobileDockMenu />
+
         <div className="container">
           <div className="flex justify-center md:justify-between items-center text-xs md:text-sm">
             <div className="hidden md:flex items-center space-x-2">
@@ -44,6 +49,8 @@ const Navbar = () => {
       <div className="py-4">
         <div className="container">
           <div className="flex items-center justify-between">
+            {/* mobile menu bars */}
+            <MobileMenu />
             <>
               <Link href={"/"}>
                 <h1 className="text-3xl font-quickSand font-bold">
@@ -51,6 +58,12 @@ const Navbar = () => {
                 </h1>
               </Link>
             </>
+
+            {/* mobile user menu */}
+            <div className="lg:hidden">
+              <UserDropdown />
+            </div>
+
             <div className="hidden md:flex w-full max-w-xl">
               <Input
                 className="rounded-r-none h-12"

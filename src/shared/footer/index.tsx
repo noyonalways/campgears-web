@@ -170,7 +170,7 @@ const Footer = () => {
           </div>
 
           {/* Footer Bottom Section */}
-          <div className="mt-8 border-t border-dashed pt-4 flex flex-col-reverse md:flex-row items-center justify-between text-sm">
+          <div className="mt-8 pb-14 lg:pb-0 border-t border-dashed pt-4 flex flex-col-reverse md:flex-row items-center justify-between text-sm">
             <p className="text-muted-foreground">
               ©2022 Campgears. All rights reserved
             </p>
