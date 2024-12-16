@@ -99,12 +99,16 @@ export default function MainMenubar() {
       <MenubarMenu>
         <MenubarTrigger>Account</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>
-            Sign In <MenubarShortcut>⌘S</MenubarShortcut>
-          </MenubarItem>
-          <MenubarItem>
-            Sign Up <MenubarShortcut>⌘U</MenubarShortcut>
-          </MenubarItem>
+          <Link href={`/auth/login`}>
+            <MenubarItem>
+              Login <MenubarShortcut>⌘S</MenubarShortcut>
+            </MenubarItem>
+          </Link>
+          <Link href={`/auth/register`}>
+            <MenubarItem>
+              Register <MenubarShortcut>⌘U</MenubarShortcut>
+            </MenubarItem>
+          </Link>
           <MenubarSeparator />
           <MenubarItem>Order History</MenubarItem>
           <MenubarItem>Wishlist</MenubarItem>
