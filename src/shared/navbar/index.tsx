@@ -11,7 +11,7 @@ import UserDropdown from "./user-dropdown";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 bg-background">
+    <header className="sticky top-0 bg-background z-50">
       {/* top bar */}
       <div className="bg-primary text-white ">
         {/* mobile dock menu */}
@@ -45,7 +45,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      <div className="">
+      <div>
         {/* logo, search, account */}
         <div className="py-3 md:py-4">
           <div className="container">
@@ -65,7 +65,7 @@ const Navbar = () => {
                 <UserDropdown />
               </div>
 
-              <div className="hidden md:flex w-full max-w-xl">
+              <div className="hidden lg:flex w-full max-w-xl">
                 <Input
                   className="rounded-r-none h-12"
                   type="text"
@@ -76,7 +76,7 @@ const Navbar = () => {
                 </Button>
               </div>
 
-              <div className="hidden md:flex items-center space-x-6">
+              <div className="hidden lg:flex items-center space-x-6">
                 <Link className="hover:text-primary" href={"/wishlist"}>
                   <Heart />
                 </Link>
@@ -90,7 +90,7 @@ const Navbar = () => {
         </div>
 
         {/* nav links */}
-        <div className="md:pt-2 md:pb-4">
+        <div className="md:pt-2 md:pb-4 hidden lg:block">
           <div className="container">
             <div className="flex justify-between items-center">
               <div className="hidden md:inline-block">

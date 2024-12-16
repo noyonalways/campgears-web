@@ -31,7 +31,9 @@ const LoginPage = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Login</BreadcrumbPage>
+                  <BreadcrumbPage className="font-semibold">
+                    Login
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>

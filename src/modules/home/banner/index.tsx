@@ -8,7 +8,7 @@ export default function Banner() {
     <section>
       <div className="container">
         <div className="flex flex-col md:flex-row gap-4">
-          <div className="bg-primary/10 p-4 md:p-6 rounded-lg  flex-1">
+          <div className="bg-primary/10 p-4 md:p-6 rounded-2xl flex-1">
             <div className="w-full flex flex-col justify-center h-full space-y-4">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium">Exclusive offer</span>

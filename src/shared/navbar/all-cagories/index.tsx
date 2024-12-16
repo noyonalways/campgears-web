@@ -5,8 +5,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChartBarStacked } from "lucide-react";
 import Link from "next/link";
+import { TbCategory } from "react-icons/tb";
 
 const categories = [
   { name: "Tents", url: "/products?category=tents" },
@@ -25,7 +25,7 @@ const AllCategories = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="px-4 justify-start" size="lg">
-          <ChartBarStacked />
+          <TbCategory />
           <span>All Categories</span>
         </Button>
       </DropdownMenuTrigger>

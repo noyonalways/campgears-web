@@ -31,7 +31,9 @@ const RegisterPage = () => {
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Register</BreadcrumbPage>
+                  <BreadcrumbPage className="font-semibold">
+                    Register
+                  </BreadcrumbPage>
                 </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
