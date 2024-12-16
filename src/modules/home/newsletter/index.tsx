@@ -8,7 +8,7 @@ export default function Newsletter() {
   return (
     <section className="py-8">
       <div className="container">
-        <div className="flex justify-between bg-primary/10 p-6 rounded-xl">
+        <div className="flex flex-col items-center md:flex-row md:justify-between bg-primary/10 p-4 md:p-6 rounded-xl">
           <div className="max-w-xl">
             <h2 className="text-3xl font-bold  sm:text-4xl lg:text-5xl">
               Gear up for your next adventure
@@ -17,7 +17,7 @@ export default function Newsletter() {
               Join our community of outdoor enthusiasts and get exclusive deals
               on camping gear
             </p>
-            <form className="mt-6 flex items-stretch max-w-md">
+            <form className="mt-6 flex items-stretch max-w-md ">
               <Input
                 className="bg-white rounded-r-none h-14"
                 type="email"

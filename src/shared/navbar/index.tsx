@@ -13,8 +13,8 @@ const Navbar = () => {
       {/* top bar */}
       <div className="bg-primary text-white ">
         <div className="container">
-          <div className="flex justify-between items-center text-sm">
-            <div className="flex items-center space-x-2">
+          <div className="flex justify-center md:justify-between items-center text-xs md:text-sm">
+            <div className="hidden md:flex items-center space-x-2">
               <MapPin size={14} />
               <p>Test Location</p>
             </div>
@@ -30,9 +30,9 @@ const Navbar = () => {
               ]}
             />
 
-            <div>
+            <div className="hidden md:inline-block">
               <p>
-                Need Help? Call Us:{" "}
+                <span>Need Help? Call Us:</span>
                 <span className="font-medium">+880172345641</span>
               </p>
             </div>
@@ -51,7 +51,7 @@ const Navbar = () => {
                 </h1>
               </Link>
             </>
-            <div className="w-full max-w-xl flex">
+            <div className="hidden md:flex w-full max-w-xl">
               <Input
                 className="rounded-r-none h-12"
                 type="text"
@@ -62,7 +62,7 @@ const Navbar = () => {
               </Button>
             </div>
 
-            <div className="flex items-center space-x-6">
+            <div className="hidden md:flex items-center space-x-6">
               <Link className="hover:text-primary" href={"/wishlist"}>
                 <Heart />
               </Link>
@@ -79,11 +79,15 @@ const Navbar = () => {
       <div className="py-2">
         <div className="container">
           <div className="flex justify-between items-center">
-            <AllCategories />
+            <div className="hidden md:inline-block">
+              <AllCategories />
+            </div>
 
-            <MainMenubar />
+            <div className="hidden md:inline-block">
+              <MainMenubar />
+            </div>
 
-            <div>
+            <div className="hidden md:inline-block">
               <Button
                 size="icon"
                 className="text-primary bg-primary/10 hover:bg-primary/20 hover:text-primary"

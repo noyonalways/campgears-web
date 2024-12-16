@@ -47,7 +47,7 @@ const Footer = () => {
         className={`bg-[url('/footer-shape.png')] bg-no-repeat bg-left-top pt-10`}
       >
         <div className="container">
-          <div className="flex justify-between pb-10 border-b border-dashed">
+          <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 justify-between pb-10 border-b border-dashed">
             <div className="flex items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
               <Package size={32} />
               <p>Premium Outdoor Essentials</p>
@@ -142,7 +142,7 @@ const Footer = () => {
               <div className="space-y-4">
                 <div className="flex space-x-2 text-muted-foreground">
                   <Phone size={20} />
-                  <div className="text-muted-foreground text-sm space-y-1 flex flex-col border-b w-full pb-2 border-dashed">
+                  <div className="text-muted-foreground text-sm space-y-1 flex flex-col md:border-b w-full pb-2 border-b-0 border-dashed">
                     <p>Hotline 24/7:</p>
                     <a
                       href="tel:+1 888 104 2340"
@@ -155,7 +155,7 @@ const Footer = () => {
 
                 <div className="flex space-x-2 text-muted-foreground">
                   <Mail size={20} />
-                  <div className="text-muted-foreground text-sm space-y-1 flex flex-col border-b w-full pb-2 border-dashed">
+                  <div className="text-muted-foreground text-sm space-y-1 flex flex-col md:border-b w-full pb-2 border-b-0 border-dashed">
                     <p>Email Address:</p>
                     <a
                       href="mailto:contact@campgears.com"
@@ -170,11 +170,11 @@ const Footer = () => {
           </div>
 
           {/* Footer Bottom Section */}
-          <div className="mt-8 border-t border-dashed pt-4 flex flex-col md:flex-row items-center justify-between text-sm">
+          <div className="mt-8 border-t border-dashed pt-4 flex flex-col-reverse md:flex-row items-center justify-between text-sm">
             <p className="text-muted-foreground">
               ©2022 Campgears. All rights reserved
             </p>
-            <div>
+            <div className="my-4 md:my-0">
               <Image
                 width={300}
                 height={20}
