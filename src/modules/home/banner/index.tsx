@@ -7,8 +7,8 @@ export default function Banner() {
   return (
     <section>
       <div className="container">
-        <div className="flex gap-4">
-          <div className="bg-primary/10 p-6 rounded-lg  flex-1">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="bg-primary/10 p-4 md:p-6 rounded-lg  flex-1">
             <div className="w-full flex flex-col justify-center h-full space-y-4">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-medium">Exclusive offer</span>
@@ -34,7 +34,7 @@ export default function Banner() {
           </div>
 
           <div className="basis-[30%] space-y-4">
-            <div className="rounded-2xl bg-white p-6 border border-primary/10">
+            <div className="rounded-2xl bg-white p-6 border border-primary/30">
               <div className="mb-4">
                 <span className="text-4xl font-bold text-red-500">45%</span>
                 <span className="ml-1 text-lg font-medium">OFF</span>
@@ -54,7 +54,7 @@ export default function Banner() {
               </Link>
             </div>
 
-            <div className="rounded-2xl bg-white p-6  border border-primary/10">
+            <div className="rounded-2xl bg-white p-6  border border-primary/30">
               <h3 className="text-2xl font-bold text-[#2C3E50]">
                 Camping Gear
               </h3>
