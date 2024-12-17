@@ -1,51 +1,24 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import WordRotate from "@/components/ui/word-rotate";
-import { Heart, MapPin, Search, ShoppingCart, Zap } from "lucide-react";
+import { Heart, Search, ShoppingCart, Zap } from "lucide-react";
 import Link from "next/link";
 import AllCategories from "./all-cagories";
 import MainMenubar from "./menubar";
 import MobileDockMenu from "./mobile-dock-menu";
 import MobileMenu from "./mobile-menu";
+import NavbarTop from "./navbar-topbar";
 import UserDropdown from "./user-dropdown";
 
 const Navbar = () => {
   return (
     <header className="sticky top-0 bg-background z-50">
       {/* top bar */}
-      <div className="bg-primary text-white ">
-        {/* mobile dock menu */}
-        <MobileDockMenu />
+      {/* mobile dock menu */}
+      <MobileDockMenu />
 
-        <div className="container">
-          <div className="flex justify-center md:justify-between items-center text-xs md:text-sm">
-            <div className="hidden md:flex items-center space-x-2">
-              <MapPin size={14} />
-              <p>Dhaka, Bangladesh</p>
-            </div>
+      <NavbarTop />
 
-            <WordRotate
-              duration={3000}
-              words={[
-                "Explore the Outdoors with New Arrivals!",
-                "Gear Up for Winter Adventures – Sale On Now!",
-                "Exclusive: 20% Off All Camping Essentials!",
-                "Enjoy Free Shipping on Orders Over $50!",
-                "Hurry! Limited-Time Offers on Outdoor Gear!",
-              ]}
-            />
-
-            <div className="hidden md:inline-block">
-              <p>
-                <span>Need Help? Call Us:</span>
-                <span className="font-medium">+8801712345678</span>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div>
+      <>
         {/* logo, search, account */}
         <div className="py-3 md:py-4">
           <div className="container">
@@ -112,7 +85,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </div>
+      </>
     </header>
   );
 };
