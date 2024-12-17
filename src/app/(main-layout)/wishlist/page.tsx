@@ -1,40 +1,11 @@
+import { PageBreadcrumb } from "@/components/breadcrumbs";
 import WishlistCard from "@/components/cards/wishlist-card";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { LayoutGrid, List } from "lucide-react";
-import Link from "next/link";
-import { TiHome } from "react-icons/ti";
 
 const WishlistPage = () => {
   return (
     <section className="pb-10">
-      <div className="bg-secondary py-4 md:py-10">
-        <div className="container">
-          <div className="flex justify-between items-center ">
-            <h2 className="text-2xl font-bold">Wishlist</h2>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <Link href="/">
-                    <TiHome size={20} />
-                  </Link>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="font-semibold">
-                    Wishlist
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </div>
-      </div>
+      <PageBreadcrumb currentPage="Wishlist" />
 
       <div className="container">
         <div className="flex justify-end py-2">

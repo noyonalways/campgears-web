@@ -66,9 +66,11 @@ export default function MainMenubar() {
           <MenubarItem>
             Track Order <MenubarShortcut>⌘O</MenubarShortcut>
           </MenubarItem>
-          <MenubarItem>
-            Order History <MenubarShortcut>⌘H</MenubarShortcut>
-          </MenubarItem>
+          <Link href={`/user/orders`}>
+            <MenubarItem>
+              Order History <MenubarShortcut>⌘H</MenubarShortcut>
+            </MenubarItem>
+          </Link>
           <MenubarSeparator />
           <MenubarItem>Cancel Order</MenubarItem>
         </MenubarContent>

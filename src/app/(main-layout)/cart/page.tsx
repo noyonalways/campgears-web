@@ -1,41 +1,13 @@
+import { PageBreadcrumb } from "@/components/breadcrumbs";
 import CartCard from "@/components/cards/cart-card";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { TiHome } from "react-icons/ti";
 
 const CartPage = () => {
   return (
     <section>
-      <div className="bg-secondary py-4 md:py-10">
-        <div className="container">
-          <div className="flex justify-between items-center ">
-            <h2 className="text-2xl font-bold">Cart</h2>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <Link href="/">
-                    <TiHome size={20} />
-                  </Link>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="font-semibold">
-                    Cart
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </div>
-      </div>
+      <PageBreadcrumb currentPage="Cart" />
+
       <div className="container">
         <div className="flex flex-col lg:flex-row items-start my-10 gap-y-6 lg:gap-x-10">
           <div className="bg-secondary px-6 lg:flex-1 rounded lg:overflow-hidden overflow-x-scroll w-full">
