@@ -5,10 +5,10 @@ import MobileDockSearch from "./mobile-dock-search";
 
 const MobileDockMenu = () => {
   return (
-    <div className="bg-primary flex w-full justify-between fixed bottom-0 lg:hidden px-4">
-      <div className="px-2 py-3 text-xs space-y-1 flex flex-col items-center">
+    <div className="bg-primary flex w-full justify-between fixed bottom-0 lg:hidden px-4 text-white">
+      <div className="px-2 py-3 text-xs space-y-1 flex flex-col items-center ">
         <House />
-        <span>Home</span>
+        <span className="text-white">Home</span>
       </div>
 
       <MobileDockCategories />

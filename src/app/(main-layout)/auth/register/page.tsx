@@ -1,10 +1,4 @@
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
+import { PageBreadcrumb } from "@/components/breadcrumbs";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -13,33 +7,12 @@ import { Separator } from "@/components/ui/separator";
 import SocialLogin from "@/modules/auth/social-login";
 import Image from "next/image";
 import Link from "next/link";
-import { TiHome } from "react-icons/ti";
 
 const RegisterPage = () => {
   return (
     <section className="pb-10">
-      <div className="bg-secondary hidden md:block md:py-10 mb-5">
-        <div className="container">
-          <div className="flex justify-between items-center ">
-            <h2 className="text-2xl font-bold">Register</h2>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <Link href="/">
-                    <TiHome size={20} />
-                  </Link>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage className="font-semibold">
-                    Register
-                  </BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </div>
-        </div>
-      </div>
+      <PageBreadcrumb currentPage="Register" />
+
       <div className="container">
         <div className="flex flex-col md:flex-row items-center">
           <div className="flex-1 md:flex justify-center hidden">
