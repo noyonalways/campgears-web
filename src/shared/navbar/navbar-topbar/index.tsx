@@ -8,7 +8,7 @@ const NavbarTop = () => {
   const [hidden, setHidden] = useState(false);
   return (
     <div
-      className={`bg-primary text-white relative ${
+      className={`bg-primary text-white relative duration-200 ${
         hidden ? "hidden" : "block"
       }`}
     >

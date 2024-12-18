@@ -8,7 +8,7 @@ import { userSidebarLinks } from "./user-sidebar-links";
 const UserSidebar = () => {
   const pathName = usePathname();
   return (
-    <div className="hidden lg:block lg:basis-[25%] rounded-md overflow-hidden bg-secondary pb-6">
+    <div className="hidden lg:block lg:basis-[25%] rounded-md overflow-hidden bg-secondary pb-6 sticky top-48 xl:h-[calc(100vh-320px)]">
       <div className="w-full">
         <div
           className={`bg-[url('/images/user-cover.jpg')] bg-cover relative h-32`}
@@ -31,10 +31,10 @@ const UserSidebar = () => {
             {userSidebarLinks.map((link) => (
               <li key={link.id}>
                 <Link
-                  className={`flex items-center space-x-2 px-4 hover:bg-primary/10 hover:text-primary py-3 hover:border-primary border-l-transparent border-l-2 ${
+                  className={`flex items-center space-x-2 px-4 hover:bg-primary/10 hover:text-primary py-3 hover:border-primary  border-l-2 ${
                     pathName === link.href
-                      ? "border-l-2 bg-primary/10 text-primary border-l-primary"
-                      : ""
+                      ? "border-l-2 bg-primary/10 border-l-primary"
+                      : "border-l-transparent"
                   }`}
                   href={link.href}
                 >

@@ -3,12 +3,18 @@ import Image from "next/image";
 
 interface IProps {
   item?: string;
+  cardClass?: string;
+  buttonClass?: string;
 }
 
-const WishlistCard = ({}: IProps) => {
+const WishlistCard = ({ cardClass, buttonClass }: IProps) => {
   return (
-    <div className="p-2 md:p-4 rounded-md bg-secondary group relative">
-      <button className="absolute right-2 top-2 bg-white rounded-full p-2 shadow">
+    <div
+      className={`p-2 md:p-4 rounded-md bg-secondary group relative w-full ${cardClass}`}
+    >
+      <button
+        className={`absolute right-2 top-2 bg-white rounded-full p-2 shadow `}
+      >
         <X size={15} />
       </button>
       <div className="flex justify-center mb-2 group-hover:scale-105 duration-100">
@@ -22,7 +28,9 @@ const WishlistCard = ({}: IProps) => {
         <small className="line-through text-muted-foreground">$150</small>
       </div>
       <div>
-        <button className="bg-white px-4 py-2 flex items-center justify-center w-full rounded-full">
+        <button
+          className={`bg-white px-4 py-2 flex items-center justify-center w-full rounded-full ${buttonClass}`}
+        >
           Add
         </button>
       </div>

@@ -51,10 +51,10 @@ const UserMobileSidebar = () => {
                 {userSidebarLinks.map((link) => (
                   <li key={link.id}>
                     <Link
-                      className={`flex items-center space-x-2 px-4 hover:bg-primary/10 hover:text-primary py-3 hover:border-primary border-l-transparent border-l-2 ${
+                      className={`flex items-center space-x-2 px-4 hover:bg-primary/10 hover:text-primary py-3 hover:border-primary  border-l-2 ${
                         pathName === link.href
-                          ? "border-l-2 bg-primary/10 text-primary border-l-primary"
-                          : ""
+                          ? "border-l-2 bg-primary/10 border-l-primary"
+                          : "border-l-transparent"
                       }`}
                       href={link.href}
                     >
