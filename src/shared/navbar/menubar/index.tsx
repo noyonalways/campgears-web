@@ -23,8 +23,13 @@ export default function MainMenubar() {
 
       {/* Products Menu */}
       <MenubarMenu>
-        <MenubarTrigger>Products</MenubarTrigger>
+        <MenubarTrigger>Shop</MenubarTrigger>
         <MenubarContent>
+          <Link href={`/shop/products`}>
+            <MenubarItem>
+              All Products <MenubarShortcut>⌘A</MenubarShortcut>
+            </MenubarItem>
+          </Link>
           <MenubarItem>
             New Arrivals <MenubarShortcut>⌘T</MenubarShortcut>
           </MenubarItem>
