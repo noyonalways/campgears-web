@@ -1,10 +1,10 @@
 import { PageBreadcrumb } from "@/components/breadcrumbs";
 
 interface IProps {
-  params?: string;
+  params: Promise<string>;
 }
 
-const ProductDetailsPage = ({}: IProps) => {
+const ProductDetailsPage = async ({}: IProps) => {
   return (
     <section>
       <PageBreadcrumb currentPage="Product Details" />
