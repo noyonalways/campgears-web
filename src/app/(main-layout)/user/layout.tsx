@@ -13,7 +13,7 @@ const UserLayout = ({ children }: IProps) => {
       <PageBreadcrumb currentPage="User Dashboard" />
 
       <div className="container mb-6  lg:my-10">
-        <div className="flex flex-col items-start lg:flex-row lg:items-stretch lg:gap-6">
+        <div className="flex flex-col lg:flex-row lg:gap-6">
           <UserSidebar />
           <div className="lg:hidden my-3">
             <UserMobileSidebar />

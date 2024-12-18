@@ -47,7 +47,7 @@ const Footer = () => {
         className={`bg-[url('/footer-shape.png')] bg-no-repeat bg-left-top pt-10`}
       >
         <div className="container">
-          <div className="flex flex-col md:flex-row space-y-6 md:space-y-0 justify-between pb-10 border-b border-dashed">
+          <div className="flex flex-col md:grid md:grid-cols-2 md:gap-y-6 lg:flex lg:flex-row space-y-6 md:space-y-0 justify-between pb-10 border-b border-dashed">
             <div className="flex md:flex-col lg:flex-row  items-center text-muted-foreground space-x-4 border-r border-dashed pr-6">
               <Package size={32} />
               <p>Premium Outdoor Essentials</p>
