@@ -1,3 +1,4 @@
+import { TGenericErrorResponse } from "@/interface";
 import { baseApi } from "@/redux/baseApi";
 
 const authApi = baseApi.injectEndpoints({
@@ -10,13 +11,16 @@ const authApi = baseApi.injectEndpoints({
           body: userInfo,
         };
       },
+      transformErrorResponse: (response: TGenericErrorResponse) => {
+        return response?.data;
+      },
     }),
 
     // get me
     getMe: builder.query({
       query: () => {
         return {
-          url: "/users/me",
+          url: "/auth/me",
           method: "GET",
         };
       },

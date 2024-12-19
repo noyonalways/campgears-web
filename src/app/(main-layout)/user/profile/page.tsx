@@ -1,9 +1,22 @@
 import UserDashboardTitle from "@/components/titles/user-dashboard-title";
+import { getMe } from "@/services/auth";
+import { IProfile } from "@/types/profile";
 import { Mail, MapPin, SquareCheckBig } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-const UserProfilePage = () => {
+const UserProfilePage = async () => {
+  const res = await getMe();
+  const profile = res?.data as IProfile;
+
+  if (!res?.success) {
+    return (
+      <div className="bg-secondary lg:p-6 p-4 rounded text-destructive">
+        Unauthenticated User
+      </div>
+    );
+  }
+
   return (
     <div className="bg-secondary lg:p-6 p-4 rounded">
       <UserDashboardTitle title={`My Profile`} />
@@ -11,23 +24,28 @@ const UserProfilePage = () => {
         <div className="bg-background p-4 lg:p-6 rounded">
           <h2 className="mb-6 text-xl font-semibold">Profile Name</h2>
           <div className="flex justify-between items-center mb-4">
-            <h3 className="font-medium">John Doe</h3>
+            <h3 className="font-medium">{profile?.name}</h3>
             <button className="bg-primary/10 text-primary rounded px-4 py-1 text-sm font-medium shadow">
               Edit
             </button>
           </div>
           <div className="flex flex-wrap items-center gap-4 lg:gap-6 text-sm lg:text-base border-b border-dashed pb-4 mb-4 text-muted-foreground">
-            <div className="flex space-x-2 items-center">
-              <MapPin size={20} />
-              <span>Downers Grove, IL</span>
-            </div>
+            {profile?.address && (
+              <div className="flex space-x-2 items-center">
+                <MapPin size={20} />
+                <span>{profile?.address}</span>
+              </div>
+            )}
             <div className="flex space-x-2 items-center">
               <Mail size={20} />
-              <span>user@example.com</span>
+              <span>{profile?.email}</span>
             </div>
             <div className="flex space-x-2 items-center">
               <SquareCheckBig size={20} />
-              <span>Licensed for 2 years</span>
+              <span>
+                Registered since{" "}
+                {new Date(profile?.createdAt).toLocaleDateString()}
+              </span>
             </div>
           </div>
           <p className="text-muted-foreground text-sm lg:text-base">
@@ -38,33 +56,50 @@ const UserProfilePage = () => {
         </div>
 
         <div className="bg-background p-4 lg:p-6 rounded grid lg:grid-cols-6 gap-y-6 lg:gap-y-0">
-          <div className="lg:col-span-4 space-y-8">
-            <div>
+          <div className="lg:col-span-4">
+            <div
+              className={`${
+                !profile?.address ||
+                !profile?.phone ||
+                !profile?.dateOfBirth ||
+                !profile?.gender
+                  ? "hidden"
+                  : "mb-8"
+              }`}
+            >
               <h2 className="mb-6 text-xl font-semibold">Profile About</h2>
               <div className="space-y-2 text-sm lg:text-base">
-                <div className="grid grid-cols-5 gap-x-4">
-                  <span className="col-span-1">Gender:</span>
-                  <span className="col-span-4">Male</span>
-                </div>
-                <div className="grid grid-cols-5 gap-x-4">
-                  <span className="col-span-1">Birthday:</span>
-                  <span className="col-span-4"> 21/05/1997</span>
-                </div>
-                <div className="grid grid-cols-5 gap-x-4">
-                  <span className="col-span-1">Phone Number:</span>
-                  <Link
-                    href={`tel:+91 846 - 547 - 210`}
-                    className="col-span-4 text-primary"
-                  >
-                    +91 846 - 547 - 210
-                  </Link>
-                </div>
-                <div className="grid grid-cols-5 gap-x-4">
-                  <span className="col-span-1">Address:</span>
-                  <span className="col-span-4">
-                    549 Sulphur Springs Road, Downers, IL
-                  </span>
-                </div>
+                {profile?.gender && (
+                  <div className="grid grid-cols-5 gap-x-4">
+                    <span className="col-span-1">Gender:</span>
+                    <span className="col-span-4">Male</span>
+                  </div>
+                )}
+                {profile?.dateOfBirth && (
+                  <div className="grid grid-cols-5 gap-x-4">
+                    <span className="col-span-1">Date of Birth:</span>
+                    <span className="col-span-4">
+                      {new Date(profile?.dateOfBirth).toLocaleDateString()}
+                    </span>
+                  </div>
+                )}
+                {profile?.phone && (
+                  <div className="grid grid-cols-5 gap-x-4">
+                    <span className="col-span-1">Phone Number:</span>
+                    <Link
+                      href={`tel:${profile?.phone}`}
+                      className="col-span-4 text-primary"
+                    >
+                      {profile?.phone}
+                    </Link>
+                  </div>
+                )}
+                {profile?.address && (
+                  <div className="grid grid-cols-5 gap-x-4">
+                    <span className="col-span-1">Address:</span>
+                    <span className="col-span-4">{profile?.address}</span>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -73,9 +108,9 @@ const UserProfilePage = () => {
               <div className="space-y-2 text-sm lg:text-base">
                 <div className="grid grid-cols-5 gap-x-4 items-center">
                   <span className="col-span-1">Email:</span>
-                  <div className="col-span-4 flex space-x-4 lg:space-x-6 items-center">
-                    <span className="text-primary">test-user@example.com</span>
-                    <button className="bg-primary/10 text-primary rounded px-4 py-1 text-sm font-medium shadow">
+                  <div className="col-span-4 flex space-x-2 lg:space-x-6 items-center">
+                    <span className="text-primary">{profile?.email}</span>
+                    <button className="bg-primary/10 text-primary rounded px-3 lg:px-4 py-1 text-sm font-medium shadow">
                       Edit
                     </button>
                   </div>

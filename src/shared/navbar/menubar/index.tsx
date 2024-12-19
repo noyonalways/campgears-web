@@ -117,10 +117,12 @@ export default function MainMenubar() {
             </MenubarItem>
           </Link>
           <MenubarSeparator />
-          <MenubarItem>Order History</MenubarItem>
-          <MenubarItem>Wishlist</MenubarItem>
-          <MenubarSeparator />
-          <MenubarItem>Logout</MenubarItem>
+          <Link href={`/user/orders`}>
+            <MenubarItem>Order History</MenubarItem>
+          </Link>
+          <Link href={`/user/wishlist`}>
+            <MenubarItem>Wishlist</MenubarItem>
+          </Link>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>
