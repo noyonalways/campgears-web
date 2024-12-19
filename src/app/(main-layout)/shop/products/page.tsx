@@ -1,6 +1,8 @@
 import { PageBreadcrumb } from "@/components/breadcrumbs";
 import ProductCard from "@/components/cards/product-card";
 import { Button } from "@/components/ui/button";
+import ProductsMobileSideControls from "@/modules/products/products-mobile-side-controls";
+import ProductsSideControls from "@/modules/products/products-side-controls";
 import SortByDropdown from "@/modules/products/sortby-dropdown";
 import { LayoutGrid, List } from "lucide-react";
 
@@ -8,18 +10,11 @@ const ProductsPage = () => {
   return (
     <section>
       <PageBreadcrumb currentPage="Products" />
-      <div className="container lg:my-10">
-        <div className="flex">
+      <div className="container lg:my-10 mb-10">
+        <div className="flex items-start">
           {/* left sidebar */}
           <div className="hidden lg:block basis-[22%] border-r border-dashed">
-            <div className="lg:pr-4">
-              <div className="flex justify-between items-center">
-                <h3 className="font-medium">Filters</h3>
-                <button className="text-primary hover:bg-primary/10 rounded px-4 py-1">
-                  Clear All
-                </button>
-              </div>
-            </div>
+            <ProductsSideControls />
           </div>
 
           {/* main contents */}
@@ -31,13 +26,14 @@ const ProductsPage = () => {
                 </div>
               </div>
 
+              {/* products mobile side controls */}
+              <div className="mt-4">
+                <ProductsMobileSideControls />
+              </div>
+
               <div className="flex justify-between items-center my-4">
                 <div className="flex items-center space-x-2">
                   <span className="text-sm md:text-base">Sort By</span>
-                  {/* <Button variant={`secondary`}>
-                    <span>Popularity</span>
-                    <ChevronDown />
-                  </Button> */}
                   <SortByDropdown />
                 </div>
                 <div className="flex space-x-2 items-center">

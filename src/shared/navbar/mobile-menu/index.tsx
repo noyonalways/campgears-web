@@ -29,7 +29,7 @@ export default function MobileMenu() {
           </Link>
           <Link
             className="block py-2 px-2 hover:bg-primary/10 hover:text-primary"
-            href="/products"
+            href="/shop/products"
           >
             Products
           </Link>

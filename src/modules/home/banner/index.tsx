@@ -24,7 +24,7 @@ export default function Banner() {
                 Quality camping equipment for unforgettable adventures in the
                 great outdoors.
               </p>
-              <Link href="/shop" className="inline-block">
+              <Link href="/shop/products" className="inline-block">
                 <Button size={"lg"}>
                   Shop Now
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -46,7 +46,7 @@ export default function Banner() {
                 Premium tents for every adventure
               </p>
               <Link
-                href="/shop/tents"
+                href="/shop/products?category=tents"
                 className="mt-4 inline-flex items-center text-sm font-medium text-[#2C3E50]"
               >
                 Shop Now
@@ -63,7 +63,7 @@ export default function Banner() {
                 Start your adventure with quality gear
               </p>
               <Link
-                href="/shop/equipment"
+                href="/shop/products?category=equipment"
                 className="mt-4 inline-flex items-center text-sm font-medium text-[#2C3E50]"
               >
                 Shop Now
