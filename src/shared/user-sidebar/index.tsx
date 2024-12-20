@@ -5,7 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { userSidebarLinks } from "./user-sidebar-links";
 
-const UserSidebar = () => {
+interface IProps {
+  avatar?: string;
+  name?: string;
+  email?: string;
+}
+
+const UserSidebar = ({ avatar, name, email }: IProps) => {
   const pathName = usePathname();
   return (
     <div className="hidden lg:block lg:basis-[25%] rounded-md overflow-hidden bg-secondary pb-6 sticky top-48 xl:h-[calc(100vh-320px)]">
@@ -13,17 +19,25 @@ const UserSidebar = () => {
         <div
           className={`bg-[url('/images/user-cover.jpg')] bg-cover relative h-32`}
         >
-          <Image
-            className="rounded-full absolute -bottom-14 right-1/2 translate-x-1/2 bg-background p-2"
-            src={`/images/avatar.jpg`}
-            width={100}
-            height={100}
-            alt="user-avatar"
-          />
+          <>
+            {avatar ? (
+              <Image
+                className="rounded-full absolute -bottom-14 right-1/2 translate-x-1/2 bg-background p-2"
+                src={avatar || "/images/user.jpg"}
+                width={100}
+                height={100}
+                alt={name + "avatar"}
+              />
+            ) : (
+              <div className="text-4xl rounded-full absolute -bottom-10 right-1/2 translate-x-1/2 size-20 bg-primary flex items-center justify-center font-bold text-white">
+                {name?.[0].toUpperCase()}
+              </div>
+            )}
+          </>
         </div>
         <div className="text-center mt-16 mb-6">
-          <h2 className="font-semibold text-lg">Test User</h2>
-          <p className="text-muted-foreground">test-user@example.com</p>
+          <h2 className="font-semibold text-lg">{name}</h2>
+          <p className="text-muted-foreground">{email}</p>
         </div>
 
         <div>

@@ -1,4 +1,5 @@
 "use client";
+import UserProvider from "@/context/user.context";
 import { ReactNode } from "react";
 import StoreProvider from "./redux.provider";
 
@@ -7,7 +8,11 @@ interface IProps {
 }
 
 const Providers = ({ children }: IProps) => {
-  return <StoreProvider>{children}</StoreProvider>;
+  return (
+    <UserProvider>
+      <StoreProvider>{children}</StoreProvider>
+    </UserProvider>
+  );
 };
 
 export default Providers;

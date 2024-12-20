@@ -21,19 +21,19 @@ export default async function UserDropdown() {
             <CircleUserRound className="hover:text-primary" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/user/profile">
                 Profile
               </Link>
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/user/overview">
                 Dashboard
               </Link>
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/user/orders">
                 Orders
               </Link>
@@ -50,17 +50,17 @@ export default async function UserDropdown() {
             <CircleUserRound className="hover:text-primary" />
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end">
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/auth/login">
                 Login
               </Link>
               <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/auth/register">
                 Register
               </Link>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+              <DropdownMenuShortcut>⇧⌘R</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
