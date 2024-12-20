@@ -1,6 +1,6 @@
 import { PageBreadcrumb } from "@/components/breadcrumbs";
 import { Separator } from "@/components/ui/separator";
-import { LoginForm } from "@/modules/auth";
+import LoginForm from "@/modules/auth/login";
 import SocialLogin from "@/modules/auth/social-login";
 import Image from "next/image";
 import Link from "next/link";

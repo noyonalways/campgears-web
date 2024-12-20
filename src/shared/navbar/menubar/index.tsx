@@ -106,17 +106,6 @@ export default function MainMenubar() {
       <MenubarMenu>
         <MenubarTrigger>Account</MenubarTrigger>
         <MenubarContent>
-          <Link href={`/auth/login`}>
-            <MenubarItem>
-              Login <MenubarShortcut>⌘S</MenubarShortcut>
-            </MenubarItem>
-          </Link>
-          <Link href={`/auth/register`}>
-            <MenubarItem>
-              Register <MenubarShortcut>⌘U</MenubarShortcut>
-            </MenubarItem>
-          </Link>
-          <MenubarSeparator />
           <Link href={`/user/orders`}>
             <MenubarItem>Order History</MenubarItem>
           </Link>

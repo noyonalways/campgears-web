@@ -1,9 +1,6 @@
 import { PageBreadcrumb } from "@/components/breadcrumbs";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { RegisterForm } from "@/modules/auth";
 import SocialLogin from "@/modules/auth/social-login";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,37 +33,7 @@ const RegisterPage = () => {
             </div>
 
             {/* login form */}
-            <div className="space-y-4">
-              <Input
-                className="py-6 bg-white"
-                placeholder="Full Name"
-                type="text"
-              />
-              <Input
-                className="py-6 bg-white"
-                placeholder="Email Address"
-                type="email"
-              />
-              <Input
-                className="py-6 bg-white"
-                placeholder="Password"
-                type="password"
-              />
-
-              <div>
-                <div className="flex space-x-2 items-center">
-                  <Checkbox id="terms" />
-                  <Label
-                    htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    I agree with Terms and Privacy
-                  </Label>
-                </div>
-              </div>
-
-              <Button className="w-full py-6 text-base">Register</Button>
-            </div>
+            <RegisterForm />
 
             {/* social login */}
             <SocialLogin />

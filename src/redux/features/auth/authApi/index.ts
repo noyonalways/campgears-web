@@ -15,17 +15,19 @@ const authApi = baseApi.injectEndpoints({
         return response?.data;
       },
     }),
-
-    // get me
-    getMe: builder.query({
-      query: () => {
+    register: builder.mutation({
+      query: (userInfo) => {
         return {
-          url: "/auth/me",
-          method: "GET",
+          url: "/auth/register",
+          method: "POST",
+          body: userInfo,
         };
+      },
+      transformErrorResponse: (response: TGenericErrorResponse) => {
+        return response?.data;
       },
     }),
   }),
 });
 
-export const { useLoginMutation, useGetMeQuery } = authApi;
+export const { useLoginMutation, useRegisterMutation } = authApi;
