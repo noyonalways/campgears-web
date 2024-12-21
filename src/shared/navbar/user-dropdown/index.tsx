@@ -1,5 +1,6 @@
 "use client";
 
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,7 +21,11 @@ export default function UserDropdown() {
       {user ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <CircleUserRound className="hover:text-primary" />
+            <Avatar className="font-bold uppercase ring-2 ring-primary size-6 text-sm">
+              <AvatarFallback className="text-xs">
+                {user.email?.[0]}
+              </AvatarFallback>
+            </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56" align="end">
             <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
