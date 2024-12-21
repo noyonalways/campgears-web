@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -5,13 +7,13 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { getCurrentUser } from "@/services/auth";
+import { useUser } from "@/context/user.context";
 import { CircleUserRound } from "lucide-react";
 import Link from "next/link";
 import LogoutButton from "./logout-button";
 
-export default async function UserDropdown() {
-  const user = await getCurrentUser();
+export default function UserDropdown() {
+  const { user } = useUser();
 
   return (
     <>
