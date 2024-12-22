@@ -11,9 +11,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useUser } from "@/context/user.context";
 import { TGenericErrorResponse } from "@/interface";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { setUser } from "@/redux/features/auth/authSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { singInFormSchema } from "@/schemas/auth";
 import { getCurrentUser, setUserToken } from "@/services/auth";
 import { TUser } from "@/types";
@@ -30,13 +31,13 @@ const LoginFormSuspense = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const redirect = searchParams.get("redirect") || "/";
+  const dispatch = useAppDispatch();
 
   const form = useForm<z.infer<typeof singInFormSchema>>({
     resolver: zodResolver(singInFormSchema),
   });
 
   const [login, { isLoading, data }] = useLoginMutation();
-  const { setUser, setIsLoading: setUserLoading } = useUser();
 
   const onSubmit = async (data: z.infer<typeof singInFormSchema>) => {
     try {
@@ -49,9 +50,6 @@ const LoginFormSuspense = () => {
           accessToken: res.data.accessToken,
           refreshToken: res.data.refreshToken,
         });
-
-        // Trigger user reloading and redirection
-        setUserLoading(true);
       }
     } catch (err) {
       const errorResponse = err as TGenericErrorResponse["data"];
@@ -67,10 +65,7 @@ const LoginFormSuspense = () => {
       const currentUser = await getCurrentUser();
 
       if (currentUser) {
-        setUserLoading(false);
-        setUser(currentUser as TUser);
-
-        // Redirect only after the user is set
+        dispatch(setUser(currentUser as TUser));
         if (redirect) {
           router.push(redirect);
         } else {
@@ -82,7 +77,7 @@ const LoginFormSuspense = () => {
     if (!isLoading && data?.success) {
       handleRedirection();
     }
-  }, [isLoading, data, redirect, router, setUser, setUserLoading]);
+  }, [isLoading, data, redirect, router, dispatch]);
 
   return (
     <Form {...form}>

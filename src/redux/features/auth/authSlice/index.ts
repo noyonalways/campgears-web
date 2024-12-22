@@ -1,6 +1,6 @@
 import { RootState } from "@/redux/store";
 import { TUser } from "@/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type TInitialState = {
   user: null | TUser;
@@ -14,7 +14,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setUser: (state, action) => {
+    setUser: (state, action: PayloadAction<TUser>) => {
       state.user = action.payload;
     },
     logout: (state) => {
