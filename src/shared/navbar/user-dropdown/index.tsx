@@ -5,7 +5,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { selectCurrentUser } from "@/redux/features/auth/authSlice";
@@ -33,19 +32,16 @@ export default function UserDropdown() {
               <Link className="w-full" href="/user/profile">
                 Profile
               </Link>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/user/overview">
-                Dashboard
+                Overview
               </Link>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/user/orders">
                 Orders
               </Link>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
 
             {/* logout user */}
@@ -62,13 +58,11 @@ export default function UserDropdown() {
               <Link className="w-full" href="/auth/login">
                 Login
               </Link>
-              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
             <DropdownMenuItem className="hover:!text-primary hover:!bg-primary/10">
               <Link className="w-full" href="/auth/register">
                 Register
               </Link>
-              <DropdownMenuShortcut>⇧⌘R</DropdownMenuShortcut>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
