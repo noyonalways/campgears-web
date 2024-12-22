@@ -1,6 +1,6 @@
 "use client";
 
-import { TUser } from "@/types";
+import { TLoggedInUser } from "@/types/user";
 import {
   createContext,
   Dispatch,
@@ -14,9 +14,9 @@ import {
 import { getCurrentUser } from "./../services/auth";
 
 interface IUserProviderValues {
-  user: TUser | null;
+  user: TLoggedInUser | null;
   isLoading: boolean;
-  setUser: (user: TUser | null) => void;
+  setUser: (user: TLoggedInUser | null) => void;
   setIsLoading: Dispatch<SetStateAction<boolean>>;
 }
 
@@ -27,12 +27,12 @@ interface IProps {
 const UserContext = createContext<IUserProviderValues | undefined>(undefined);
 
 const UserProvider: FC<IProps> = ({ children }) => {
-  const [user, setUser] = useState<TUser | null>(null);
+  const [user, setUser] = useState<TLoggedInUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const handleUser = async () => {
     const currentUser = await getCurrentUser();
-    setUser(currentUser as TUser);
+    setUser(currentUser as TLoggedInUser);
     setIsLoading(false);
   };
 

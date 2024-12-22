@@ -102,7 +102,7 @@ const ProductModal = ({}: IProps) => {
               </div>
             </div>
 
-            <div className="space-y-4">
+            <div className="space-y-6">
               <div className="flex space-x-2 items-center">
                 <span>Quantity:</span>
                 <div className="flex items-center space-x-6">

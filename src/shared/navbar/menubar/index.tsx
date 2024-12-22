@@ -14,7 +14,7 @@ import Link from "next/link";
 
 export default function MainMenubar() {
   return (
-    <Menubar className="shadow-none border-none">
+    <Menubar className="shadow-none border-none bg-transparent">
       <MenubarMenu>
         <MenubarTrigger>
           <Link href={"/"}>Home</Link>

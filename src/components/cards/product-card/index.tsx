@@ -20,18 +20,6 @@ const ProductCard = ({}: IProps) => {
         <Image src={`/tent.png`} width={150} height={150} alt="product-image" />
 
         <div className="flex items-center justify-center absolute bg-background opacity-0 -bottom-10 group-hover:-bottom-2 group-hover:opacity-100 text-muted-foreground rounded duration-200">
-          {/* <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <div className="hover:text-primary px-10 py-1 border-r">
-                  <Eye size={20} />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Quick View</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider> */}
           <ProductModal />
           <TooltipProvider>
             <Tooltip>

@@ -11,14 +11,14 @@ import UserDropdown from "./user-dropdown";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 bg-background z-50">
+    <header className="sticky top-0 bg-background/60 z-50">
       {/* top bar */}
       {/* mobile dock menu */}
       <MobileDockMenu />
 
       <NavbarTop />
 
-      <>
+      <div className="backdrop-blur-lg">
         {/* logo, search, account */}
         <div className="py-3 md:py-4">
           <div className="container">
@@ -85,7 +85,7 @@ const Navbar = () => {
             </div>
           </div>
         </div>
-      </>
+      </div>
     </header>
   );
 };
