@@ -17,7 +17,7 @@ import { setUser } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { singInFormSchema } from "@/schemas/auth";
 import { getCurrentUser, setUserToken } from "@/services/auth";
-import { TUser } from "@/types";
+import { TLoggedInUser } from "@/types/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import Link from "next/link";
@@ -65,7 +65,7 @@ const LoginFormSuspense = () => {
       const currentUser = await getCurrentUser();
 
       if (currentUser) {
-        dispatch(setUser(currentUser as TUser));
+        dispatch(setUser(currentUser as TLoggedInUser));
         if (redirect) {
           router.push(redirect);
         } else {

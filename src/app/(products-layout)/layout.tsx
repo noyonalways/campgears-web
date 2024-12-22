@@ -5,6 +5,7 @@ import ProductsMobileSideControls from "@/modules/products/products-mobile-side-
 import ProductsSideControls from "@/modules/products/products-side-controls";
 import SortByDropdown from "@/modules/products/sortby-dropdown";
 import { getProducts } from "@/services/product";
+import { Footer, Navbar } from "@/shared";
 import { IProduct } from "@/types/product";
 import { LayoutGrid, List } from "lucide-react";
 const ProductsPage = async () => {
@@ -13,6 +14,7 @@ const ProductsPage = async () => {
 
   return (
     <>
+      <Navbar />
       <section>
         <PageBreadcrumb currentPage="Products" />
         <div className="container lg:my-10 mb-10">
@@ -67,6 +69,7 @@ const ProductsPage = async () => {
           </div>
         </div>
       </section>
+      <Footer />
     </>
   );
 };

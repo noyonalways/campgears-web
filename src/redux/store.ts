@@ -1,5 +1,3 @@
-"use client";
-
 import { configureStore } from "@reduxjs/toolkit";
 import {
   FLUSH,
@@ -11,9 +9,9 @@ import {
   persistReducer,
   persistStore,
 } from "redux-persist";
-import storage from "redux-persist/lib/storage";
 import { baseApi } from "./baseApi";
 import authReducer from "./features/auth/authSlice";
+import storage from "./storage";
 
 const persisConfig = {
   key: "auth",

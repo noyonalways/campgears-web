@@ -1,4 +1,4 @@
-export type TUser = {
+export type TLoggedInUser = {
   email: string;
   exp: number;
   iat: number;

@@ -7,6 +7,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Label } from "@/components/ui/label";
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { GoStar, GoStarFill } from "react-icons/go";
@@ -36,53 +37,68 @@ const Ratings = () => {
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
             <Checkbox id="fiveStar" />
-            <div className="flex items-center space-x-2 text-orange-400">
+            <Label
+              htmlFor="fiveStar"
+              className="flex items-center space-x-2 text-orange-400"
+            >
               <GoStarFill />
               <GoStarFill />
               <GoStarFill />
               <GoStarFill />
               <GoStarFill />
-            </div>
+            </Label>
           </div>
           <div className="flex items-center space-x-3">
-            <Checkbox id="fiveStar" />
-            <div className="flex items-center space-x-2 text-orange-400">
+            <Checkbox id="fourStar" />
+            <Label
+              htmlFor="fourStar"
+              className="flex items-center space-x-2 text-orange-400"
+            >
               <GoStarFill />
               <GoStarFill />
               <GoStarFill />
               <GoStarFill />
               <GoStar />
-            </div>
+            </Label>
           </div>
           <div className="flex items-center space-x-3">
-            <Checkbox id="fiveStar" />
-            <div className="flex items-center space-x-2 text-orange-400">
+            <Checkbox id="threeStar" />
+            <Label
+              htmlFor="threeStar"
+              className="flex items-center space-x-2 text-orange-400"
+            >
               <GoStarFill />
               <GoStarFill />
               <GoStarFill />
               <GoStar />
               <GoStar />
-            </div>
+            </Label>
           </div>
           <div className="flex items-center space-x-3">
-            <Checkbox id="fiveStar" />
-            <div className="flex items-center space-x-2 text-orange-400">
+            <Checkbox id="twoStar" />
+            <Label
+              htmlFor="twoStar"
+              className="flex items-center space-x-2 text-orange-400"
+            >
               <GoStarFill />
               <GoStarFill />
               <GoStar />
               <GoStar />
               <GoStar />
-            </div>
+            </Label>
           </div>
           <div className="flex items-center space-x-3">
-            <Checkbox id="fiveStar" />
-            <div className="flex items-center space-x-2 text-orange-400">
+            <Checkbox id="oneStar" />
+            <Label
+              htmlFor="oneStar"
+              className="flex items-center space-x-2 text-orange-400"
+            >
               <GoStarFill />
               <GoStar />
               <GoStar />
               <GoStar />
               <GoStar />
-            </div>
+            </Label>
           </div>
         </div>
       </CollapsibleContent>
