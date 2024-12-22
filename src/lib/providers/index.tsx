@@ -1,7 +1,9 @@
 "use client";
-import UserProvider from "@/context/user.context";
+
+import { persistor, store } from "@/redux/store";
 import { ReactNode } from "react";
-import StoreProvider from "./redux.provider";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 interface IProps {
   children: ReactNode;
@@ -9,9 +11,13 @@ interface IProps {
 
 const Providers = ({ children }: IProps) => {
   return (
-    <UserProvider>
-      <StoreProvider>{children}</StoreProvider>
-    </UserProvider>
+    <>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          {children}
+        </PersistGate>
+      </Provider>
+    </>
   );
 };
 

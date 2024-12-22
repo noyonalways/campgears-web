@@ -8,13 +8,14 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useUser } from "@/context/user.context";
+import { selectCurrentUser } from "@/redux/features/auth/authSlice";
+import { useAppSelector } from "@/redux/hooks";
 import { CircleUserRound } from "lucide-react";
 import Link from "next/link";
 import LogoutButton from "./logout-button";
 
 export default function UserDropdown() {
-  const { user } = useUser();
+  const user = useAppSelector(selectCurrentUser);
 
   return (
     <>

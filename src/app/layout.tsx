@@ -16,15 +16,15 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <Providers>
-      <html lang="en">
-        <body
-          className={`${roboto.variable} ${quickSand.variable} ${lato.variable} ${inter.variable} font-inter`}
-        >
+    <html lang="en">
+      <body
+        className={`${roboto.variable} ${quickSand.variable} ${lato.variable} ${inter.variable} font-inter`}
+      >
+        <Providers>
           {children}
           <Toaster position="top-center" richColors />
-        </body>
-      </html>
-    </Providers>
+        </Providers>
+      </body>
+    </html>
   );
 }
