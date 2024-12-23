@@ -1,13 +1,13 @@
 import UserDashboardTitle from "@/components/titles/user-dashboard-title";
 import { getMe } from "@/services/auth";
-import { IProfile } from "@/types/profile";
+import { TProfile } from "@/types/profile";
 import { Mail, MapPin, SquareCheckBig } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const UserProfilePage = async () => {
   const res = await getMe();
-  const profile = res?.data as IProfile;
+  const profile = res?.data as TProfile;
 
   if (!res?.success) {
     return (

@@ -1,9 +1,9 @@
 import ProductCard from "@/components/cards/product-card";
 import { getProducts } from "@/services/product";
-import { IProduct } from "@/types/product";
+import { TProduct } from "@/types/product";
 const ProductsPage = async () => {
   const res = await getProducts();
-  const products = res?.data as IProduct[];
+  const products = res?.data as TProduct[];
 
   return (
     <>
