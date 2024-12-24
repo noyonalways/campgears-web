@@ -10,6 +10,7 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from "@/components/ui/menubar";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 export default function MainMenubar() {
@@ -23,7 +24,10 @@ export default function MainMenubar() {
 
       {/* Products Menu */}
       <MenubarMenu>
-        <MenubarTrigger>Shop</MenubarTrigger>
+        <MenubarTrigger className="space-x-2">
+          <span>Shop</span>
+          <ChevronDown size={16} />
+        </MenubarTrigger>
         <MenubarContent>
           <Link href={`/shop/products`}>
             <MenubarItem>
@@ -66,7 +70,10 @@ export default function MainMenubar() {
 
       {/* Orders Menu */}
       <MenubarMenu>
-        <MenubarTrigger>Orders</MenubarTrigger>
+        <MenubarTrigger className="space-x-2">
+          <span>Orders</span>
+          <ChevronDown size={16} />
+        </MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
             Track Order <MenubarShortcut>⌘O</MenubarShortcut>
@@ -83,7 +90,10 @@ export default function MainMenubar() {
 
       {/* Customer Support Menu */}
       <MenubarMenu>
-        <MenubarTrigger>Customer Support</MenubarTrigger>
+        <MenubarTrigger className="space-x-2">
+          <span>Customer Support</span>
+          <ChevronDown size={16} />
+        </MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
             FAQs <MenubarShortcut>⌘F</MenubarShortcut>
@@ -104,7 +114,10 @@ export default function MainMenubar() {
 
       {/* Account Menu */}
       <MenubarMenu>
-        <MenubarTrigger>Account</MenubarTrigger>
+        <MenubarTrigger className="space-x-2">
+          <span>Account</span>
+          <ChevronDown size={16} />
+        </MenubarTrigger>
         <MenubarContent>
           <Link href={`/user/orders`}>
             <MenubarItem>Order History</MenubarItem>
