@@ -18,7 +18,7 @@ const UserLayout = async ({ children }: IProps) => {
       <PageBreadcrumb currentPage="User Dashboard" />
 
       <div className="container mb-6  lg:my-10">
-        <div className="flex flex-col lg:flex-row lg:gap-6">
+        <div className="flex flex-col lg:flex-row lg:gap-6 lg:items-start">
           <UserSidebar
             avatar={profile?.avatar}
             email={profile?.email}
