@@ -11,7 +11,7 @@ import UserDropdown from "./user-dropdown";
 
 const Navbar = () => {
   return (
-    <header className="sticky top-0 bg-background/60 z-50">
+    <header className="sticky top-0 lg:static bg-background/60 z-50">
       {/* top bar */}
       {/* mobile dock menu */}
       <MobileDockMenu />

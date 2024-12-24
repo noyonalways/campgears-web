@@ -1,8 +1,8 @@
 export type TGender = "male" | "female" | "others";
 
-export interface IProfile {
+export type TProfile = {
   _id: string;
-  user: IUser;
+  user: TUser;
   name: string;
   email: string;
   phone: string;
@@ -13,22 +13,12 @@ export interface IProfile {
   isDeleted: boolean;
   createdAt: string;
   updatedAt: string;
-}
-
-export interface IUser {
-  email: string;
-  password: string;
-  status: TUserStatus;
-  role: TUserRole;
-  isDeleted: boolean;
-  needsPasswordChange?: boolean;
-  passwordChangeAt?: Date;
-}
+};
 
 export type TUserStatus = "active" | "inactive" | "blocked";
 export type TUserRole = "super-admin" | "admin" | "user";
 
-export interface IUser {
+export type TUser = {
   email: string;
   password: string;
   status: TUserStatus;
@@ -36,4 +26,4 @@ export interface IUser {
   isDeleted: boolean;
   needsPasswordChange?: boolean;
   passwordChangeAt?: Date;
-}
+};

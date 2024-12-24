@@ -14,7 +14,7 @@ interface IProps {
 const UserSidebar = ({ avatar, name, email }: IProps) => {
   const pathName = usePathname();
   return (
-    <div className="hidden lg:block lg:basis-[25%] rounded-md overflow-hidden bg-secondary pb-6 sticky top-48 xl:h-[calc(100vh-320px)]">
+    <div className="hidden lg:block lg:basis-[25%] rounded-md overflow-hidden bg-secondary pb-6 sticky top-48">
       <div className="w-full">
         <div
           className={`bg-[url('/images/user-cover.jpg')] bg-cover relative h-32`}

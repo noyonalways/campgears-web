@@ -1,12 +1,12 @@
-import { ICategory } from "../category";
+import { TCategory } from "../category";
 
-export interface IProduct {
+export type TProduct = {
   _id: string;
   name: string;
   price: number;
   description: string;
   brand: string;
-  category: ICategory;
+  category: TCategory;
   subCategory: string;
   image: string;
   stockQuantity: number;
@@ -15,15 +15,15 @@ export interface IProduct {
   isFeatured: boolean;
   status: string;
   tags: string[];
-  galleryImages: IGalleryImage[];
+  galleryImages: TGalleryImage[];
   createdAt: string;
   updatedAt: string;
   slug: string;
   __v: number;
-}
+};
 
-export interface IGalleryImage {
+export type TGalleryImage = {
   url: string;
   alt: string;
   _id: string;
-}
+};

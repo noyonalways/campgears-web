@@ -2,7 +2,7 @@ import { PageBreadcrumb } from "@/components/breadcrumbs";
 import { getMe } from "@/services/auth";
 import { UserSidebar } from "@/shared";
 import UserMobileSidebar from "@/shared/user-mobile-sidebar";
-import { IProfile } from "@/types/profile";
+import { TProfile } from "@/types/profile";
 import { ReactNode } from "react";
 
 interface IProps {
@@ -11,7 +11,7 @@ interface IProps {
 
 const UserLayout = async ({ children }: IProps) => {
   const res = await getMe();
-  const profile = res?.data as IProfile;
+  const profile = res?.data as TProfile;
 
   return (
     <div>
