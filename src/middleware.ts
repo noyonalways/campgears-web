@@ -1,9 +1,11 @@
 import { JwtPayload } from "jwt-decode";
 import { NextRequest, NextResponse } from "next/server";
 import { getCurrentUser } from "./services/auth";
+import { TAuthProvider } from "./types/user";
 
 interface ExtendedJwtPayload extends JwtPayload {
   role: string;
+  authProvider?: TAuthProvider;
 }
 
 const authRoutes = ["/auth/login", "/auth/register", "/auth/forget-password"];
@@ -46,6 +48,16 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(
         new URL(`/auth/login?redirect=${pathname}`, request.url)
       );
+    }
+  }
+
+  if (user?.authProvider) {
+    if (
+      ["google", "github", "facebook"].includes(
+        user.authProvider as TAuthProvider
+      )
+    ) {
+      return NextResponse.next();
     }
   }
 

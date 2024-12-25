@@ -17,6 +17,7 @@ export type TProfile = {
 
 export type TUserStatus = "active" | "inactive" | "blocked";
 export type TUserRole = "super-admin" | "admin" | "user";
+export type TAuthProvider = "google" | "github" | "facebook";
 
 export type TUser = {
   email: string;
@@ -26,4 +27,5 @@ export type TUser = {
   isDeleted: boolean;
   needsPasswordChange?: boolean;
   passwordChangeAt?: Date;
+  authProvider?: TAuthProvider;
 };

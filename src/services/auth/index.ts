@@ -1,6 +1,7 @@
 "use server";
 
 import config from "@/config/envConfig";
+import { TSocialLogin } from "@/types/user";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
 
@@ -59,6 +60,34 @@ export const getMe = async () => {
       throw new Error("Failed to fetch user");
     }
     return await res.json();
+  } catch (error) {
+    return error;
+  }
+};
+
+// social login
+export const socialLogin = async (payload: TSocialLogin) => {
+  try {
+    const res = await fetch(`${config.API_BASE_URL}/auth/social-login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+    if (!res.ok) {
+      throw new Error("Failed to authenticate user");
+    }
+    const data = await res.json();
+
+    if (data?.success) {
+      await setUserToken({
+        accessToken: data?.data?.accessToken,
+        refreshToken: data?.data?.refreshToken,
+      });
+    }
+
+    return data;
   } catch (error) {
     return error;
   }
