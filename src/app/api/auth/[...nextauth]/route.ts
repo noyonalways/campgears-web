@@ -1,3 +1,5 @@
+import { socialLogin } from "@/services/auth";
+import { TSocialLogin } from "@/types/user";
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -18,14 +20,14 @@ const handler = NextAuth({
       }
       if (account.provider === "google") {
         if (user) {
-          const reqBody = {
-            fullName: user.name!,
+          const reqBody: TSocialLogin = {
+            name: user.name!,
             email: user.email!,
             avatar: user.image!,
+            authProvider: "google",
           };
 
-          console.log(reqBody);
-          // await socialLogin(reqBody);
+          await socialLogin(reqBody);
         }
       }
 

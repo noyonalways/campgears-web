@@ -21,7 +21,7 @@ const RegisterPage = () => {
             />
           </div>
 
-          <div className="w-full max-w-lg space-y-6 md:bg-secondary md:p-8 rounded-md">
+          <div className="w-full max-w-lg space-y-6 md:bg-secondary pt-8 md:p-8 rounded-md">
             <div className="text-center md:text-start">
               <h2 className="text-2xl font-semibold">
                 <span>Welcome to </span>
