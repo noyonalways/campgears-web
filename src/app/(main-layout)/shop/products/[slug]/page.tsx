@@ -104,6 +104,39 @@ const ProductDetailsPage = async ({}: IProps) => {
             </div>
           </div>
         </div>
+
+        {/* description ,additional info, review */}
+        <div className="mb-10">
+          <div className="inline-flex mb-4">
+            <div className="border-t-2 border-t-primary bg-secondary px-8 py-2">
+              Review
+            </div>
+          </div>
+
+          <div className="flex flex-col lg:flex-row">
+            <div className="space-y-6 basis-[40%]">
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                  <h1 className="text-4xl font-bold">3.40</h1>
+                  <GoStarFill className="text-orange-400" size={24} />
+                </div>
+                <p>5 Overall Rating</p>
+              </div>
+
+              <div className="w-full">
+                <h4 className="font-semibold text-lg mb-1">
+                  Review this product
+                </h4>
+                <p className="text-sm mb-2">
+                  Let other customers know what you think
+                </p>
+                <Button className="w-full" size={`lg`} variant={"secondary"}>
+                  Write a Review
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
