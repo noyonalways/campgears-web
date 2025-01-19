@@ -1,6 +1,6 @@
 "use server";
 
-import config from "@/config/envConfig";
+import config from "@/config/environment";
 
 export const getProducts = async () => {
   try {

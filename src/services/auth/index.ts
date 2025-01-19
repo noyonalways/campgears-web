@@ -1,6 +1,6 @@
 "use server";
 
-import config from "@/config/envConfig";
+import config from "@/config/environment";
 import { TSocialLogin } from "@/types/user";
 import { jwtDecode } from "jwt-decode";
 import { cookies } from "next/headers";
