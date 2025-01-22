@@ -5,11 +5,12 @@ import { TProduct } from "@/types/product";
 import { Suspense } from "react";
 
 interface Props {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
 const ProductsPage = async ({ searchParams }: Props) => {
-  const viewMode = await searchParams.view || "grid";
+  const params = await searchParams;
+  const viewMode = (params.view as string) || "grid";
   let products: TProduct[] = [];
   let errorMessage: string | null = null;
 
