@@ -1,135 +1,112 @@
 import { Eye, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { GoStar, GoStarFill } from "react-icons/go";
+import { GoStar } from "react-icons/go";
 import { Button } from "../ui/button";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
+  DialogTrigger
 } from "../ui/dialog";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
 
-interface IProps {
-  item?: string;
-}
-
-const ProductModal = ({}: IProps) => {
+const ProductModal = () => {
   return (
     <Dialog>
-      <DialogTrigger>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger asChild>
-              <div className="hover:text-primary px-10 py-1 border-r">
-                <Eye size={20} />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Quick View</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
+      <DialogTrigger asChild>
+        <Button 
+          size="icon" 
+          variant="secondary"
+          className="rounded-full bg-white hover:bg-primary hover:text-white"
+        >
+          <Eye size={18} />
+        </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px] lg:max-w-6xl overflow-y-scroll lg:overflow-y-hidden max-h-svh">
-        <DialogHeader hidden>
-          <DialogTitle hidden>Product Details</DialogTitle>
-        </DialogHeader>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 ">
-          <div className="w-full">
+      <DialogContent className="sm:max-w-[425px] lg:max-w-4xl overflow-y-auto max-h-[90vh]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <DialogHeader className="hidden">  
+            <DialogTitle> 
+              Peanut Butter Bite Premium Butter Cookies 600 g
+            </DialogTitle>
+          </DialogHeader>
+          <div className="w-full h-[400px] relative rounded-lg overflow-hidden bg-secondary/50">
             <Image
-              className="w-full"
-              src={`/images/cake.jpg`}
-              width={350}
-              height={350}
+              src={`/tent.png`}
+              fill
+              className="object-contain p-8"
               alt="product-image"
             />
           </div>
 
-          <div>
-            <div className="mb-4 border-b border-dashed pb-4">
-              <h2 className="text-2xl font-bold mb-1">
+          <div className="flex flex-col h-full">
+            <div className="mb-6 pb-6 border-b">
+              <h2 className="text-2xl font-bold mb-2">
                 Peanut Butter Bite Premium Butter Cookies 600 g
               </h2>
-              <h3 className="text-lg mb-2">$35.00</h3>
-              <div className="flex items-center text-sm space-x-2">
-                <div className="flex space-x-1 text-orange-400">
-                  <GoStarFill />
-                  <GoStarFill />
-                  <GoStarFill />
-                  <GoStarFill />
-                  <GoStar />
+              <div className="flex items-center gap-4 mb-4">
+                <h3 className="text-xl font-semibold text-primary">$35.00</h3>
+                <div className="flex items-center text-sm space-x-2">
+                  <div className="flex space-x-1 text-orange-400">
+                    {[...Array(5)].map((_, i) => (
+                      <GoStar key={i} size={16} />
+                    ))}
+                  </div>
+                  <span className="text-muted-foreground">(24 Reviews)</span>
                 </div>
-                <span className="text-muted-foreground">Reviews</span>
               </div>
-            </div>
-
-            <div className="border-b border-dashed pb-4 mb-6">
-              <h3 className="font-medium text-lg mb-2">Product Details</h3>
-              <p className="text-muted-foreground mb-4 text-sm">
+              <p className="text-muted-foreground">
                 Candy canes sugar plum tart cotton candy chupa chups sugar plum
                 chocolate I love. Caramels marshmallow icing dessert candy canes
-                I love soufflé I love toffee. Marshmallow pie sweet sweet roll
-                sesame snaps tiramisu jelly bear claw. Bonbon muffin I love
-                carrot cake sugar plum dessert bonbon.
+                I love soufflé I love toffee.
               </p>
-              <div className="text-sm space-y-2">
-                <div className="grid grid-cols-8">
-                  <span className="col-span-3 lg:col-span-2">Brand Name:</span>
-                  <span className="col-span-4 lg:col-span-6">Black Forest</span>
-                </div>
-                <div className="grid grid-cols-8">
-                  <span className="col-span-3 lg:col-span-2">
-                    Product Code:
-                  </span>
-                  <span className="col-span-4 lg:col-span-6">4552DHEd</span>
-                </div>
-                <div className="grid grid-cols-8">
-                  <span className="col-span-3 lg:col-span-2">
-                    Product Type:
-                  </span>
-                  <span className="col-span-4 lg:col-span-6">
-                    White Cream Cake
-                  </span>
-                </div>
-              </div>
             </div>
 
-            <div className="space-y-6">
-              <div className="flex space-x-2 items-center">
-                <span>Quantity:</span>
-                <div className="flex items-center space-x-6">
+            <div className="space-y-6 flex-1">
+              <div className="space-y-4 text-sm">
+                <div className="flex items-center">
+                  <span className="w-24 text-muted-foreground">Brand:</span>
+                  <span>Black Forest</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="w-24 text-muted-foreground">Category:</span>
+                  <span>Camping</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="w-24 text-muted-foreground">Stock:</span>
+                  <span className="text-green-500">In Stock</span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <Button
-                    size={`icon`}
-                    variant={`secondary`}
-                    className="rounded-full"
+                    size="icon"
+                    variant="secondary"
+                    className="rounded-full h-8 w-8"
                   >
                     <Minus size={14} />
                   </Button>
-                  <span>1</span>
+                  <span className="text-lg font-medium w-8 text-center">1</span>
                   <Button
-                    size={`icon`}
-                    variant={`secondary`}
-                    className="rounded-full"
+                    size="icon"
+                    variant="secondary"
+                    className="rounded-full h-8 w-8"
                   >
                     <Plus size={14} />
                   </Button>
                 </div>
+                <Button className="rounded-full">
+                  Add to Cart
+                </Button>
               </div>
 
-              <div className="flex space-x-4 items-center">
-                <Link href={`/shop/products/slug`}>
-                  <Button variant={`secondary`}>View Details</Button>
-                </Link>
-                <Button variant={`default`}>Add to Cart</Button>
-              </div>
+              <Link 
+                href={`/shop/products/slug`}
+                className="inline-block text-sm text-primary hover:underline"
+              >
+                View Full Details →
+              </Link>
             </div>
           </div>
         </div>
