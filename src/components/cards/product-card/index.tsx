@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { TProduct } from "@/types/product";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
 
 interface IProps {
   product: TProduct;
@@ -19,9 +20,32 @@ interface IProps {
 const ProductCard = ({ product, viewMode }: IProps) => {
   const isListView = viewMode === "list";
 
+  const QuickActions = () => (
+    <div className="flex gap-2">
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button 
+              size="icon" 
+              variant="secondary"
+              className="rounded-full bg-white  hover:bg-primary hover:text-white"
+            >
+              <Heart size={18} />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Add to Wishlist</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
+      <ProductModal />
+    </div>
+  );
+
   return (
     <div className={cn(
-      "bg-secondary rounded group",
+      "bg-secondary rounded group relative",
       isListView && "flex gap-4"
     )}>
       <div className={cn(
@@ -36,25 +60,12 @@ const ProductCard = ({ product, viewMode }: IProps) => {
           className="object-cover" 
         />
 
-        <div className={
-          `
-          flex items-center justify-center absolute bg-background opacity-0  group-hover:-bottom-2 group-hover:opacity-100 text-muted-foreground rounded duration-200
-          ${isListView ? "" : "-bottom-10 w-full"}
-          `
-        }>
-          <ProductModal />
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger>
-                <div className="hover:text-primary px-10 py-1">
-                  <Heart size={20} />
-                </div>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Add to Wishlist</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+        {/* Quick action buttons */}
+        <div className={cn(
+          "absolute right-2 top-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0",
+          isListView && "top-2"
+        )}>
+          <QuickActions />
         </div>
       </div>
 
@@ -65,7 +76,7 @@ const ProductCard = ({ product, viewMode }: IProps) => {
         <p className="text-sm text-muted-foreground mb-2">{product.category.name}</p>
         <Link
           href={`/shop/products/${product.slug}`}
-          className="font-medium mb-2 inline-block"
+          className="font-medium mb-2 inline-block hover:text-primary transition-colors"
         >
           {product.name}
         </Link>
@@ -81,8 +92,8 @@ const ProductCard = ({ product, viewMode }: IProps) => {
           <span>{product.stockQuantity}</span>
         </p>
         <div className={cn(
-          "flex items-end space-x-1 mb-2",
-          isListView && "justify-between items-center"
+          "flex items-center justify-between",
+          isListView && "mt-4"
         )}>
           <div>
             <h3 className="text-primary font-medium">${product.price}</h3>
@@ -91,29 +102,13 @@ const ProductCard = ({ product, viewMode }: IProps) => {
             )}
           </div>
 
-          {isListView && (
-            <div className="flex gap-2">
-              <button 
-                disabled={product.status === "out-of-stock"}
-                className="bg-primary text-white px-4 py-2 rounded-full hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                Add to Cart
-              </button>
-              <button className="bg-background px-4 py-2 rounded-full hover:bg-primary/10 hover:text-primary">
-                Quick View
-              </button>
-            </div>
-          )}
-        </div>
-
-        {!isListView && (
-          <button 
+          <Button 
+            className="rounded-full"
             disabled={product.status === "out-of-stock"}
-            className="bg-background px-4 py-2 flex items-center justify-center w-full rounded-full hover:bg-primary/10 hover:text-primary font-medium text-sm md:text-base disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Add to Cart
-          </button>
-        )}
+          </Button>
+        </div>
 
         {isListView && product.description && (
           <p className="mt-4 text-muted-foreground line-clamp-2">
