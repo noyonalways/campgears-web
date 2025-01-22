@@ -2,8 +2,14 @@ import ProductCard from "@/components/cards/product-card";
 import { getProducts } from "@/services/product";
 import { isTProduct } from "@/type-guards/product";
 import { TProduct } from "@/types/product";
+import { Suspense } from "react";
 
-const ProductsPage = async () => {
+interface Props {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+const ProductsPage = async ({ searchParams }: Props) => {
+  const viewMode = await searchParams.view || "grid";
   let products: TProduct[] = [];
   let errorMessage: string | null = null;
 
@@ -19,16 +25,25 @@ const ProductsPage = async () => {
     console.error(error);
   }
 
+  const gridViewClasses = "grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6";
+  const listViewClasses = "flex flex-col space-y-4";
+
   return (
     <div>
       {errorMessage ? (
         <p>{errorMessage}</p>
       ) : (
-        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6">
-          {products.map((product) => (
-            <ProductCard key={product._id} />
-          ))}
-        </div>
+        <Suspense fallback={<div>Loading products...</div>}>
+          <div className={viewMode === "grid" ? gridViewClasses : listViewClasses}>
+            {products.map((product) => (
+              <ProductCard 
+                key={product._id} 
+                product={product}
+                viewMode={viewMode as "grid" | "list"}
+              />
+            ))}
+          </div>
+        </Suspense>
       )}
     </div>
   );

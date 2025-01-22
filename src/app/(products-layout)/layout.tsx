@@ -1,10 +1,9 @@
 import { PageBreadcrumb } from "@/components/breadcrumbs";
-import { Button } from "@/components/ui/button";
 import ProductsMobileSideControls from "@/modules/products/products-mobile-side-controls";
 import ProductsSideControls from "@/modules/products/products-side-controls";
 import SortByDropdown from "@/modules/products/sortby-dropdown";
+import ViewToggle from "@/modules/products/view-toggle";
 import { Footer, Navbar } from "@/shared";
-import { LayoutGrid, List } from "lucide-react";
 import { ReactNode } from "react";
 
 interface IProps {
@@ -44,19 +43,8 @@ const ProductsLayout = async ({ children }: IProps) => {
                       <span className="text-sm md:text-base">Sort By</span>
                       <SortByDropdown />
                     </div>
-                    <div className="flex space-x-2 items-center">
-                      <span className="text-muted-foreground text-sm">
-                        View as
-                      </span>
-                      <div className="flex space-x-2">
-                        <Button size={`icon`}>
-                          <LayoutGrid size={20} />
-                        </Button>
-                        <Button size={`icon`} variant={`secondary`}>
-                          <List size={20} />
-                        </Button>
-                      </div>
-                    </div>
+
+                    <ViewToggle />
                   </div>
 
                   {/* products cards */}
