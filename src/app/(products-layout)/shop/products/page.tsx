@@ -26,7 +26,8 @@ const ProductsPage = async ({ searchParams }: Props) => {
     console.error(error);
   }
 
-  const gridViewClasses = "grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6";
+  const gridViewClasses =
+    "grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-4 lg:gap-6";
   const listViewClasses = "flex flex-col space-y-4";
 
   return (
@@ -35,10 +36,12 @@ const ProductsPage = async ({ searchParams }: Props) => {
         <p>{errorMessage}</p>
       ) : (
         <Suspense fallback={<div>Loading products...</div>}>
-          <div className={viewMode === "grid" ? gridViewClasses : listViewClasses}>
+          <div
+            className={viewMode === "grid" ? gridViewClasses : listViewClasses}
+          >
             {products.map((product) => (
-              <ProductCard 
-                key={product._id} 
+              <ProductCard
+                key={product._id}
                 product={product}
                 viewMode={viewMode as "grid" | "list"}
               />

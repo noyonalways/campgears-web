@@ -1,16 +1,16 @@
 import ProductModal from "@/components/modals/product-modal";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { cn } from "@/lib/utils";
+import { TProduct } from "@/types/product";
 import { Heart, Star } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { TProduct } from "@/types/product";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 
 interface IProps {
   product: TProduct;
@@ -25,8 +25,8 @@ const ProductCard = ({ product, viewMode }: IProps) => {
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
-            <Button 
-              size="icon" 
+            <Button
+              size="icon"
               variant="secondary"
               className="rounded-full bg-white  hover:bg-primary hover:text-white"
             >
@@ -44,36 +44,41 @@ const ProductCard = ({ product, viewMode }: IProps) => {
   );
 
   return (
-    <div className={cn(
-      "bg-secondary rounded group relative",
-      isListView && "flex gap-4"
-    )}>
-      <div className={cn(
-        "flex justify-center mt-4 mb-2 relative",
-        isListView && "basis-48 flex-shrink-0"
-      )}>
-        <Image 
-          src={"/tent.png"} 
-          width={150} 
-          height={150} 
+    <div
+      className={cn(
+        "bg-secondary rounded group relative",
+        isListView && "flex lg:gap-4"
+      )}
+    >
+      <div
+        className={cn(
+          "flex justify-center mt-4 mb-2 relative",
+          isListView && "lg:basis-48 flex-shrink-0"
+        )}
+      >
+        <Image
+          src={"/tent.png"}
+          width={150}
+          height={150}
           alt={product.name}
-          className="object-cover" 
+          className="object-cover w-full"
         />
 
         {/* Quick action buttons */}
-        <div className={cn(
-          "absolute right-2 top-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0",
-          isListView && "top-2"
-        )}>
+        <div
+          className={cn(
+            "absolute right-2 top-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-2 group-hover:translate-x-0",
+            isListView && "top-2"
+          )}
+        >
           <QuickActions />
         </div>
       </div>
 
-      <div className={cn(
-        "p-4",
-        isListView && "flex-1"
-      )}>
-        <p className="text-sm text-muted-foreground mb-2">{product.category.name}</p>
+      <div className={cn("p-4", isListView && "flex-1")}>
+        <p className="text-sm text-muted-foreground mb-2">
+          {product.category.name}
+        </p>
         <Link
           href={`/shop/products/${product.slug}`}
           className="font-medium mb-2 inline-block hover:text-primary transition-colors"
@@ -91,10 +96,12 @@ const ProductCard = ({ product, viewMode }: IProps) => {
           <span>Qty:</span>
           <span>{product.stockQuantity}</span>
         </p>
-        <div className={cn(
-          "flex items-center justify-between",
-          isListView && "mt-4"
-        )}>
+        <div
+          className={cn(
+            "flex flex-col lg:flex-row lg:items-center justify-between gap-y-2",
+            isListView && "mt-4"
+          )}
+        >
           <div>
             <h3 className="text-primary font-medium">${product.price}</h3>
             {product.status === "out-of-stock" && (
@@ -102,8 +109,8 @@ const ProductCard = ({ product, viewMode }: IProps) => {
             )}
           </div>
 
-          <Button 
-            className="rounded-full"
+          <Button
+            className="rounded-full w-full lg:w-auto"
             disabled={product.status === "out-of-stock"}
           >
             Add to Cart
