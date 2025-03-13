@@ -1,6 +1,7 @@
 import { PageBreadcrumb } from "@/components/breadcrumbs";
+import Tabs from "@/components/product-details/tabs";
 import { Button } from "@/components/ui/button";
-import { Heart, Minus, Plus } from "lucide-react";
+import { Dot, Heart, Minus, Plus } from "lucide-react";
 import Image from "next/image";
 import { GoStar, GoStarFill } from "react-icons/go";
 
@@ -13,25 +14,29 @@ const ProductDetailsPage = async ({}: IProps) => {
     <section>
       <PageBreadcrumb currentPage="Product Details" />
       <div className="container">
-        <div className="flex flex-col lg:flex-row mb-10 lg:gap-x-20 gap-y-4 lg:gap-y-0">
-          <div className="lg:basis-[35%]">
-            <div className="rounded overflow-hidden">
+        <div className="flex flex-col lg:flex-row lg:items-start mb-10 lg:space-x-10 gap-y-4 lg:gap-y-0">
+          {/* left side */}
+          <div className="lg:basis-[32%]">
+            <div className="rounded-md overflow-hidden bg-secondary">
               <Image
                 className="w-full"
                 width={500}
                 height={500}
-                src={`/images/cake.jpg`}
+                src={`/tent.png`}
                 alt="product-image"
               />
             </div>
             <div className="grid grid-cols-4 gap-3 lg:gap-4 mt-4">
               {Array.from({ length: 4 }).map((_, index) => (
-                <div className="rounded overflow-hidden" key={index + 222}>
+                <div
+                  className="rounded overflow-hidden bg-secondary"
+                  key={index + 222}
+                >
                   <Image
                     className="w-full"
                     width={500}
                     height={500}
-                    src={`/images/cake.jpg`}
+                    src={`/tent.png`}
                     alt="product-image"
                   />
                 </div>
@@ -39,7 +44,7 @@ const ProductDetailsPage = async ({}: IProps) => {
             </div>
           </div>
 
-          {/* right side */}
+          {/* middle side*/}
           <div className="flex-1">
             <span className="px-4 py-1 rounded bg-destructive/20 text-destructive text-sm inline-block mb-4">
               30% OFF
@@ -101,41 +106,99 @@ const ProductDetailsPage = async ({}: IProps) => {
                 <Heart size={20} />
                 <span>Add to Wishlist</span>
               </button>
+
+              <div className="flex flex-col gap-y-2 mt-4">
+                <span>Please hurry up! Only 10 left in stock</span>
+                <div className="bg-gray-200 w-full h-2 rounded-full">
+                  <div className="bg-primary h-full rounded-full w-[50%]"></div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 border-b border-dashed pb-4 space-y-4">
+              <div>
+                <h3 className="text-lg font-medium mb-2">More Information</h3>
+                <p className="text-muted-foreground">
+                  Lollipop cake chocolate chocolate cake dessert jujubes.
+                  Shortbread sugar plum dessert powder cookie sweet brownie.
+                </p>
+              </div>
+              <div className="flex flex-col gap-y-2 bg-secondary p-4 rounded-md">
+                <div className="flex flex-col gap-y-2">
+                  <div className="flex items-center gap-x-2">
+                    <span className="flex items-center gap-x-2">
+                      <Dot size={28} className="text-primary" /> Type:
+                    </span>
+                    <span>Cake</span>
+                  </div>
+                  <div className="flex items-center gap-x-2">
+                    <span className="flex items-center gap-x-2">
+                      <Dot size={28} className="text-primary" /> SKU:
+                    </span>
+                    <span>1234567890</span>
+                  </div>
+                  <div className="flex items-center gap-x-2">
+                    <span className="flex items-center gap-x-2">
+                      <Dot size={28} className="text-primary" /> Stock:
+                    </span>
+                    <span>10 items left</span>
+                  </div>
+                  <div className="flex items-center gap-x-2">
+                    <span className="flex items-center gap-x-2">
+                      <Dot size={28} className="text-primary" /> Tags:
+                    </span>
+                    <span>Cake, Chocolate, Dessert</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-4 pb-4 space-y-2">
+              <h4 className="text-lg font-medium mb-2">
+                Guaranteed Safe Checkout
+              </h4>
+              <div className="w-full max-w-[280px]">
+                <Image
+                  src={`/payments.png`}
+                  alt="payment"
+                  width={280}
+                  height={200}
+                  className="w-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* right side */}
+          <div className="bg-secondary p-4 md:p-6 rounded">
+            <h3 className="text-xl font-semibold mb-4 border-b-2 border-primary w-fit pb-1">
+              Trending Products
+            </h3>
+            <div className="space-y-4">
+              {Array.from({ length: 4 }).map((_, index) => (
+                <div className="flex gap-4  " key={index + 222}>
+                  <div className="w-24 h-20 rounded overflow-hidden">
+                    <Image
+                      className="w-full"
+                      width={200}
+                      height={200}
+                      src={`/images/cake.jpg`}
+                      alt="product-image"
+                    />
+                  </div>
+                  <div className="border-b border-dashed">
+                    <h4 className="font-medium">Creamy Chocolate Cake</h4>
+                    <p className="text-primary">$35.00</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
 
         {/* description ,additional info, review */}
-        <div className="mb-10">
-          <div className="inline-flex mb-4">
-            <div className="border-t-2 border-t-primary bg-secondary px-8 py-2">
-              Review
-            </div>
-          </div>
-
-          <div className="flex flex-col lg:flex-row">
-            <div className="space-y-6 basis-[40%]">
-              <div className="flex items-center space-x-4">
-                <div className="flex items-center space-x-2">
-                  <h1 className="text-4xl font-bold">3.40</h1>
-                  <GoStarFill className="text-orange-400" size={24} />
-                </div>
-                <p>5 Overall Rating</p>
-              </div>
-
-              <div className="w-full">
-                <h4 className="font-semibold text-lg mb-1">
-                  Review this product
-                </h4>
-                <p className="text-sm mb-2">
-                  Let other customers know what you think
-                </p>
-                <Button className="w-full" size={`lg`} variant={"secondary"}>
-                  Write a Review
-                </Button>
-              </div>
-            </div>
-          </div>
+        <div className="mb-10 w-full md:max-w-[75%]">
+          <Tabs />
         </div>
       </div>
     </section>
