@@ -39,7 +39,16 @@ const ProductCard = ({ product, viewMode }: IProps) => {
         </Tooltip>
       </TooltipProvider>
 
-      <ProductModal />
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <ProductModal />
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>Quick View</p>
+          </TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
     </div>
   );
 

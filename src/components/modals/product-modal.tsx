@@ -8,25 +8,42 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger
+  DialogTrigger,
 } from "../ui/dialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 const ProductModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button 
-          size="icon" 
-          variant="secondary"
-          className="rounded-full bg-white hover:bg-primary hover:text-white"
-        >
-          <Eye size={18} />
-        </Button>
+        <div>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  size="icon"
+                  variant="secondary"
+                  className="rounded-full bg-white  hover:bg-primary hover:text-white"
+                >
+                  <Eye size={18} />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Quick View</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px] lg:max-w-4xl overflow-y-auto max-h-[90vh]">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <DialogHeader className="hidden">  
-            <DialogTitle> 
+          <DialogHeader className="hidden">
+            <DialogTitle>
               Peanut Butter Bite Premium Butter Cookies 600 g
             </DialogTitle>
           </DialogHeader>
@@ -96,12 +113,10 @@ const ProductModal = () => {
                     <Plus size={14} />
                   </Button>
                 </div>
-                <Button className="rounded-full">
-                  Add to Cart
-                </Button>
+                <Button className="rounded-full">Add to Cart</Button>
               </div>
 
-              <Link 
+              <Link
                 href={`/shop/products/slug`}
                 className="inline-block text-sm text-primary hover:underline"
               >
